@@ -1019,6 +1019,37 @@ class Repository(github.GithubObject.CompletableGithubObject):
         )
         self._useAttributes(data)
 
+    def delete_file(self, path, message, sha, branch=github.GithubObject.NotSet, author=github.GithubObject.NotSet):
+        """
+        :calls: `DELETE /repos/:owner/:repo/contents/:path <http://developer.github.com/v3/repos/contents>`_
+        :param path: string
+        :param message: string
+        :param sha: string
+        :param branch: string
+        :param author: :class:`github.InputGitAuthor.InputGitAuthor`
+        :rtype: :class:`github.GitCommit.GitCommit`
+        """
+        assert isinstance(path, (str, unicode)), path
+        assert isinstance(message, (str, unicode)), message
+        assert isinstance(sha, (str, unicode)), sha
+        assert branch is github.GithubObject.NotSet or isinstance(branch, (str, unicode)), branch
+        assert author is github.GithubObject.NotSet or isinstance(author, (github.InputGitAuthor)), author
+        parameters = {
+            'path': path,
+            'message': message,
+            'sha': sha
+        }
+        if branch is not github.GithubObject.NotSet:
+            parameters["branch"] = branch
+        if author is not github.GithubObject.NotSet:
+            parameters["author"] = author._identity
+        headers, data = self._requester.requestJsonAndCheck(
+            "DELETE",
+            self.url + "/contents/" + path,
+            input=parameters
+        )
+        return github.Commit.Commit(self._requester, headers, data, completed=True)
+
     def get_archive_link(self, archive_format, ref=github.GithubObject.NotSet):
         """
         :calls: `GET /repos/:owner/:repo/:archive_format/:ref <http://developer.github.com/v3/repos/contents>`_
