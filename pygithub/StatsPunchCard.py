@@ -1,7 +1,7 @@
-############################ Copyrights and license ############################
+# -*- coding: utf-8 -*-
+
+# ########################## Copyrights and license ############################
 #                                                                              #
-# Copyright 2012 Vincent Jacques <vincent@vincent-jacques.net>                 #
-# Copyright 2013 AKFish <akfish@gmail.com>                                     #
 # Copyright 2013 Vincent Jacques <vincent@vincent-jacques.net>                 #
 #                                                                              #
 # This file is part of PyGithub. http://jacquev6.github.com/PyGithub/          #
@@ -19,18 +19,30 @@
 # You should have received a copy of the GNU Lesser General Public License     #
 # along with PyGithub. If not, see <http://www.gnu.org/licenses/>.             #
 #                                                                              #
-################################################################################
+# ##############################################################################
 
-*.pyc
-*.sw*
+import pygithub.GithubObject
 
-/GithubCredentials.py
-/scripts/TwitterCredentials.py
-/dist/
-/build/
-/MANIFEST
-/PyGithub.egg-info/
-/.coverage
-/developer.github.com/
-/gh-pages/
-/doc/doctrees/
+import pygithub.NamedUser
+
+
+class StatsPunchCard(github.GithubObject.NonCompletableGithubObject):
+    """
+    This class represents the punch card. The reference can be found here http://developer.github.com/v3/repos/statistics/#get-the-number-of-commits-per-hour-in-each-day
+    """
+
+    def get(self, day, hour):
+        """
+        Get a specific element
+        :param day: int
+        :param hour: int
+        :rtype: int
+        """
+        return self._dict[(day, hour)]
+
+    def _initAttributes(self):
+        self._dict = {}
+
+    def _useAttributes(self, attributes):
+        for day, hour, commits in attributes:
+            self._dict[(day, hour)] = commits

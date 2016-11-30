@@ -1,4 +1,6 @@
-############################ Copyrights and license ############################
+# -*- coding: utf-8 -*-
+
+# ########################## Copyrights and license ############################
 #                                                                              #
 # Copyright 2012 Vincent Jacques <vincent@vincent-jacques.net>                 #
 # Copyright 2013 AKFish <akfish@gmail.com>                                     #
@@ -19,18 +21,36 @@
 # You should have received a copy of the GNU Lesser General Public License     #
 # along with PyGithub. If not, see <http://www.gnu.org/licenses/>.             #
 #                                                                              #
-################################################################################
+# ##############################################################################
 
-*.pyc
-*.sw*
+import pygithub.GithubObject
 
-/GithubCredentials.py
-/scripts/TwitterCredentials.py
-/dist/
-/build/
-/MANIFEST
-/PyGithub.egg-info/
-/.coverage
-/developer.github.com/
-/gh-pages/
-/doc/doctrees/
+
+class GitignoreTemplate(github.GithubObject.NonCompletableGithubObject):
+    """
+    This class represents GitignoreTemplates as returned for example by http://developer.github.com/v3/todo
+    """
+
+    @property
+    def source(self):
+        """
+        :type: string
+        """
+        return self._source.value
+
+    @property
+    def name(self):
+        """
+        :type: string
+        """
+        return self._name.value
+
+    def _initAttributes(self):
+        self._source = github.GithubObject.NotSet
+        self._name = github.GithubObject.NotSet
+
+    def _useAttributes(self, attributes):
+        if "source" in attributes:  # pragma no branch
+            self._source = self._makeStringAttribute(attributes["source"])
+        if "name" in attributes:  # pragma no branch
+            self._name = self._makeStringAttribute(attributes["name"])

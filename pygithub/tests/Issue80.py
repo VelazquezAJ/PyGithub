@@ -1,7 +1,9 @@
-############################ Copyrights and license ############################
+# -*- coding: utf-8 -*-
+
+# ########################## Copyrights and license ############################
 #                                                                              #
 # Copyright 2012 Vincent Jacques <vincent@vincent-jacques.net>                 #
-# Copyright 2013 AKFish <akfish@gmail.com>                                     #
+# Copyright 2012 Zearin <zearin@gonk.net>                                      #
 # Copyright 2013 Vincent Jacques <vincent@vincent-jacques.net>                 #
 #                                                                              #
 # This file is part of PyGithub. http://jacquev6.github.com/PyGithub/          #
@@ -19,18 +21,22 @@
 # You should have received a copy of the GNU Lesser General Public License     #
 # along with PyGithub. If not, see <http://www.gnu.org/licenses/>.             #
 #                                                                              #
-################################################################################
+# ##############################################################################
 
-*.pyc
-*.sw*
+import pygithub
 
-/GithubCredentials.py
-/scripts/TwitterCredentials.py
-/dist/
-/build/
-/MANIFEST
-/PyGithub.egg-info/
-/.coverage
-/developer.github.com/
-/gh-pages/
-/doc/doctrees/
+import Framework
+
+
+class Issue80(Framework.BasicTestCase):  # https://github.com/jacquev6/PyGithub/issues/80
+    def testIgnoreHttpsFromGithubEnterprise(self):
+        g = github.Github(self.login, self.password, base_url="http://my.enterprise.com/some/prefix")  # http here
+        org = g.get_organization("BeaverSoftware")
+        self.assertEqual(org.url, "https://my.enterprise.com/some/prefix/orgs/BeaverSoftware")  # https returned
+        self.assertListKeyEqual(org.get_repos(), lambda r: r.name, ["FatherBeaver", "TestPyGithub"])  # But still http in second request based on org.url
+
+    def testIgnoreHttpsFromGithubEnterpriseWithPort(self):
+        g = github.Github(self.login, self.password, base_url="http://my.enterprise.com:1234/some/prefix")  # http here
+        org = g.get_organization("BeaverSoftware")
+        self.assertEqual(org.url, "https://my.enterprise.com:1234/some/prefix/orgs/BeaverSoftware")  # https returned
+        self.assertListKeyEqual(org.get_repos(), lambda r: r.name, ["FatherBeaver", "TestPyGithub"])  # But still http in second request based on org.url

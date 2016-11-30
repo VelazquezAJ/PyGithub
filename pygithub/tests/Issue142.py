@@ -1,7 +1,7 @@
-############################ Copyrights and license ############################
+# -*- coding: utf-8 -*-
+
+# ########################## Copyrights and license ############################
 #                                                                              #
-# Copyright 2012 Vincent Jacques <vincent@vincent-jacques.net>                 #
-# Copyright 2013 AKFish <akfish@gmail.com>                                     #
 # Copyright 2013 Vincent Jacques <vincent@vincent-jacques.net>                 #
 #                                                                              #
 # This file is part of PyGithub. http://jacquev6.github.com/PyGithub/          #
@@ -19,18 +19,14 @@
 # You should have received a copy of the GNU Lesser General Public License     #
 # along with PyGithub. If not, see <http://www.gnu.org/licenses/>.             #
 #                                                                              #
-################################################################################
+# ##############################################################################
 
-*.pyc
-*.sw*
+import unittest
+import pygithub
 
-/GithubCredentials.py
-/scripts/TwitterCredentials.py
-/dist/
-/build/
-/MANIFEST
-/PyGithub.egg-info/
-/.coverage
-/developer.github.com/
-/gh-pages/
-/doc/doctrees/
+
+class Issue142(unittest.TestCase):  # https://github.com/jacquev6/PyGithub/issues/142
+    def testDecodeJson(self):
+        # This test has to hit GitHub for real, because the record-replay framework looses types
+        # and python3 does not behave like python2 for strings and bytes
+        self.assertEqual(github.Github().get_rate_limit().rate.limit, 60)

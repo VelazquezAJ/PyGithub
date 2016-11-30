@@ -1,6 +1,9 @@
-############################ Copyrights and license ############################
+# -*- coding: utf-8 -*-
+
+# ########################## Copyrights and license ############################
 #                                                                              #
 # Copyright 2012 Vincent Jacques <vincent@vincent-jacques.net>                 #
+# Copyright 2012 Zearin <zearin@gonk.net>                                      #
 # Copyright 2013 AKFish <akfish@gmail.com>                                     #
 # Copyright 2013 Vincent Jacques <vincent@vincent-jacques.net>                 #
 #                                                                              #
@@ -19,18 +22,46 @@
 # You should have received a copy of the GNU Lesser General Public License     #
 # along with PyGithub. If not, see <http://www.gnu.org/licenses/>.             #
 #                                                                              #
-################################################################################
+# ##############################################################################
 
-*.pyc
-*.sw*
+import pygithub.GithubObject
 
-/GithubCredentials.py
-/scripts/TwitterCredentials.py
-/dist/
-/build/
-/MANIFEST
-/PyGithub.egg-info/
-/.coverage
-/developer.github.com/
-/gh-pages/
-/doc/doctrees/
+
+class CommitStats(github.GithubObject.NonCompletableGithubObject):
+    """
+    This class represents CommitStatss as returned for example by http://developer.github.com/v3/todo
+    """
+
+    @property
+    def additions(self):
+        """
+        :type: integer
+        """
+        return self._additions.value
+
+    @property
+    def deletions(self):
+        """
+        :type: integer
+        """
+        return self._deletions.value
+
+    @property
+    def total(self):
+        """
+        :type: integer
+        """
+        return self._total.value
+
+    def _initAttributes(self):
+        self._additions = github.GithubObject.NotSet
+        self._deletions = github.GithubObject.NotSet
+        self._total = github.GithubObject.NotSet
+
+    def _useAttributes(self, attributes):
+        if "additions" in attributes:  # pragma no branch
+            self._additions = self._makeIntAttribute(attributes["additions"])
+        if "deletions" in attributes:  # pragma no branch
+            self._deletions = self._makeIntAttribute(attributes["deletions"])
+        if "total" in attributes:  # pragma no branch
+            self._total = self._makeIntAttribute(attributes["total"])

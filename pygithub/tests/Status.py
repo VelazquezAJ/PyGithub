@@ -1,7 +1,7 @@
-############################ Copyrights and license ############################
+# -*- coding: utf-8 -*-
+
+# ########################## Copyrights and license ############################
 #                                                                              #
-# Copyright 2012 Vincent Jacques <vincent@vincent-jacques.net>                 #
-# Copyright 2013 AKFish <akfish@gmail.com>                                     #
 # Copyright 2013 Vincent Jacques <vincent@vincent-jacques.net>                 #
 #                                                                              #
 # This file is part of PyGithub. http://jacquev6.github.com/PyGithub/          #
@@ -19,18 +19,25 @@
 # You should have received a copy of the GNU Lesser General Public License     #
 # along with PyGithub. If not, see <http://www.gnu.org/licenses/>.             #
 #                                                                              #
-################################################################################
+# ##############################################################################
 
-*.pyc
-*.sw*
+import Framework
 
-/GithubCredentials.py
-/scripts/TwitterCredentials.py
-/dist/
-/build/
-/MANIFEST
-/PyGithub.egg-info/
-/.coverage
-/developer.github.com/
-/gh-pages/
-/doc/doctrees/
+import pygithub
+import datetime
+
+
+class Status(Framework.TestCase):
+    def testGetStatus(self):
+        status = self.g.get_api_status()
+        self.assertEqual(status.status, "good")
+        self.assertEqual(status.last_updated, datetime.datetime(2013, 9, 6, 8, 29, 27))
+
+    def testGetLastMessage(self):
+        message = self.g.get_last_api_status_message()
+        self.assertEqual(message.status, "good")
+        self.assertEqual(message.body, "Everything operating normally.")
+        self.assertEqual(message.created_on, datetime.datetime(2013, 9, 1, 15, 41, 46))
+
+    def testGetMessages(self):
+        self.assertListKeyEqual(self.g.get_api_status_messages(), lambda m: m.status, ["good", "minor", "good", "minor", "good", "minor", "good", "minor", "good", "major", "good", "minor"])

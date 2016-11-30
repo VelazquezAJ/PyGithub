@@ -1,7 +1,7 @@
-############################ Copyrights and license ############################
+# -*- coding: utf-8 -*-
+
+# ########################## Copyrights and license ############################
 #                                                                              #
-# Copyright 2012 Vincent Jacques <vincent@vincent-jacques.net>                 #
-# Copyright 2013 AKFish <akfish@gmail.com>                                     #
 # Copyright 2013 Vincent Jacques <vincent@vincent-jacques.net>                 #
 #                                                                              #
 # This file is part of PyGithub. http://jacquev6.github.com/PyGithub/          #
@@ -19,18 +19,43 @@
 # You should have received a copy of the GNU Lesser General Public License     #
 # along with PyGithub. If not, see <http://www.gnu.org/licenses/>.             #
 #                                                                              #
-################################################################################
+# ##############################################################################
 
-*.pyc
-*.sw*
+import pygithub.GithubObject
 
-/GithubCredentials.py
-/scripts/TwitterCredentials.py
-/dist/
-/build/
-/MANIFEST
-/PyGithub.egg-info/
-/.coverage
-/developer.github.com/
-/gh-pages/
-/doc/doctrees/
+
+class StatsCodeFrequency(github.GithubObject.NonCompletableGithubObject):
+    """
+    This class represents statistics of code frequency. The reference can be found here http://developer.github.com/v3/repos/statistics/#get-the-number-of-additions-and-deletions-per-week
+    """
+
+    @property
+    def week(self):
+        """
+        :type: datetime.datetime
+        """
+        return self._week.value
+
+    @property
+    def additions(self):
+        """
+        :type: int
+        """
+        return self._additions.value
+
+    @property
+    def deletions(self):
+        """
+        :type: int
+        """
+        return self._deletions.value
+
+    def _initAttributes(self):
+        self._week = github.GithubObject.NotSet
+        self._additions = github.GithubObject.NotSet
+        self._deletions = github.GithubObject.NotSet
+
+    def _useAttributes(self, attributes):
+        self._week = self._makeTimestampAttribute(attributes[0])
+        self._additions = self._makeIntAttribute(attributes[1])
+        self._deletions = self._makeIntAttribute(attributes[2])

@@ -1,7 +1,7 @@
-############################ Copyrights and license ############################
+# -*- coding: utf-8 -*-
+
+# ########################## Copyrights and license ############################
 #                                                                              #
-# Copyright 2012 Vincent Jacques <vincent@vincent-jacques.net>                 #
-# Copyright 2013 AKFish <akfish@gmail.com>                                     #
 # Copyright 2013 Vincent Jacques <vincent@vincent-jacques.net>                 #
 #                                                                              #
 # This file is part of PyGithub. http://jacquev6.github.com/PyGithub/          #
@@ -19,18 +19,19 @@
 # You should have received a copy of the GNU Lesser General Public License     #
 # along with PyGithub. If not, see <http://www.gnu.org/licenses/>.             #
 #                                                                              #
-################################################################################
+# ##############################################################################
 
-*.pyc
-*.sw*
+import Framework
+import pygithub
 
-/GithubCredentials.py
-/scripts/TwitterCredentials.py
-/dist/
-/build/
-/MANIFEST
-/PyGithub.egg-info/
-/.coverage
-/developer.github.com/
-/gh-pages/
-/doc/doctrees/
+
+class Issue139(Framework.TestCase):  # https://github.com/jacquev6/PyGithub/issues/139
+    def setUp(self):
+        Framework.TestCase.setUp(self)
+        self.user = self.g.get_user().get_repo("PyGithub").get_issue(139).user
+
+    def testCompletion(self):
+        self.assertFalse(self.user._CompletableGithubObject__completed)
+        self.assertEqual(self.user.name, "Ian Ozsvald")
+        self.assertTrue(self.user._CompletableGithubObject__completed)
+        self.assertEqual(self.user.plan, None)

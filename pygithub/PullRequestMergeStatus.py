@@ -1,8 +1,12 @@
-############################ Copyrights and license ############################
+# -*- coding: utf-8 -*-
+
+# ########################## Copyrights and license ############################
 #                                                                              #
 # Copyright 2012 Vincent Jacques <vincent@vincent-jacques.net>                 #
+# Copyright 2012 Zearin <zearin@gonk.net>                                      #
 # Copyright 2013 AKFish <akfish@gmail.com>                                     #
 # Copyright 2013 Vincent Jacques <vincent@vincent-jacques.net>                 #
+# Copyright 2013 martinqt <m.ki2@laposte.net>                                  #
 #                                                                              #
 # This file is part of PyGithub. http://jacquev6.github.com/PyGithub/          #
 #                                                                              #
@@ -19,18 +23,46 @@
 # You should have received a copy of the GNU Lesser General Public License     #
 # along with PyGithub. If not, see <http://www.gnu.org/licenses/>.             #
 #                                                                              #
-################################################################################
+# ##############################################################################
 
-*.pyc
-*.sw*
+import pygithub.GithubObject
 
-/GithubCredentials.py
-/scripts/TwitterCredentials.py
-/dist/
-/build/
-/MANIFEST
-/PyGithub.egg-info/
-/.coverage
-/developer.github.com/
-/gh-pages/
-/doc/doctrees/
+
+class PullRequestMergeStatus(github.GithubObject.NonCompletableGithubObject):
+    """
+    This class represents PullRequestMergeStatuss. The reference can be found here http://developer.github.com/v3/pulls/#get-if-a-pull-request-has-been-merged
+    """
+
+    @property
+    def merged(self):
+        """
+        :type: bool
+        """
+        return self._merged.value
+
+    @property
+    def message(self):
+        """
+        :type: string
+        """
+        return self._message.value
+
+    @property
+    def sha(self):
+        """
+        :type: string
+        """
+        return self._sha.value
+
+    def _initAttributes(self):
+        self._merged = github.GithubObject.NotSet
+        self._message = github.GithubObject.NotSet
+        self._sha = github.GithubObject.NotSet
+
+    def _useAttributes(self, attributes):
+        if "merged" in attributes:  # pragma no branch
+            self._merged = self._makeBoolAttribute(attributes["merged"])
+        if "message" in attributes:  # pragma no branch
+            self._message = self._makeStringAttribute(attributes["message"])
+        if "sha" in attributes:  # pragma no branch
+            self._sha = self._makeStringAttribute(attributes["sha"])

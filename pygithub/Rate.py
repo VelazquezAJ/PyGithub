@@ -1,7 +1,7 @@
-############################ Copyrights and license ############################
+# -*- coding: utf-8 -*-
+
+# ########################## Copyrights and license ############################
 #                                                                              #
-# Copyright 2012 Vincent Jacques <vincent@vincent-jacques.net>                 #
-# Copyright 2013 AKFish <akfish@gmail.com>                                     #
 # Copyright 2013 Vincent Jacques <vincent@vincent-jacques.net>                 #
 #                                                                              #
 # This file is part of PyGithub. http://jacquev6.github.com/PyGithub/          #
@@ -19,18 +19,47 @@
 # You should have received a copy of the GNU Lesser General Public License     #
 # along with PyGithub. If not, see <http://www.gnu.org/licenses/>.             #
 #                                                                              #
-################################################################################
+# ##############################################################################
 
-*.pyc
-*.sw*
+import pygithub.GithubObject
+import datetime
 
-/GithubCredentials.py
-/scripts/TwitterCredentials.py
-/dist/
-/build/
-/MANIFEST
-/PyGithub.egg-info/
-/.coverage
-/developer.github.com/
-/gh-pages/
-/doc/doctrees/
+
+class Rate(github.GithubObject.NonCompletableGithubObject):
+    """
+    This class represents rate limits as defined in http://developer.github.com/v3/rate_limit
+    """
+
+    @property
+    def limit(self):
+        """
+        :type: integer
+        """
+        return self._limit.value
+
+    @property
+    def remaining(self):
+        """
+        :type: integer
+        """
+        return self._remaining.value
+
+    @property
+    def reset(self):
+        """
+        :type: datetime.datetime
+        """
+        return self._reset.value
+
+    def _initAttributes(self):
+        self._limit = github.GithubObject.NotSet
+        self._remaining = github.GithubObject.NotSet
+        self._reset = github.GithubObject.NotSet
+
+    def _useAttributes(self, attributes):
+        if "limit" in attributes:  # pragma no branch
+            self._limit = self._makeIntAttribute(attributes["limit"])
+        if "remaining" in attributes:  # pragma no branch
+            self._remaining = self._makeIntAttribute(attributes["remaining"])
+        if "reset" in attributes:  # pragma no branch
+            self._reset = self._makeTimestampAttribute(attributes["reset"])

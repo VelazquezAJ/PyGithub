@@ -1,7 +1,7 @@
-############################ Copyrights and license ############################
+# -*- coding: utf-8 -*-
+
+# ########################## Copyrights and license ############################
 #                                                                              #
-# Copyright 2012 Vincent Jacques <vincent@vincent-jacques.net>                 #
-# Copyright 2013 AKFish <akfish@gmail.com>                                     #
 # Copyright 2013 Vincent Jacques <vincent@vincent-jacques.net>                 #
 #                                                                              #
 # This file is part of PyGithub. http://jacquev6.github.com/PyGithub/          #
@@ -19,18 +19,29 @@
 # You should have received a copy of the GNU Lesser General Public License     #
 # along with PyGithub. If not, see <http://www.gnu.org/licenses/>.             #
 #                                                                              #
-################################################################################
+# ##############################################################################
 
-*.pyc
-*.sw*
+import Framework
+import pygithub
 
-/GithubCredentials.py
-/scripts/TwitterCredentials.py
-/dist/
-/build/
-/MANIFEST
-/PyGithub.egg-info/
-/.coverage
-/developer.github.com/
-/gh-pages/
-/doc/doctrees/
+
+class Issue134(Framework.BasicTestCase):  # https://github.com/jacquev6/PyGithub/pull/134
+    def testGetAuthorizationsFailsWhenAutenticatedThroughOAuth(self):
+        g = github.Github(self.oauth_token)
+        raised = False
+        try:
+            list(g.get_user().get_authorizations())
+        except github.GithubException, exception:
+            raised = True
+            self.assertEqual(exception.status, 404)
+        self.assertTrue(raised)
+
+    def testGetAuthorizationsSucceedsWhenAutenticatedThroughLoginPassword(self):
+        g = github.Github(self.login, self.password)
+        self.assertListKeyEqual(g.get_user().get_authorizations(), lambda a: a.note, [None, None, 'cligh', None, None, 'GitHub Android App'])
+
+    def testGetOAuthScopesFromHeader(self):
+        g = github.Github(self.oauth_token)
+        self.assertEqual(g.oauth_scopes, None)
+        g.get_user().name
+        self.assertEqual(g.oauth_scopes, ['repo', 'user', 'gist'])

@@ -70,13 +70,12 @@ if __name__ == "__main__":
 
             See http://jacquev6.github.com/PyGithub"""),
         packages=[
-            "github",
-            "github.tests",
+            "pygithub",
+            "pygithub.tests",
         ],
         package_data={
-            "github": ["tests/ReplayData/*.txt"]
+            "pygithub": ["tests/ReplayData/*.txt"]
         },
-        package_dir={"pygithub": "github"},        
         classifiers=[
             "Development Status :: 5 - Production/Stable",
             "Environment :: Web Environment",
@@ -93,6 +92,6 @@ if __name__ == "__main__":
             "Programming Language :: Python :: 3.3",
             "Topic :: Software Development",
         ],
-        test_suite="github.tests.AllTests",
+        test_suite="pygithub.tests.AllTests",
         use_2to3=True
     )

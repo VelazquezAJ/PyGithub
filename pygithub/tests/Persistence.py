@@ -1,7 +1,7 @@
-############################ Copyrights and license ############################
+# -*- coding: utf-8 -*-
+
+# ########################## Copyrights and license ############################
 #                                                                              #
-# Copyright 2012 Vincent Jacques <vincent@vincent-jacques.net>                 #
-# Copyright 2013 AKFish <akfish@gmail.com>                                     #
 # Copyright 2013 Vincent Jacques <vincent@vincent-jacques.net>                 #
 #                                                                              #
 # This file is part of PyGithub. http://jacquev6.github.com/PyGithub/          #
@@ -19,18 +19,37 @@
 # You should have received a copy of the GNU Lesser General Public License     #
 # along with PyGithub. If not, see <http://www.gnu.org/licenses/>.             #
 #                                                                              #
-################################################################################
+# ##############################################################################
 
-*.pyc
-*.sw*
+import Framework
+import pygithub
 
-/GithubCredentials.py
-/scripts/TwitterCredentials.py
-/dist/
-/build/
-/MANIFEST
-/PyGithub.egg-info/
-/.coverage
-/developer.github.com/
-/gh-pages/
-/doc/doctrees/
+if Framework.atLeastPython26:
+    from io import BytesIO as IO
+else:
+    from StringIO import StringIO as IO
+
+
+class Persistence(Framework.TestCase):
+    def setUp(self):
+        Framework.TestCase.setUp(self)
+        self.repo = self.g.get_repo("akfish/PyGithub")
+
+        self.dumpedRepo = IO()
+        self.g.dump(self.repo, self.dumpedRepo)
+        self.dumpedRepo.seek(0)
+
+    def tearDown(self):
+        self.dumpedRepo.close()
+
+    def testLoad(self):
+        loadedRepo = self.g.load(self.dumpedRepo)
+        self.assertTrue(isinstance(loadedRepo, github.Repository.Repository))
+        self.assertTrue(loadedRepo._requester is self.repo._requester)
+        self.assertTrue(loadedRepo.owner._requester is self.repo._requester)
+        self.assertEqual(loadedRepo.name, "PyGithub")
+        self.assertEqual(loadedRepo.url, "https://api.github.com/repos/akfish/PyGithub")
+
+    def testLoadAndUpdate(self):
+        loadedRepo = self.g.load(self.dumpedRepo)
+        self.assertTrue(loadedRepo.update())

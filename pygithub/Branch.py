@@ -1,8 +1,12 @@
-############################ Copyrights and license ############################
+# -*- coding: utf-8 -*-
+
+# ########################## Copyrights and license ############################
 #                                                                              #
 # Copyright 2012 Vincent Jacques <vincent@vincent-jacques.net>                 #
+# Copyright 2012 Zearin <zearin@gonk.net>                                      #
 # Copyright 2013 AKFish <akfish@gmail.com>                                     #
 # Copyright 2013 Vincent Jacques <vincent@vincent-jacques.net>                 #
+# Copyright 2013 martinqt <m.ki2@laposte.net>                                  #
 #                                                                              #
 # This file is part of PyGithub. http://jacquev6.github.com/PyGithub/          #
 #                                                                              #
@@ -19,18 +23,38 @@
 # You should have received a copy of the GNU Lesser General Public License     #
 # along with PyGithub. If not, see <http://www.gnu.org/licenses/>.             #
 #                                                                              #
-################################################################################
+# ##############################################################################
 
-*.pyc
-*.sw*
+import pygithub.GithubObject
 
-/GithubCredentials.py
-/scripts/TwitterCredentials.py
-/dist/
-/build/
-/MANIFEST
-/PyGithub.egg-info/
-/.coverage
-/developer.github.com/
-/gh-pages/
-/doc/doctrees/
+import pygithub.Commit
+
+
+class Branch(github.GithubObject.NonCompletableGithubObject):
+    """
+    This class represents Branchs. The reference can be found here http://developer.github.com/v3/repos/#list-branches
+    """
+
+    @property
+    def commit(self):
+        """
+        :type: :class:`github.Commit.Commit`
+        """
+        return self._commit.value
+
+    @property
+    def name(self):
+        """
+        :type: string
+        """
+        return self._name.value
+
+    def _initAttributes(self):
+        self._commit = github.GithubObject.NotSet
+        self._name = github.GithubObject.NotSet
+
+    def _useAttributes(self, attributes):
+        if "commit" in attributes:  # pragma no branch
+            self._commit = self._makeClassAttribute(github.Commit.Commit, attributes["commit"])
+        if "name" in attributes:  # pragma no branch
+            self._name = self._makeStringAttribute(attributes["name"])

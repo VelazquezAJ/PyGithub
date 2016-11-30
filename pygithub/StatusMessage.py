@@ -1,7 +1,7 @@
-############################ Copyrights and license ############################
+# -*- coding: utf-8 -*-
+
+# ########################## Copyrights and license ############################
 #                                                                              #
-# Copyright 2012 Vincent Jacques <vincent@vincent-jacques.net>                 #
-# Copyright 2013 AKFish <akfish@gmail.com>                                     #
 # Copyright 2013 Vincent Jacques <vincent@vincent-jacques.net>                 #
 #                                                                              #
 # This file is part of PyGithub. http://jacquev6.github.com/PyGithub/          #
@@ -19,18 +19,45 @@
 # You should have received a copy of the GNU Lesser General Public License     #
 # along with PyGithub. If not, see <http://www.gnu.org/licenses/>.             #
 #                                                                              #
-################################################################################
+# ##############################################################################
 
-*.pyc
-*.sw*
+import pygithub.GithubObject
 
-/GithubCredentials.py
-/scripts/TwitterCredentials.py
-/dist/
-/build/
-/MANIFEST
-/PyGithub.egg-info/
-/.coverage
-/developer.github.com/
-/gh-pages/
-/doc/doctrees/
+
+class StatusMessage(github.GithubObject.NonCompletableGithubObject):
+    """
+    This class represents status messages as defined in https://status.github.com/api
+    """
+
+    @property
+    def body(self):
+        """
+        :type: string
+        """
+        return self._body.value
+
+    @property
+    def status(self):
+        """
+        :type: string
+        """
+        return self._status.value
+
+    @property
+    def created_on(self):
+        """
+        :type: datetime.datetime
+        """
+        return self._created_on.value
+
+    def _initAttributes(self):
+        self._status = github.GithubObject.NotSet
+        self._created_on = github.GithubObject.NotSet
+
+    def _useAttributes(self, attributes):
+        if "body" in attributes:  # pragma no branch
+            self._body = self._makeStringAttribute(attributes["body"])
+        if "status" in attributes:  # pragma no branch
+            self._status = self._makeStringAttribute(attributes["status"])
+        if "created_on" in attributes:  # pragma no branch
+            self._created_on = self._makeDatetimeAttribute(attributes["created_on"])

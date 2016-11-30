@@ -1,6 +1,9 @@
-############################ Copyrights and license ############################
+# -*- coding: utf-8 -*-
+
+# ########################## Copyrights and license ############################
 #                                                                              #
 # Copyright 2012 Vincent Jacques <vincent@vincent-jacques.net>                 #
+# Copyright 2012 Zearin <zearin@gonk.net>                                      #
 # Copyright 2013 AKFish <akfish@gmail.com>                                     #
 # Copyright 2013 Vincent Jacques <vincent@vincent-jacques.net>                 #
 #                                                                              #
@@ -19,18 +22,38 @@
 # You should have received a copy of the GNU Lesser General Public License     #
 # along with PyGithub. If not, see <http://www.gnu.org/licenses/>.             #
 #                                                                              #
-################################################################################
+# ##############################################################################
 
-*.pyc
-*.sw*
+import pygithub.GithubObject
 
-/GithubCredentials.py
-/scripts/TwitterCredentials.py
-/dist/
-/build/
-/MANIFEST
-/PyGithub.egg-info/
-/.coverage
-/developer.github.com/
-/gh-pages/
-/doc/doctrees/
+
+class AuthorizationApplication(github.GithubObject.CompletableGithubObject):
+    """
+    This class represents AuthorizationApplications as returned for example by http://developer.github.com/v3/todo
+    """
+
+    @property
+    def name(self):
+        """
+        :type: string
+        """
+        self._completeIfNotSet(self._name)
+        return self._name.value
+
+    @property
+    def url(self):
+        """
+        :type: string
+        """
+        self._completeIfNotSet(self._url)
+        return self._url.value
+
+    def _initAttributes(self):
+        self._name = github.GithubObject.NotSet
+        self._url = github.GithubObject.NotSet
+
+    def _useAttributes(self, attributes):
+        if "name" in attributes:  # pragma no branch
+            self._name = self._makeStringAttribute(attributes["name"])
+        if "url" in attributes:  # pragma no branch
+            self._url = self._makeStringAttribute(attributes["url"])
