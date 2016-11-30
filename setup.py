@@ -76,6 +76,7 @@ if __name__ == "__main__":
         package_data={
             "github": ["tests/ReplayData/*.txt"]
         },
+        package_dir={"pygithub": "github"},        
         classifiers=[
             "Development Status :: 5 - Production/Stable",
             "Environment :: Web Environment",
