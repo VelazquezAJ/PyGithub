@@ -27,7 +27,7 @@
 import pygithub.GithubObject
 
 
-class Permissions(github.GithubObject.NonCompletableGithubObject):
+class Permissions(pygithub.GithubObject.NonCompletableGithubObject):
     """
     This class represents Permissionss as returned for example by http://developer.github.com/v3/todo
     """
@@ -54,9 +54,9 @@ class Permissions(github.GithubObject.NonCompletableGithubObject):
         return self._push.value
 
     def _initAttributes(self):
-        self._admin = github.GithubObject.NotSet
-        self._pull = github.GithubObject.NotSet
-        self._push = github.GithubObject.NotSet
+        self._admin = pygithub.GithubObject.NotSet
+        self._pull = pygithub.GithubObject.NotSet
+        self._push = pygithub.GithubObject.NotSet
 
     def _useAttributes(self, attributes):
         if "admin" in attributes:  # pragma no branch

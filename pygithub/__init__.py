@@ -24,11 +24,11 @@
 # ##############################################################################
 
 """
-The primary class you will instanciate is :class:`github.MainClass.Github`.
+The primary class you will instanciate is :class:`pygithub.MainClass.Github`.
 From its ``get_``, ``create_`` methods, you will obtain instances of all Github objects
-like :class:`github.NamedUser.NamedUser` or :class:`github.Repository.Repository`.
+like :class:`pygithub.NamedUser.NamedUser` or :class:`pygithub.Repository.Repository`.
 
-All classes inherit from :class:`github.GithubObject.GithubObject`.
+All classes inherit from :class:`pygithub.GithubObject.GithubObject`.
 """
 
 import logging
@@ -45,6 +45,6 @@ def enable_console_debug_logging():  # pragma no cover (Function useful only out
     This function sets up a very simple logging configuration (log everything on standard output) that is useful for troubleshooting.
     """
 
-    logger = logging.getLogger("github")
+    logger = logging.getLogger("pygithub")
     logger.setLevel(logging.DEBUG)
     logger.addHandler(logging.StreamHandler())

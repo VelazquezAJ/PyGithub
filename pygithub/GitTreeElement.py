@@ -27,7 +27,7 @@
 import pygithub.GithubObject
 
 
-class GitTreeElement(github.GithubObject.NonCompletableGithubObject):
+class GitTreeElement(pygithub.GithubObject.NonCompletableGithubObject):
     """
     This class represents GitTreeElements as returned for example by http://developer.github.com/v3/todo
     """
@@ -75,12 +75,12 @@ class GitTreeElement(github.GithubObject.NonCompletableGithubObject):
         return self._url.value
 
     def _initAttributes(self):
-        self._mode = github.GithubObject.NotSet
-        self._path = github.GithubObject.NotSet
-        self._sha = github.GithubObject.NotSet
-        self._size = github.GithubObject.NotSet
-        self._type = github.GithubObject.NotSet
-        self._url = github.GithubObject.NotSet
+        self._mode = pygithub.GithubObject.NotSet
+        self._path = pygithub.GithubObject.NotSet
+        self._sha = pygithub.GithubObject.NotSet
+        self._size = pygithub.GithubObject.NotSet
+        self._type = pygithub.GithubObject.NotSet
+        self._url = pygithub.GithubObject.NotSet
 
     def _useAttributes(self, attributes):
         if "mode" in attributes:  # pragma no branch

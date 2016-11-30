@@ -25,7 +25,7 @@ import pygithub.GithubObject
 import pygithub.Rate
 
 
-class RateLimit(github.GithubObject.NonCompletableGithubObject):
+class RateLimit(pygithub.GithubObject.NonCompletableGithubObject):
     """
     This class represents rate limits as defined in http://developer.github.com/v3/rate_limit
     """
@@ -33,13 +33,13 @@ class RateLimit(github.GithubObject.NonCompletableGithubObject):
     @property
     def rate(self):
         """
-        :type: class:`github.Rate.Rate`
+        :type: class:`pygithub.Rate.Rate`
         """
         return self._rate.value
 
     def _initAttributes(self):
-        self._rate = github.GithubObject.NotSet
+        self._rate = pygithub.GithubObject.NotSet
 
     def _useAttributes(self, attributes):
         if "rate" in attributes:  # pragma no branch
-            self._rate = self._makeClassAttribute(github.Rate.Rate, attributes["rate"])
+            self._rate = self._makeClassAttribute(pygithub.Rate.Rate, attributes["rate"])

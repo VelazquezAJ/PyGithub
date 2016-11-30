@@ -26,7 +26,7 @@ import pygithub.GithubObject
 import pygithub.NamedUser
 
 
-class StatsParticipation(github.GithubObject.NonCompletableGithubObject):
+class StatsParticipation(pygithub.GithubObject.NonCompletableGithubObject):
     """
     This class represents statistics of participation. The reference can be found here http://developer.github.com/v3/repos/statistics/#get-the-weekly-commit-count-for-the-repo-owner-and-everyone-else
     """
@@ -46,8 +46,8 @@ class StatsParticipation(github.GithubObject.NonCompletableGithubObject):
         return self._owner.value
 
     def _initAttributes(self):
-        self._all = github.GithubObject.NotSet
-        self._owner = github.GithubObject.NotSet
+        self._all = pygithub.GithubObject.NotSet
+        self._owner = pygithub.GithubObject.NotSet
 
     def _useAttributes(self, attributes):
         if "all" in attributes:  # pragma no branch

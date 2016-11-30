@@ -30,7 +30,7 @@ import pygithub.Issue
 import pygithub.NamedUser
 
 
-class IssueEvent(github.GithubObject.CompletableGithubObject):
+class IssueEvent(pygithub.GithubObject.CompletableGithubObject):
     """
     This class represents IssueEvents as returned for example by http://developer.github.com/v3/todo
     """
@@ -38,7 +38,7 @@ class IssueEvent(github.GithubObject.CompletableGithubObject):
     @property
     def actor(self):
         """
-        :type: :class:`github.NamedUser.NamedUser`
+        :type: :class:`pygithub.NamedUser.NamedUser`
         """
         self._completeIfNotSet(self._actor)
         return self._actor.value
@@ -78,7 +78,7 @@ class IssueEvent(github.GithubObject.CompletableGithubObject):
     @property
     def issue(self):
         """
-        :type: :class:`github.Issue.Issue`
+        :type: :class:`pygithub.Issue.Issue`
         """
         self._completeIfNotSet(self._issue)
         return self._issue.value
@@ -92,17 +92,17 @@ class IssueEvent(github.GithubObject.CompletableGithubObject):
         return self._url.value
 
     def _initAttributes(self):
-        self._actor = github.GithubObject.NotSet
-        self._commit_id = github.GithubObject.NotSet
-        self._created_at = github.GithubObject.NotSet
-        self._event = github.GithubObject.NotSet
-        self._id = github.GithubObject.NotSet
-        self._issue = github.GithubObject.NotSet
-        self._url = github.GithubObject.NotSet
+        self._actor = pygithub.GithubObject.NotSet
+        self._commit_id = pygithub.GithubObject.NotSet
+        self._created_at = pygithub.GithubObject.NotSet
+        self._event = pygithub.GithubObject.NotSet
+        self._id = pygithub.GithubObject.NotSet
+        self._issue = pygithub.GithubObject.NotSet
+        self._url = pygithub.GithubObject.NotSet
 
     def _useAttributes(self, attributes):
         if "actor" in attributes:  # pragma no branch
-            self._actor = self._makeClassAttribute(github.NamedUser.NamedUser, attributes["actor"])
+            self._actor = self._makeClassAttribute(pygithub.NamedUser.NamedUser, attributes["actor"])
         if "commit_id" in attributes:  # pragma no branch
             self._commit_id = self._makeStringAttribute(attributes["commit_id"])
         if "created_at" in attributes:  # pragma no branch
@@ -112,6 +112,6 @@ class IssueEvent(github.GithubObject.CompletableGithubObject):
         if "id" in attributes:  # pragma no branch
             self._id = self._makeIntAttribute(attributes["id"])
         if "issue" in attributes:  # pragma no branch
-            self._issue = self._makeClassAttribute(github.Issue.Issue, attributes["issue"])
+            self._issue = self._makeClassAttribute(pygithub.Issue.Issue, attributes["issue"])
         if "url" in attributes:  # pragma no branch
             self._url = self._makeStringAttribute(attributes["url"])

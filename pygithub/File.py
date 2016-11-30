@@ -27,7 +27,7 @@
 import pygithub.GithubObject
 
 
-class File(github.GithubObject.NonCompletableGithubObject):
+class File(pygithub.GithubObject.NonCompletableGithubObject):
     """
     This class represents Files as returned for example by http://developer.github.com/v3/todo
     """
@@ -103,16 +103,16 @@ class File(github.GithubObject.NonCompletableGithubObject):
         return self._status.value
 
     def _initAttributes(self):
-        self._additions = github.GithubObject.NotSet
-        self._blob_url = github.GithubObject.NotSet
-        self._changes = github.GithubObject.NotSet
-        self._contents_url = github.GithubObject.NotSet
-        self._deletions = github.GithubObject.NotSet
-        self._filename = github.GithubObject.NotSet
-        self._patch = github.GithubObject.NotSet
-        self._raw_url = github.GithubObject.NotSet
-        self._sha = github.GithubObject.NotSet
-        self._status = github.GithubObject.NotSet
+        self._additions = pygithub.GithubObject.NotSet
+        self._blob_url = pygithub.GithubObject.NotSet
+        self._changes = pygithub.GithubObject.NotSet
+        self._contents_url = pygithub.GithubObject.NotSet
+        self._deletions = pygithub.GithubObject.NotSet
+        self._filename = pygithub.GithubObject.NotSet
+        self._patch = pygithub.GithubObject.NotSet
+        self._raw_url = pygithub.GithubObject.NotSet
+        self._sha = pygithub.GithubObject.NotSet
+        self._status = pygithub.GithubObject.NotSet
 
     def _useAttributes(self, attributes):
         if "additions" in attributes:  # pragma no branch

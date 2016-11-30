@@ -30,7 +30,7 @@ import pygithub.GitAuthor
 import pygithub.GitTree
 
 
-class GitCommit(github.GithubObject.CompletableGithubObject):
+class GitCommit(pygithub.GithubObject.CompletableGithubObject):
     """
     This class represents GitCommits as returned for example by http://developer.github.com/v3/todo
     """
@@ -38,7 +38,7 @@ class GitCommit(github.GithubObject.CompletableGithubObject):
     @property
     def author(self):
         """
-        :type: :class:`github.GitAuthor.GitAuthor`
+        :type: :class:`pygithub.GitAuthor.GitAuthor`
         """
         self._completeIfNotSet(self._author)
         return self._author.value
@@ -46,7 +46,7 @@ class GitCommit(github.GithubObject.CompletableGithubObject):
     @property
     def committer(self):
         """
-        :type: :class:`github.GitAuthor.GitAuthor`
+        :type: :class:`pygithub.GitAuthor.GitAuthor`
         """
         self._completeIfNotSet(self._committer)
         return self._committer.value
@@ -70,7 +70,7 @@ class GitCommit(github.GithubObject.CompletableGithubObject):
     @property
     def parents(self):
         """
-        :type: list of :class:`github.GitCommit.GitCommit`
+        :type: list of :class:`pygithub.GitCommit.GitCommit`
         """
         self._completeIfNotSet(self._parents)
         return self._parents.value
@@ -86,7 +86,7 @@ class GitCommit(github.GithubObject.CompletableGithubObject):
     @property
     def tree(self):
         """
-        :type: :class:`github.GitTree.GitTree`
+        :type: :class:`pygithub.GitTree.GitTree`
         """
         self._completeIfNotSet(self._tree)
         return self._tree.value
@@ -104,20 +104,20 @@ class GitCommit(github.GithubObject.CompletableGithubObject):
         return self.sha
 
     def _initAttributes(self):
-        self._author = github.GithubObject.NotSet
-        self._committer = github.GithubObject.NotSet
-        self._html_url = github.GithubObject.NotSet
-        self._message = github.GithubObject.NotSet
-        self._parents = github.GithubObject.NotSet
-        self._sha = github.GithubObject.NotSet
-        self._tree = github.GithubObject.NotSet
-        self._url = github.GithubObject.NotSet
+        self._author = pygithub.GithubObject.NotSet
+        self._committer = pygithub.GithubObject.NotSet
+        self._html_url = pygithub.GithubObject.NotSet
+        self._message = pygithub.GithubObject.NotSet
+        self._parents = pygithub.GithubObject.NotSet
+        self._sha = pygithub.GithubObject.NotSet
+        self._tree = pygithub.GithubObject.NotSet
+        self._url = pygithub.GithubObject.NotSet
 
     def _useAttributes(self, attributes):
         if "author" in attributes:  # pragma no branch
-            self._author = self._makeClassAttribute(github.GitAuthor.GitAuthor, attributes["author"])
+            self._author = self._makeClassAttribute(pygithub.GitAuthor.GitAuthor, attributes["author"])
         if "committer" in attributes:  # pragma no branch
-            self._committer = self._makeClassAttribute(github.GitAuthor.GitAuthor, attributes["committer"])
+            self._committer = self._makeClassAttribute(pygithub.GitAuthor.GitAuthor, attributes["committer"])
         if "html_url" in attributes:  # pragma no branch
             self._html_url = self._makeStringAttribute(attributes["html_url"])
         if "message" in attributes:  # pragma no branch
@@ -127,6 +127,6 @@ class GitCommit(github.GithubObject.CompletableGithubObject):
         if "sha" in attributes:  # pragma no branch
             self._sha = self._makeStringAttribute(attributes["sha"])
         if "tree" in attributes:  # pragma no branch
-            self._tree = self._makeClassAttribute(github.GitTree.GitTree, attributes["tree"])
+            self._tree = self._makeClassAttribute(pygithub.GitTree.GitTree, attributes["tree"])
         if "url" in attributes:  # pragma no branch
             self._url = self._makeStringAttribute(attributes["url"])

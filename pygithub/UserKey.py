@@ -28,7 +28,7 @@
 import pygithub.GithubObject
 
 
-class UserKey(github.GithubObject.CompletableGithubObject):
+class UserKey(pygithub.GithubObject.CompletableGithubObject):
     """
     This class represents UserKeys. The reference can be found here http://developer.github.com/v3/users/keys/
     """
@@ -83,19 +83,19 @@ class UserKey(github.GithubObject.CompletableGithubObject):
             self.url
         )
 
-    def edit(self, title=github.GithubObject.NotSet, key=github.GithubObject.NotSet):
+    def edit(self, title=pygithub.GithubObject.NotSet, key=pygithub.GithubObject.NotSet):
         """
         :calls: `PATCH /user/keys/:id <http://developer.github.com/v3/users/keys>`_
         :param title: string
         :param key: string
         :rtype: None
         """
-        assert title is github.GithubObject.NotSet or isinstance(title, (str, unicode)), title
-        assert key is github.GithubObject.NotSet or isinstance(key, (str, unicode)), key
+        assert title is pygithub.GithubObject.NotSet or isinstance(title, (str, unicode)), title
+        assert key is pygithub.GithubObject.NotSet or isinstance(key, (str, unicode)), key
         post_parameters = dict()
-        if title is not github.GithubObject.NotSet:
+        if title is not pygithub.GithubObject.NotSet:
             post_parameters["title"] = title
-        if key is not github.GithubObject.NotSet:
+        if key is not pygithub.GithubObject.NotSet:
             post_parameters["key"] = key
         headers, data = self._requester.requestJsonAndCheck(
             "PATCH",
@@ -105,11 +105,11 @@ class UserKey(github.GithubObject.CompletableGithubObject):
         self._useAttributes(data)
 
     def _initAttributes(self):
-        self._id = github.GithubObject.NotSet
-        self._key = github.GithubObject.NotSet
-        self._title = github.GithubObject.NotSet
-        self._url = github.GithubObject.NotSet
-        self._verified = github.GithubObject.NotSet
+        self._id = pygithub.GithubObject.NotSet
+        self._key = pygithub.GithubObject.NotSet
+        self._title = pygithub.GithubObject.NotSet
+        self._url = pygithub.GithubObject.NotSet
+        self._verified = pygithub.GithubObject.NotSet
 
     def _useAttributes(self, attributes):
         if "id" in attributes:  # pragma no branch

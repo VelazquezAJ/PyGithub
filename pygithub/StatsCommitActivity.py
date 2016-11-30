@@ -24,7 +24,7 @@
 import pygithub.GithubObject
 
 
-class StatsCommitActivity(github.GithubObject.NonCompletableGithubObject):
+class StatsCommitActivity(pygithub.GithubObject.NonCompletableGithubObject):
     """
     This class represents statistics of commit activity. The reference can be found here http://developer.github.com/v3/repos/statistics/#get-the-last-year-of-commit-activity-data
     """
@@ -51,9 +51,9 @@ class StatsCommitActivity(github.GithubObject.NonCompletableGithubObject):
         return self._days.value
 
     def _initAttributes(self):
-        self._week = github.GithubObject.NotSet
-        self._total = github.GithubObject.NotSet
-        self._days = github.GithubObject.NotSet
+        self._week = pygithub.GithubObject.NotSet
+        self._total = pygithub.GithubObject.NotSet
+        self._days = pygithub.GithubObject.NotSet
 
     def _useAttributes(self, attributes):
         if "week" in attributes:  # pragma no branch

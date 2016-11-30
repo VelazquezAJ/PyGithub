@@ -29,7 +29,7 @@ import pygithub.GithubObject
 import pygithub.HookResponse
 
 
-class Hook(github.GithubObject.CompletableGithubObject):
+class Hook(pygithub.GithubObject.CompletableGithubObject):
     """
     This class represents Hooks as returned for example by http://developer.github.com/v3/repos/hooks
     """
@@ -77,7 +77,7 @@ class Hook(github.GithubObject.CompletableGithubObject):
     @property
     def last_response(self):
         """
-        :type: :class:`github.HookResponse.HookResponse`
+        :type: :class:`pygithub.HookResponse.HookResponse`
         """
         self._completeIfNotSet(self._last_response)
         return self._last_response.value
@@ -124,7 +124,7 @@ class Hook(github.GithubObject.CompletableGithubObject):
             self.url
         )
 
-    def edit(self, name, config, events=github.GithubObject.NotSet, add_events=github.GithubObject.NotSet, remove_events=github.GithubObject.NotSet, active=github.GithubObject.NotSet):
+    def edit(self, name, config, events=pygithub.GithubObject.NotSet, add_events=pygithub.GithubObject.NotSet, remove_events=pygithub.GithubObject.NotSet, active=pygithub.GithubObject.NotSet):
         """
         :calls: `PATCH /repos/:owner/:repo/hooks/:id <http://developer.github.com/v3/repos/hooks>`_
         :param name: string
@@ -137,21 +137,21 @@ class Hook(github.GithubObject.CompletableGithubObject):
         """
         assert isinstance(name, (str, unicode)), name
         assert isinstance(config, dict), config
-        assert events is github.GithubObject.NotSet or all(isinstance(element, (str, unicode)) for element in events), events
-        assert add_events is github.GithubObject.NotSet or all(isinstance(element, (str, unicode)) for element in add_events), add_events
-        assert remove_events is github.GithubObject.NotSet or all(isinstance(element, (str, unicode)) for element in remove_events), remove_events
-        assert active is github.GithubObject.NotSet or isinstance(active, bool), active
+        assert events is pygithub.GithubObject.NotSet or all(isinstance(element, (str, unicode)) for element in events), events
+        assert add_events is pygithub.GithubObject.NotSet or all(isinstance(element, (str, unicode)) for element in add_events), add_events
+        assert remove_events is pygithub.GithubObject.NotSet or all(isinstance(element, (str, unicode)) for element in remove_events), remove_events
+        assert active is pygithub.GithubObject.NotSet or isinstance(active, bool), active
         post_parameters = {
             "name": name,
             "config": config,
         }
-        if events is not github.GithubObject.NotSet:
+        if events is not pygithub.GithubObject.NotSet:
             post_parameters["events"] = events
-        if add_events is not github.GithubObject.NotSet:
+        if add_events is not pygithub.GithubObject.NotSet:
             post_parameters["add_events"] = add_events
-        if remove_events is not github.GithubObject.NotSet:
+        if remove_events is not pygithub.GithubObject.NotSet:
             post_parameters["remove_events"] = remove_events
-        if active is not github.GithubObject.NotSet:
+        if active is not pygithub.GithubObject.NotSet:
             post_parameters["active"] = active
         headers, data = self._requester.requestJsonAndCheck(
             "PATCH",
@@ -171,16 +171,16 @@ class Hook(github.GithubObject.CompletableGithubObject):
         )
 
     def _initAttributes(self):
-        self._active = github.GithubObject.NotSet
-        self._config = github.GithubObject.NotSet
-        self._created_at = github.GithubObject.NotSet
-        self._events = github.GithubObject.NotSet
-        self._id = github.GithubObject.NotSet
-        self._last_response = github.GithubObject.NotSet
-        self._name = github.GithubObject.NotSet
-        self._test_url = github.GithubObject.NotSet
-        self._updated_at = github.GithubObject.NotSet
-        self._url = github.GithubObject.NotSet
+        self._active = pygithub.GithubObject.NotSet
+        self._config = pygithub.GithubObject.NotSet
+        self._created_at = pygithub.GithubObject.NotSet
+        self._events = pygithub.GithubObject.NotSet
+        self._id = pygithub.GithubObject.NotSet
+        self._last_response = pygithub.GithubObject.NotSet
+        self._name = pygithub.GithubObject.NotSet
+        self._test_url = pygithub.GithubObject.NotSet
+        self._updated_at = pygithub.GithubObject.NotSet
+        self._url = pygithub.GithubObject.NotSet
 
     def _useAttributes(self, attributes):
         if "active" in attributes:  # pragma no branch
@@ -194,7 +194,7 @@ class Hook(github.GithubObject.CompletableGithubObject):
         if "id" in attributes:  # pragma no branch
             self._id = self._makeIntAttribute(attributes["id"])
         if "last_response" in attributes:  # pragma no branch
-            self._last_response = self._makeClassAttribute(github.HookResponse.HookResponse, attributes["last_response"])
+            self._last_response = self._makeClassAttribute(pygithub.HookResponse.HookResponse, attributes["last_response"])
         if "name" in attributes:  # pragma no branch
             self._name = self._makeStringAttribute(attributes["name"])
         if "test_url" in attributes:  # pragma no branch

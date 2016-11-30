@@ -26,7 +26,7 @@
 import pygithub.GithubObject
 
 
-class GitignoreTemplate(github.GithubObject.NonCompletableGithubObject):
+class GitignoreTemplate(pygithub.GithubObject.NonCompletableGithubObject):
     """
     This class represents GitignoreTemplates as returned for example by http://developer.github.com/v3/todo
     """
@@ -46,8 +46,8 @@ class GitignoreTemplate(github.GithubObject.NonCompletableGithubObject):
         return self._name.value
 
     def _initAttributes(self):
-        self._source = github.GithubObject.NotSet
-        self._name = github.GithubObject.NotSet
+        self._source = pygithub.GithubObject.NotSet
+        self._name = pygithub.GithubObject.NotSet
 
     def _useAttributes(self, attributes):
         if "source" in attributes:  # pragma no branch

@@ -29,7 +29,7 @@ import pygithub.GithubObject
 import pygithub.NamedUser
 
 
-class CommitComment(github.GithubObject.CompletableGithubObject):
+class CommitComment(pygithub.GithubObject.CompletableGithubObject):
     """
     This class represents CommitComments as returned for example by http://developer.github.com/v3/todo
     """
@@ -117,7 +117,7 @@ class CommitComment(github.GithubObject.CompletableGithubObject):
     @property
     def user(self):
         """
-        :type: :class:`github.NamedUser.NamedUser`
+        :type: :class:`pygithub.NamedUser.NamedUser`
         """
         self._completeIfNotSet(self._user)
         return self._user.value
@@ -150,17 +150,17 @@ class CommitComment(github.GithubObject.CompletableGithubObject):
         self._useAttributes(data)
 
     def _initAttributes(self):
-        self._body = github.GithubObject.NotSet
-        self._commit_id = github.GithubObject.NotSet
-        self._created_at = github.GithubObject.NotSet
-        self._html_url = github.GithubObject.NotSet
-        self._id = github.GithubObject.NotSet
-        self._line = github.GithubObject.NotSet
-        self._path = github.GithubObject.NotSet
-        self._position = github.GithubObject.NotSet
-        self._updated_at = github.GithubObject.NotSet
-        self._url = github.GithubObject.NotSet
-        self._user = github.GithubObject.NotSet
+        self._body = pygithub.GithubObject.NotSet
+        self._commit_id = pygithub.GithubObject.NotSet
+        self._created_at = pygithub.GithubObject.NotSet
+        self._html_url = pygithub.GithubObject.NotSet
+        self._id = pygithub.GithubObject.NotSet
+        self._line = pygithub.GithubObject.NotSet
+        self._path = pygithub.GithubObject.NotSet
+        self._position = pygithub.GithubObject.NotSet
+        self._updated_at = pygithub.GithubObject.NotSet
+        self._url = pygithub.GithubObject.NotSet
+        self._user = pygithub.GithubObject.NotSet
 
     def _useAttributes(self, attributes):
         if "body" in attributes:  # pragma no branch
@@ -184,4 +184,4 @@ class CommitComment(github.GithubObject.CompletableGithubObject):
         if "url" in attributes:  # pragma no branch
             self._url = self._makeStringAttribute(attributes["url"])
         if "user" in attributes:  # pragma no branch
-            self._user = self._makeClassAttribute(github.NamedUser.NamedUser, attributes["user"])
+            self._user = self._makeClassAttribute(pygithub.NamedUser.NamedUser, attributes["user"])

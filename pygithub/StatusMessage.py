@@ -24,7 +24,7 @@
 import pygithub.GithubObject
 
 
-class StatusMessage(github.GithubObject.NonCompletableGithubObject):
+class StatusMessage(pygithub.GithubObject.NonCompletableGithubObject):
     """
     This class represents status messages as defined in https://status.github.com/api
     """
@@ -51,8 +51,8 @@ class StatusMessage(github.GithubObject.NonCompletableGithubObject):
         return self._created_on.value
 
     def _initAttributes(self):
-        self._status = github.GithubObject.NotSet
-        self._created_on = github.GithubObject.NotSet
+        self._status = pygithub.GithubObject.NotSet
+        self._created_on = pygithub.GithubObject.NotSet
 
     def _useAttributes(self, attributes):
         if "body" in attributes:  # pragma no branch

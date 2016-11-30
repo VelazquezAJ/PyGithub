@@ -30,7 +30,7 @@ import pygithub.GithubObject
 import pygithub.Commit
 
 
-class Tag(github.GithubObject.NonCompletableGithubObject):
+class Tag(pygithub.GithubObject.NonCompletableGithubObject):
     """
     This class represents Tags. The reference can be found here http://developer.github.com/v3/git/tags/
     """
@@ -38,7 +38,7 @@ class Tag(github.GithubObject.NonCompletableGithubObject):
     @property
     def commit(self):
         """
-        :type: :class:`github.Commit.Commit`
+        :type: :class:`pygithub.Commit.Commit`
         """
         return self._commit.value
 
@@ -64,14 +64,14 @@ class Tag(github.GithubObject.NonCompletableGithubObject):
         return self._zipball_url.value
 
     def _initAttributes(self):
-        self._commit = github.GithubObject.NotSet
-        self._name = github.GithubObject.NotSet
-        self._tarball_url = github.GithubObject.NotSet
-        self._zipball_url = github.GithubObject.NotSet
+        self._commit = pygithub.GithubObject.NotSet
+        self._name = pygithub.GithubObject.NotSet
+        self._tarball_url = pygithub.GithubObject.NotSet
+        self._zipball_url = pygithub.GithubObject.NotSet
 
     def _useAttributes(self, attributes):
         if "commit" in attributes:  # pragma no branch
-            self._commit = self._makeClassAttribute(github.Commit.Commit, attributes["commit"])
+            self._commit = self._makeClassAttribute(pygithub.Commit.Commit, attributes["commit"])
         if "name" in attributes:  # pragma no branch
             self._name = self._makeStringAttribute(attributes["name"])
         if "tarball_url" in attributes:  # pragma no branch

@@ -34,7 +34,7 @@ import pygithub.GistFile
 import pygithub.GistHistoryState
 
 
-class Gist(github.GithubObject.CompletableGithubObject):
+class Gist(pygithub.GithubObject.CompletableGithubObject):
     """
     This class represents Gists as returned for example by http://developer.github.com/v3/todo
     """
@@ -82,7 +82,7 @@ class Gist(github.GithubObject.CompletableGithubObject):
     @property
     def files(self):
         """
-        :type: dict of string to :class:`github.GistFile.GistFile`
+        :type: dict of string to :class:`pygithub.GistFile.GistFile`
         """
         self._completeIfNotSet(self._files)
         return self._files.value
@@ -90,7 +90,7 @@ class Gist(github.GithubObject.CompletableGithubObject):
     @property
     def fork_of(self):
         """
-        :type: :class:`github.Gist.Gist`
+        :type: :class:`pygithub.Gist.Gist`
         """
         self._completeIfNotSet(self._fork_of)
         return self._fork_of.value
@@ -98,7 +98,7 @@ class Gist(github.GithubObject.CompletableGithubObject):
     @property
     def forks(self):
         """
-        :type: list of :class:`github.Gist.Gist`
+        :type: list of :class:`pygithub.Gist.Gist`
         """
         self._completeIfNotSet(self._forks)
         return self._forks.value
@@ -130,7 +130,7 @@ class Gist(github.GithubObject.CompletableGithubObject):
     @property
     def history(self):
         """
-        :type: list of :class:`github.GistHistoryState.GistHistoryState`
+        :type: list of :class:`pygithub.GistHistoryState.GistHistoryState`
         """
         self._completeIfNotSet(self._history)
         return self._history.value
@@ -154,7 +154,7 @@ class Gist(github.GithubObject.CompletableGithubObject):
     @property
     def owner(self):
         """
-        :type: :class:`github.NamedUser.NamedUser`
+        :type: :class:`pygithub.NamedUser.NamedUser`
         """
         self._completeIfNotSet(self._owner)
         return self._owner.value
@@ -186,7 +186,7 @@ class Gist(github.GithubObject.CompletableGithubObject):
     @property
     def user(self):
         """
-        :type: :class:`github.NamedUser.NamedUser`
+        :type: :class:`pygithub.NamedUser.NamedUser`
         """
         self._completeIfNotSet(self._user)
         return self._user.value
@@ -195,7 +195,7 @@ class Gist(github.GithubObject.CompletableGithubObject):
         """
         :calls: `POST /gists/:gist_id/comments <http://developer.github.com/v3/gists/comments>`_
         :param body: string
-        :rtype: :class:`github.GistComment.GistComment`
+        :rtype: :class:`pygithub.GistComment.GistComment`
         """
         assert isinstance(body, (str, unicode)), body
         post_parameters = {
@@ -206,12 +206,12 @@ class Gist(github.GithubObject.CompletableGithubObject):
             self.url + "/comments",
             input=post_parameters
         )
-        return github.GistComment.GistComment(self._requester, headers, data, completed=True)
+        return pygithub.GistComment.GistComment(self._requester, headers, data, completed=True)
 
     def create_fork(self):
         """
         :calls: `POST /gists/:id/forks <http://developer.github.com/v3/gists>`_
-        :rtype: :class:`github.Gist.Gist`
+        :rtype: :class:`pygithub.Gist.Gist`
         """
         headers, data = self._requester.requestJsonAndCheck(
             "POST",
@@ -229,19 +229,19 @@ class Gist(github.GithubObject.CompletableGithubObject):
             self.url
         )
 
-    def edit(self, description=github.GithubObject.NotSet, files=github.GithubObject.NotSet):
+    def edit(self, description=pygithub.GithubObject.NotSet, files=pygithub.GithubObject.NotSet):
         """
         :calls: `PATCH /gists/:id <http://developer.github.com/v3/gists>`_
         :param description: string
-        :param files: dict of string to :class:`github.InputFileContent.InputFileContent`
+        :param files: dict of string to :class:`pygithub.InputFileContent.InputFileContent`
         :rtype: None
         """
-        assert description is github.GithubObject.NotSet or isinstance(description, (str, unicode)), description
-        assert files is github.GithubObject.NotSet or all(element is None or isinstance(element, github.InputFileContent) for element in files.itervalues()), files
+        assert description is pygithub.GithubObject.NotSet or isinstance(description, (str, unicode)), description
+        assert files is pygithub.GithubObject.NotSet or all(element is None or isinstance(element, pygithub.InputFileContent) for element in files.itervalues()), files
         post_parameters = dict()
-        if description is not github.GithubObject.NotSet:
+        if description is not pygithub.GithubObject.NotSet:
             post_parameters["description"] = description
-        if files is not github.GithubObject.NotSet:
+        if files is not pygithub.GithubObject.NotSet:
             post_parameters["files"] = dict((key, None if value is None else value._identity) for key, value in files.iteritems())
         headers, data = self._requester.requestJsonAndCheck(
             "PATCH",
@@ -254,22 +254,22 @@ class Gist(github.GithubObject.CompletableGithubObject):
         """
         :calls: `GET /gists/:gist_id/comments/:id <http://developer.github.com/v3/gists/comments>`_
         :param id: integer
-        :rtype: :class:`github.GistComment.GistComment`
+        :rtype: :class:`pygithub.GistComment.GistComment`
         """
         assert isinstance(id, (int, long)), id
         headers, data = self._requester.requestJsonAndCheck(
             "GET",
             self.url + "/comments/" + str(id)
         )
-        return github.GistComment.GistComment(self._requester, headers, data, completed=True)
+        return pygithub.GistComment.GistComment(self._requester, headers, data, completed=True)
 
     def get_comments(self):
         """
         :calls: `GET /gists/:gist_id/comments <http://developer.github.com/v3/gists/comments>`_
-        :rtype: :class:`github.PaginatedList.PaginatedList` of :class:`github.GistComment.GistComment`
+        :rtype: :class:`pygithub.PaginatedList.PaginatedList` of :class:`pygithub.GistComment.GistComment`
         """
-        return github.PaginatedList.PaginatedList(
-            github.GistComment.GistComment,
+        return pygithub.PaginatedList.PaginatedList(
+            pygithub.GistComment.GistComment,
             self._requester,
             self.url + "/comments",
             None
@@ -307,25 +307,25 @@ class Gist(github.GithubObject.CompletableGithubObject):
         )
 
     def _initAttributes(self):
-        self._comments = github.GithubObject.NotSet
-        self._comments_url = github.GithubObject.NotSet
-        self._commits_url = github.GithubObject.NotSet
-        self._created_at = github.GithubObject.NotSet
-        self._description = github.GithubObject.NotSet
-        self._files = github.GithubObject.NotSet
-        self._fork_of = github.GithubObject.NotSet
-        self._forks = github.GithubObject.NotSet
-        self._forks_url = github.GithubObject.NotSet
-        self._git_pull_url = github.GithubObject.NotSet
-        self._git_push_url = github.GithubObject.NotSet
-        self._history = github.GithubObject.NotSet
-        self._html_url = github.GithubObject.NotSet
-        self._id = github.GithubObject.NotSet
-        self._owner = github.GithubObject.NotSet
-        self._public = github.GithubObject.NotSet
-        self._updated_at = github.GithubObject.NotSet
-        self._url = github.GithubObject.NotSet
-        self._user = github.GithubObject.NotSet
+        self._comments = pygithub.GithubObject.NotSet
+        self._comments_url = pygithub.GithubObject.NotSet
+        self._commits_url = pygithub.GithubObject.NotSet
+        self._created_at = pygithub.GithubObject.NotSet
+        self._description = pygithub.GithubObject.NotSet
+        self._files = pygithub.GithubObject.NotSet
+        self._fork_of = pygithub.GithubObject.NotSet
+        self._forks = pygithub.GithubObject.NotSet
+        self._forks_url = pygithub.GithubObject.NotSet
+        self._git_pull_url = pygithub.GithubObject.NotSet
+        self._git_push_url = pygithub.GithubObject.NotSet
+        self._history = pygithub.GithubObject.NotSet
+        self._html_url = pygithub.GithubObject.NotSet
+        self._id = pygithub.GithubObject.NotSet
+        self._owner = pygithub.GithubObject.NotSet
+        self._public = pygithub.GithubObject.NotSet
+        self._updated_at = pygithub.GithubObject.NotSet
+        self._url = pygithub.GithubObject.NotSet
+        self._user = pygithub.GithubObject.NotSet
 
     def _useAttributes(self, attributes):
         if "comments" in attributes:  # pragma no branch
@@ -339,7 +339,7 @@ class Gist(github.GithubObject.CompletableGithubObject):
         if "description" in attributes:  # pragma no branch
             self._description = self._makeStringAttribute(attributes["description"])
         if "files" in attributes:  # pragma no branch
-            self._files = self._makeDictOfStringsToClassesAttribute(github.GistFile.GistFile, attributes["files"])
+            self._files = self._makeDictOfStringsToClassesAttribute(pygithub.GistFile.GistFile, attributes["files"])
         if "fork_of" in attributes:  # pragma no branch
             self._fork_of = self._makeClassAttribute(Gist, attributes["fork_of"])
         if "forks" in attributes:  # pragma no branch
@@ -351,13 +351,13 @@ class Gist(github.GithubObject.CompletableGithubObject):
         if "git_push_url" in attributes:  # pragma no branch
             self._git_push_url = self._makeStringAttribute(attributes["git_push_url"])
         if "history" in attributes:  # pragma no branch
-            self._history = self._makeListOfClassesAttribute(github.GistHistoryState.GistHistoryState, attributes["history"])
+            self._history = self._makeListOfClassesAttribute(pygithub.GistHistoryState.GistHistoryState, attributes["history"])
         if "html_url" in attributes:  # pragma no branch
             self._html_url = self._makeStringAttribute(attributes["html_url"])
         if "id" in attributes:  # pragma no branch
             self._id = self._makeStringAttribute(attributes["id"])
         if "owner" in attributes:  # pragma no branch
-            self._owner = self._makeClassAttribute(github.NamedUser.NamedUser, attributes["owner"])
+            self._owner = self._makeClassAttribute(pygithub.NamedUser.NamedUser, attributes["owner"])
         if "public" in attributes:  # pragma no branch
             self._public = self._makeBoolAttribute(attributes["public"])
         if "updated_at" in attributes:  # pragma no branch
@@ -365,4 +365,4 @@ class Gist(github.GithubObject.CompletableGithubObject):
         if "url" in attributes:  # pragma no branch
             self._url = self._makeStringAttribute(attributes["url"])
         if "user" in attributes:  # pragma no branch
-            self._user = self._makeClassAttribute(github.NamedUser.NamedUser, attributes["user"])
+            self._user = self._makeClassAttribute(pygithub.NamedUser.NamedUser, attributes["user"])

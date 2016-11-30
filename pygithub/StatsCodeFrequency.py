@@ -24,7 +24,7 @@
 import pygithub.GithubObject
 
 
-class StatsCodeFrequency(github.GithubObject.NonCompletableGithubObject):
+class StatsCodeFrequency(pygithub.GithubObject.NonCompletableGithubObject):
     """
     This class represents statistics of code frequency. The reference can be found here http://developer.github.com/v3/repos/statistics/#get-the-number-of-additions-and-deletions-per-week
     """
@@ -51,9 +51,9 @@ class StatsCodeFrequency(github.GithubObject.NonCompletableGithubObject):
         return self._deletions.value
 
     def _initAttributes(self):
-        self._week = github.GithubObject.NotSet
-        self._additions = github.GithubObject.NotSet
-        self._deletions = github.GithubObject.NotSet
+        self._week = pygithub.GithubObject.NotSet
+        self._additions = pygithub.GithubObject.NotSet
+        self._deletions = pygithub.GithubObject.NotSet
 
     def _useAttributes(self, attributes):
         self._week = self._makeTimestampAttribute(attributes[0])

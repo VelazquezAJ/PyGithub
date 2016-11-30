@@ -29,7 +29,7 @@ import pygithub.GithubObject
 import pygithub.GitTreeElement
 
 
-class GitTree(github.GithubObject.CompletableGithubObject):
+class GitTree(pygithub.GithubObject.CompletableGithubObject):
     """
     This class represents GitTrees as returned for example by http://developer.github.com/v3/todo
     """
@@ -45,7 +45,7 @@ class GitTree(github.GithubObject.CompletableGithubObject):
     @property
     def tree(self):
         """
-        :type: list of :class:`github.GitTreeElement.GitTreeElement`
+        :type: list of :class:`pygithub.GitTreeElement.GitTreeElement`
         """
         self._completeIfNotSet(self._tree)
         return self._tree.value
@@ -63,14 +63,14 @@ class GitTree(github.GithubObject.CompletableGithubObject):
         return self.sha
 
     def _initAttributes(self):
-        self._sha = github.GithubObject.NotSet
-        self._tree = github.GithubObject.NotSet
-        self._url = github.GithubObject.NotSet
+        self._sha = pygithub.GithubObject.NotSet
+        self._tree = pygithub.GithubObject.NotSet
+        self._url = pygithub.GithubObject.NotSet
 
     def _useAttributes(self, attributes):
         if "sha" in attributes:  # pragma no branch
             self._sha = self._makeStringAttribute(attributes["sha"])
         if "tree" in attributes:  # pragma no branch
-            self._tree = self._makeListOfClassesAttribute(github.GitTreeElement.GitTreeElement, attributes["tree"])
+            self._tree = self._makeListOfClassesAttribute(pygithub.GitTreeElement.GitTreeElement, attributes["tree"])
         if "url" in attributes:  # pragma no branch
             self._url = self._makeStringAttribute(attributes["url"])

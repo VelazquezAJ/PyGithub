@@ -41,7 +41,7 @@ class Commit(Framework.TestCase):
         self.assertEqual(self.commit.files[0].blob_url, "https://github.com/jacquev6/PyGithub/blob/1292bf0e22c796e91cc3d6e24b544aece8c21f2a/github/GithubObjects/GitAuthor.py")
         self.assertEqual(self.commit.files[0].changes, 20)
         self.assertEqual(self.commit.files[0].deletions, 20)
-        self.assertEqual(self.commit.files[0].filename, "github/GithubObjects/GitAuthor.py")
+        self.assertEqual(self.commit.files[0].filename, "pygithub/GithubObjects/GitAuthor.py")
         self.assertTrue(isinstance(self.commit.files[0].patch, (str, unicode)))
         self.assertEqual(self.commit.files[0].raw_url, "https://github.com/jacquev6/PyGithub/raw/1292bf0e22c796e91cc3d6e24b544aece8c21f2a/github/GithubObjects/GitAuthor.py")
         self.assertEqual(self.commit.files[0].sha, "1292bf0e22c796e91cc3d6e24b544aece8c21f2a")

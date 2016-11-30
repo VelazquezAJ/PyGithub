@@ -35,8 +35,8 @@ class Github(Framework.TestCase):
         self.assertListKeyBegin(self.g.get_gists(), lambda g: g.id, ["2729695", "2729656", "2729597", "2729584", "2729569", "2729554", "2729543", "2729537", "2729536", "2729533", "2729525", "2729522", "2729519", "2729515", "2729506", "2729487", "2729484", "2729482", "2729441", "2729432", "2729420", "2729398", "2729372", "2729371", "2729351", "2729346", "2729316", "2729304", "2729296", "2729276", "2729272", "2729265", "2729195", "2729160", "2729143", "2729127", "2729119", "2729113", "2729103", "2729069", "2729059", "2729051", "2729029", "2729027", "2729026", "2729022", "2729002", "2728985", "2728979", "2728964", "2728937", "2728933", "2728884", "2728869", "2728866", "2728855", "2728854", "2728853", "2728846", "2728825", "2728814", "2728813", "2728812", "2728805", "2728802", "2728800", "2728798", "2728797", "2728796", "2728793", "2728758", "2728754", "2728751", "2728748", "2728721", "2728716", "2728715", "2728705", "2728701", "2728699", "2728697", "2728688", "2728683", "2728677", "2728649", "2728640", "2728625", "2728620", "2728615", "2728614", "2728565", "2728564", "2728554", "2728523", "2728519", "2728511", "2728497", "2728496", "2728495", "2728487"])
 
     def testLegacySearchRepos(self):
-        repos = self.g.legacy_search_repos("github api v3")
-        self.assertListKeyBegin(repos, lambda r: r.name, ["github", "octonode", "PyGithub"])
+        repos = self.g.legacy_search_repos("pygithub api v3")
+        self.assertListKeyBegin(repos, lambda r: r.name, ["pygithub", "octonode", "PyGithub"])
         self.assertEqual(repos[0].full_name, "peter-murach/github")
 
         # Attributes retrieved from legacy API without lazy completion call
@@ -136,7 +136,7 @@ class Github(Framework.TestCase):
         self.assertEqual(t.source, "# Compiled Object files\n*.slo\n*.lo\n*.o\n\n# Compiled Dynamic libraries\n*.so\n*.dylib\n\n# Compiled Static libraries\n*.lai\n*.la\n*.a\n")
 
     def testStringOfNotSet(self):
-        self.assertEqual(str(github.GithubObject.NotSet), "NotSet")
+        self.assertEqual(str(pygithub.GithubObject.NotSet), "NotSet")
 
     def testGetUsers(self):
         self.assertListKeyBegin(self.g.get_users(), lambda u: u.login, ["mojombo", "defunkt", "pjhyett", "wycats", "ezmobius", "ivey", "evanphx", "vanpelt", "wayneeseguin", "brynary", "kevinclark", "technoweenie", "macournoyer", "takeo", "Caged", "topfunky", "anotherjesse", "roland", "lukas", "fanvsfan", "tomtt", "railsjitsu", "nitay", "kevwil", "KirinDave", "jamesgolick", "atmos", "errfree", "mojodna", "bmizerany", "jnewland", "joshknowles", "hornbeck", "jwhitmire", "elbowdonkey", "reinh", "timocratic", "bs", "rsanheim", "schacon", "uggedal", "bruce", "sam", "mmower", "abhay", "rabble", "benburkert", "indirect", "fearoffish", "ry", "engineyard", "jsierles", "tweibley", "peimei", "brixen", "tmornini", "outerim", "daksis", "sr", "lifo", "rsl", "imownbey", "dylanegan", "jm", "willcodeforfoo", "jvantuyl", "BrianTheCoder", "freeformz", "hassox", "automatthew", "queso", "lancecarlson", "drnic", "lukesutton", "danwrong", "hcatlin", "jfrost", "mattetti", "ctennis", "lawrencepit", "marcjeanson", "grempe", "peterc", "ministrycentered", "afarnham", "up_the_irons", "evilchelu", "heavysixer", "brosner", "danielmorrison", "danielharan", "kvnsmth", "collectiveidea", "canadaduane", "nate", "dstrelau", "sunny", "dkubb", "jnicklas", "richcollins", "simonjefford"])

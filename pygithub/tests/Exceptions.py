@@ -37,7 +37,7 @@ class Exceptions(Framework.TestCase):  # To stay compatible with Python 2.6, we 
         raised = False
         try:
             self.g.get_user().create_key("Bad key", "xxx")
-        except github.GithubException, exception:
+        except pygithub.GithubException, exception:
             raised = True
             self.assertEqual(exception.status, 422)
             self.assertEqual(
@@ -61,7 +61,7 @@ class Exceptions(Framework.TestCase):  # To stay compatible with Python 2.6, we 
         raised = False
         try:
             self.g.get_user("jacquev6")
-        except github.GithubException, exception:
+        except pygithub.GithubException, exception:
             raised = True
             self.assertEqual(exception.status, 503)
             self.assertEqual(
@@ -76,7 +76,7 @@ class Exceptions(Framework.TestCase):  # To stay compatible with Python 2.6, we 
         raised = False
         try:
             self.g.get_user().get_repo("Xxx")
-        except github.GithubException, exception:
+        except pygithub.GithubException, exception:
             raised = True
             self.assertEqual(exception.status, 404)
             self.assertEqual(exception.data, {"message": "Not Found"})
@@ -90,7 +90,7 @@ class Exceptions(Framework.TestCase):  # To stay compatible with Python 2.6, we 
         raised = False
         try:
             self.g.get_user("ThisUserShouldReallyNotExist")
-        except github.GithubException, exception:
+        except pygithub.GithubException, exception:
             raised = True
             self.assertEqual(exception.status, 404)
             self.assertEqual(exception.data, {"message": "Not Found"})
@@ -103,8 +103,8 @@ class Exceptions(Framework.TestCase):  # To stay compatible with Python 2.6, we 
     def testBadAuthentication(self):
         raised = False
         try:
-            github.Github("BadUser", "BadPassword").get_user().login
-        except github.GithubException, exception:
+            pygithub.Github("BadUser", "BadPassword").get_user().login
+        except pygithub.GithubException, exception:
             raised = True
             self.assertEqual(exception.status, 401)
             self.assertEqual(exception.data, {"message": "Bad credentials"})
@@ -117,19 +117,19 @@ class Exceptions(Framework.TestCase):  # To stay compatible with Python 2.6, we 
 
 class SpecificExceptions(Framework.TestCase):
     def testBadCredentials(self):
-        self.assertRaises(github.BadCredentialsException, lambda: github.Github("BadUser", "BadPassword").get_user().login)
+        self.assertRaises(pygithub.BadCredentialsException, lambda: pygithub.Github("BadUser", "BadPassword").get_user().login)
 
     def testUnknownObject(self):
-        self.assertRaises(github.UnknownObjectException, lambda: self.g.get_user().get_repo("Xxx"))
+        self.assertRaises(pygithub.UnknownObjectException, lambda: self.g.get_user().get_repo("Xxx"))
 
     def testBadUserAgent(self):
-        self.assertRaises(github.BadUserAgentException, lambda: github.Github(self.login, self.password, user_agent="").get_user().name)
+        self.assertRaises(pygithub.BadUserAgentException, lambda: pygithub.Github(self.login, self.password, user_agent="").get_user().name)
 
     def testRateLimitExceeded(self):
-        g = github.Github()
+        g = pygithub.Github()
 
         def exceed():
             for i in range(100):
                 g.get_user("jacquev6")
 
-        self.assertRaises(github.RateLimitExceededException, exceed)
+        self.assertRaises(pygithub.RateLimitExceededException, exceed)

@@ -29,7 +29,7 @@ import pygithub.GithubObject
 import pygithub.NamedUser
 
 
-class CommitStatus(github.GithubObject.NonCompletableGithubObject):
+class CommitStatus(pygithub.GithubObject.NonCompletableGithubObject):
     """
     This class represents CommitStatuss as returned for example by http://developer.github.com/v3/todo
     """
@@ -44,7 +44,7 @@ class CommitStatus(github.GithubObject.NonCompletableGithubObject):
     @property
     def creator(self):
         """
-        :type: :class:`github.NamedUser.NamedUser`
+        :type: :class:`pygithub.NamedUser.NamedUser`
         """
         return self._creator.value
 
@@ -91,20 +91,20 @@ class CommitStatus(github.GithubObject.NonCompletableGithubObject):
         return self._url.value
 
     def _initAttributes(self):
-        self._created_at = github.GithubObject.NotSet
-        self._creator = github.GithubObject.NotSet
-        self._description = github.GithubObject.NotSet
-        self._id = github.GithubObject.NotSet
-        self._state = github.GithubObject.NotSet
-        self._target_url = github.GithubObject.NotSet
-        self._updated_at = github.GithubObject.NotSet
-        self._url = github.GithubObject.NotSet
+        self._created_at = pygithub.GithubObject.NotSet
+        self._creator = pygithub.GithubObject.NotSet
+        self._description = pygithub.GithubObject.NotSet
+        self._id = pygithub.GithubObject.NotSet
+        self._state = pygithub.GithubObject.NotSet
+        self._target_url = pygithub.GithubObject.NotSet
+        self._updated_at = pygithub.GithubObject.NotSet
+        self._url = pygithub.GithubObject.NotSet
 
     def _useAttributes(self, attributes):
         if "created_at" in attributes:  # pragma no branch
             self._created_at = self._makeDatetimeAttribute(attributes["created_at"])
         if "creator" in attributes:  # pragma no branch
-            self._creator = self._makeClassAttribute(github.NamedUser.NamedUser, attributes["creator"])
+            self._creator = self._makeClassAttribute(pygithub.NamedUser.NamedUser, attributes["creator"])
         if "description" in attributes:  # pragma no branch
             self._description = self._makeStringAttribute(attributes["description"])
         if "id" in attributes:  # pragma no branch

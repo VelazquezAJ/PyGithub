@@ -30,7 +30,7 @@ import urllib
 import pygithub.GithubObject
 
 
-class Label(github.GithubObject.CompletableGithubObject):
+class Label(pygithub.GithubObject.CompletableGithubObject):
     """
     This class represents Labels. The reference can be found here http://developer.github.com/v3/issues/labels/
     """
@@ -94,9 +94,9 @@ class Label(github.GithubObject.CompletableGithubObject):
         return urllib.quote(self.name)
 
     def _initAttributes(self):
-        self._color = github.GithubObject.NotSet
-        self._name = github.GithubObject.NotSet
-        self._url = github.GithubObject.NotSet
+        self._color = pygithub.GithubObject.NotSet
+        self._name = pygithub.GithubObject.NotSet
+        self._url = pygithub.GithubObject.NotSet
 
     def _useAttributes(self, attributes):
         if "color" in attributes:  # pragma no branch

@@ -27,7 +27,7 @@
 import pygithub.GithubObject
 
 
-class GitBlob(github.GithubObject.CompletableGithubObject):
+class GitBlob(pygithub.GithubObject.CompletableGithubObject):
     """
     This class represents GitBlobs as returned for example by http://developer.github.com/v3/todo
     """
@@ -73,11 +73,11 @@ class GitBlob(github.GithubObject.CompletableGithubObject):
         return self._url.value
 
     def _initAttributes(self):
-        self._content = github.GithubObject.NotSet
-        self._encoding = github.GithubObject.NotSet
-        self._sha = github.GithubObject.NotSet
-        self._size = github.GithubObject.NotSet
-        self._url = github.GithubObject.NotSet
+        self._content = pygithub.GithubObject.NotSet
+        self._encoding = pygithub.GithubObject.NotSet
+        self._sha = pygithub.GithubObject.NotSet
+        self._size = pygithub.GithubObject.NotSet
+        self._url = pygithub.GithubObject.NotSet
 
     def _useAttributes(self, attributes):
         if "content" in attributes:  # pragma no branch

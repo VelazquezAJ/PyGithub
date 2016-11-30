@@ -30,7 +30,7 @@ import pygithub.GithubObject
 import pygithub.NamedUser
 
 
-class IssueComment(github.GithubObject.CompletableGithubObject):
+class IssueComment(pygithub.GithubObject.CompletableGithubObject):
     """
     This class represents IssueComments as returned for example by http://developer.github.com/v3/todo
     """
@@ -94,7 +94,7 @@ class IssueComment(github.GithubObject.CompletableGithubObject):
     @property
     def user(self):
         """
-        :type: :class:`github.NamedUser.NamedUser`
+        :type: :class:`pygithub.NamedUser.NamedUser`
         """
         self._completeIfNotSet(self._user)
         return self._user.value
@@ -127,14 +127,14 @@ class IssueComment(github.GithubObject.CompletableGithubObject):
         self._useAttributes(data)
 
     def _initAttributes(self):
-        self._body = github.GithubObject.NotSet
-        self._created_at = github.GithubObject.NotSet
-        self._id = github.GithubObject.NotSet
-        self._issue_url = github.GithubObject.NotSet
-        self._updated_at = github.GithubObject.NotSet
-        self._url = github.GithubObject.NotSet
-        self._html_url = github.GithubObject.NotSet
-        self._user = github.GithubObject.NotSet
+        self._body = pygithub.GithubObject.NotSet
+        self._created_at = pygithub.GithubObject.NotSet
+        self._id = pygithub.GithubObject.NotSet
+        self._issue_url = pygithub.GithubObject.NotSet
+        self._updated_at = pygithub.GithubObject.NotSet
+        self._url = pygithub.GithubObject.NotSet
+        self._html_url = pygithub.GithubObject.NotSet
+        self._user = pygithub.GithubObject.NotSet
 
     def _useAttributes(self, attributes):
         if "body" in attributes:  # pragma no branch
@@ -152,4 +152,4 @@ class IssueComment(github.GithubObject.CompletableGithubObject):
         if "html_url" in attributes:  # pragma no branch
             self._html_url = self._makeStringAttribute(attributes["html_url"])
         if "user" in attributes:  # pragma no branch
-            self._user = self._makeClassAttribute(github.NamedUser.NamedUser, attributes["user"])
+            self._user = self._makeClassAttribute(pygithub.NamedUser.NamedUser, attributes["user"])

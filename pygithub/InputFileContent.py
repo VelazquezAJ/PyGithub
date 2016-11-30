@@ -30,14 +30,14 @@ class InputFileContent(object):
     """
     """
 
-    def __init__(self, content, new_name=github.GithubObject.NotSet):
+    def __init__(self, content, new_name=pygithub.GithubObject.NotSet):
         """
         :param content: string
         :param new_name: string
         """
 
         assert isinstance(content, (str, unicode)), content
-        assert new_name is github.GithubObject.NotSet or isinstance(new_name, (str, unicode)), new_name
+        assert new_name is pygithub.GithubObject.NotSet or isinstance(new_name, (str, unicode)), new_name
         self.__newName = new_name
         self.__content = content
 
@@ -46,6 +46,6 @@ class InputFileContent(object):
         identity = {
             "content": self.__content,
         }
-        if self.__newName is not github.GithubObject.NotSet:
+        if self.__newName is not pygithub.GithubObject.NotSet:
             identity["filename"] = self.__newName
         return identity

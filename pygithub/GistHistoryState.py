@@ -31,7 +31,7 @@ import pygithub.CommitStats
 import pygithub.Gist
 
 
-class GistHistoryState(github.GithubObject.CompletableGithubObject):
+class GistHistoryState(pygithub.GithubObject.CompletableGithubObject):
     """
     This class represents GistHistoryStates as returned for example by http://developer.github.com/v3/todo
     """
@@ -39,7 +39,7 @@ class GistHistoryState(github.GithubObject.CompletableGithubObject):
     @property
     def change_status(self):
         """
-        :type: :class:`github.CommitStats.CommitStats`
+        :type: :class:`pygithub.CommitStats.CommitStats`
         """
         self._completeIfNotSet(self._change_status)
         return self._change_status.value
@@ -95,7 +95,7 @@ class GistHistoryState(github.GithubObject.CompletableGithubObject):
     @property
     def files(self):
         """
-        :type: dict of string to :class:`github.GistFile.GistFile`
+        :type: dict of string to :class:`pygithub.GistFile.GistFile`
         """
         self._completeIfNotSet(self._files)
         return self._files.value
@@ -103,7 +103,7 @@ class GistHistoryState(github.GithubObject.CompletableGithubObject):
     @property
     def forks(self):
         """
-        :type: list of :class:`github.Gist.Gist`
+        :type: list of :class:`pygithub.Gist.Gist`
         """
         self._completeIfNotSet(self._forks)
         return self._forks.value
@@ -159,7 +159,7 @@ class GistHistoryState(github.GithubObject.CompletableGithubObject):
     @property
     def owner(self):
         """
-        :type: :class:`github.NamedUser.NamedUser`
+        :type: :class:`pygithub.NamedUser.NamedUser`
         """
         self._completeIfNotSet(self._owner)
         return self._owner.value
@@ -191,7 +191,7 @@ class GistHistoryState(github.GithubObject.CompletableGithubObject):
     @property
     def user(self):
         """
-        :type: :class:`github.NamedUser.NamedUser`
+        :type: :class:`pygithub.NamedUser.NamedUser`
         """
         self._completeIfNotSet(self._user)
         return self._user.value
@@ -205,31 +205,31 @@ class GistHistoryState(github.GithubObject.CompletableGithubObject):
         return self._version.value
 
     def _initAttributes(self):
-        self._change_status = github.GithubObject.NotSet
-        self._comments = github.GithubObject.NotSet
-        self._comments_url = github.GithubObject.NotSet
-        self._commits_url = github.GithubObject.NotSet
-        self._committed_at = github.GithubObject.NotSet
-        self._created_at = github.GithubObject.NotSet
-        self._description = github.GithubObject.NotSet
-        self._files = github.GithubObject.NotSet
-        self._forks = github.GithubObject.NotSet
-        self._forks_url = github.GithubObject.NotSet
-        self._git_pull_url = github.GithubObject.NotSet
-        self._git_push_url = github.GithubObject.NotSet
-        self._history = github.GithubObject.NotSet
-        self._html_url = github.GithubObject.NotSet
-        self._id = github.GithubObject.NotSet
-        self._owner = github.GithubObject.NotSet
-        self._public = github.GithubObject.NotSet
-        self._updated_at = github.GithubObject.NotSet
-        self._url = github.GithubObject.NotSet
-        self._user = github.GithubObject.NotSet
-        self._version = github.GithubObject.NotSet
+        self._change_status = pygithub.GithubObject.NotSet
+        self._comments = pygithub.GithubObject.NotSet
+        self._comments_url = pygithub.GithubObject.NotSet
+        self._commits_url = pygithub.GithubObject.NotSet
+        self._committed_at = pygithub.GithubObject.NotSet
+        self._created_at = pygithub.GithubObject.NotSet
+        self._description = pygithub.GithubObject.NotSet
+        self._files = pygithub.GithubObject.NotSet
+        self._forks = pygithub.GithubObject.NotSet
+        self._forks_url = pygithub.GithubObject.NotSet
+        self._git_pull_url = pygithub.GithubObject.NotSet
+        self._git_push_url = pygithub.GithubObject.NotSet
+        self._history = pygithub.GithubObject.NotSet
+        self._html_url = pygithub.GithubObject.NotSet
+        self._id = pygithub.GithubObject.NotSet
+        self._owner = pygithub.GithubObject.NotSet
+        self._public = pygithub.GithubObject.NotSet
+        self._updated_at = pygithub.GithubObject.NotSet
+        self._url = pygithub.GithubObject.NotSet
+        self._user = pygithub.GithubObject.NotSet
+        self._version = pygithub.GithubObject.NotSet
 
     def _useAttributes(self, attributes):
         if "change_status" in attributes:  # pragma no branch
-            self._change_status = self._makeClassAttribute(github.CommitStats.CommitStats, attributes["change_status"])
+            self._change_status = self._makeClassAttribute(pygithub.CommitStats.CommitStats, attributes["change_status"])
         if "comments" in attributes:  # pragma no branch
             self._comments = self._makeIntAttribute(attributes["comments"])
         if "comments_url" in attributes:  # pragma no branch
@@ -243,9 +243,9 @@ class GistHistoryState(github.GithubObject.CompletableGithubObject):
         if "description" in attributes:  # pragma no branch
             self._description = self._makeStringAttribute(attributes["description"])
         if "files" in attributes:  # pragma no branch
-            self._files = self._makeDictOfStringsToClassesAttribute(github.GistFile.GistFile, attributes["files"])
+            self._files = self._makeDictOfStringsToClassesAttribute(pygithub.GistFile.GistFile, attributes["files"])
         if "forks" in attributes:  # pragma no branch
-            self._forks = self._makeListOfClassesAttribute(github.Gist.Gist, attributes["forks"])
+            self._forks = self._makeListOfClassesAttribute(pygithub.Gist.Gist, attributes["forks"])
         if "forks_url" in attributes:  # pragma no branch
             self._forks_url = self._makeStringAttribute(attributes["forks_url"])
         if "git_pull_url" in attributes:  # pragma no branch
@@ -259,7 +259,7 @@ class GistHistoryState(github.GithubObject.CompletableGithubObject):
         if "id" in attributes:  # pragma no branch
             self._id = self._makeStringAttribute(attributes["id"])
         if "owner" in attributes:  # pragma no branch
-            self._owner = self._makeClassAttribute(github.NamedUser.NamedUser, attributes["owner"])
+            self._owner = self._makeClassAttribute(pygithub.NamedUser.NamedUser, attributes["owner"])
         if "public" in attributes:  # pragma no branch
             self._public = self._makeBoolAttribute(attributes["public"])
         if "updated_at" in attributes:  # pragma no branch
@@ -267,6 +267,6 @@ class GistHistoryState(github.GithubObject.CompletableGithubObject):
         if "url" in attributes:  # pragma no branch
             self._url = self._makeStringAttribute(attributes["url"])
         if "user" in attributes:  # pragma no branch
-            self._user = self._makeClassAttribute(github.NamedUser.NamedUser, attributes["user"])
+            self._user = self._makeClassAttribute(pygithub.NamedUser.NamedUser, attributes["user"])
         if "version" in attributes:  # pragma no branch
             self._version = self._makeStringAttribute(attributes["version"])

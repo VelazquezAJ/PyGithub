@@ -73,7 +73,7 @@ class Gist(Framework.TestCase):
 
     def testEditWithAllParameters(self):
         gist = self.g.get_gist("2729810")
-        gist.edit("Description edited by PyGithub", {"barbaz.txt": github.InputFileContent("File also created by PyGithub")})
+        gist.edit("Description edited by PyGithub", {"barbaz.txt": pygithub.InputFileContent("File also created by PyGithub")})
         self.assertEqual(gist.description, "Description edited by PyGithub")
         self.assertEqual(gist.updated_at, datetime.datetime(2012, 5, 19, 7, 6, 10))
         self.assertEqual(set(gist.files.keys()), set(["foobar.txt", "barbaz.txt"]))
@@ -87,7 +87,7 @@ class Gist(Framework.TestCase):
     def testRenameFile(self):
         gist = self.g.get_gist("5339374")
         self.assertEqual(gist.files.keys(), ["bar.txt"])
-        gist.edit(files={"bar.txt": github.InputFileContent(gist.files["bar.txt"].content, new_name="baz.txt")})
+        gist.edit(files={"bar.txt": pygithub.InputFileContent(gist.files["bar.txt"].content, new_name="baz.txt")})
         self.assertEqual(gist.files.keys(), ["baz.txt"])
 
     def testCreateComment(self):

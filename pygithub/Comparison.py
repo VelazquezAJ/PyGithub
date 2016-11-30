@@ -30,7 +30,7 @@ import pygithub.Commit
 import pygithub.File
 
 
-class Comparison(github.GithubObject.CompletableGithubObject):
+class Comparison(pygithub.GithubObject.CompletableGithubObject):
     """
     This class represents Comparisons as returned for example by http://developer.github.com/v3/todo
     """
@@ -46,7 +46,7 @@ class Comparison(github.GithubObject.CompletableGithubObject):
     @property
     def base_commit(self):
         """
-        :type: :class:`github.Commit.Commit`
+        :type: :class:`pygithub.Commit.Commit`
         """
         self._completeIfNotSet(self._base_commit)
         return self._base_commit.value
@@ -62,7 +62,7 @@ class Comparison(github.GithubObject.CompletableGithubObject):
     @property
     def commits(self):
         """
-        :type: list of :class:`github.Commit.Commit`
+        :type: list of :class:`pygithub.Commit.Commit`
         """
         self._completeIfNotSet(self._commits)
         return self._commits.value
@@ -78,7 +78,7 @@ class Comparison(github.GithubObject.CompletableGithubObject):
     @property
     def files(self):
         """
-        :type: list of :class:`github.File.File`
+        :type: list of :class:`pygithub.File.File`
         """
         self._completeIfNotSet(self._files)
         return self._files.value
@@ -94,7 +94,7 @@ class Comparison(github.GithubObject.CompletableGithubObject):
     @property
     def merge_base_commit(self):
         """
-        :type: :class:`github.Commit.Commit`
+        :type: :class:`pygithub.Commit.Commit`
         """
         self._completeIfNotSet(self._merge_base_commit)
         return self._merge_base_commit.value
@@ -140,37 +140,37 @@ class Comparison(github.GithubObject.CompletableGithubObject):
         return self._url.value
 
     def _initAttributes(self):
-        self._ahead_by = github.GithubObject.NotSet
-        self._base_commit = github.GithubObject.NotSet
-        self._behind_by = github.GithubObject.NotSet
-        self._commits = github.GithubObject.NotSet
-        self._diff_url = github.GithubObject.NotSet
-        self._files = github.GithubObject.NotSet
-        self._html_url = github.GithubObject.NotSet
-        self._merge_base_commit = github.GithubObject.NotSet
-        self._patch_url = github.GithubObject.NotSet
-        self._permalink_url = github.GithubObject.NotSet
-        self._status = github.GithubObject.NotSet
-        self._total_commits = github.GithubObject.NotSet
-        self._url = github.GithubObject.NotSet
+        self._ahead_by = pygithub.GithubObject.NotSet
+        self._base_commit = pygithub.GithubObject.NotSet
+        self._behind_by = pygithub.GithubObject.NotSet
+        self._commits = pygithub.GithubObject.NotSet
+        self._diff_url = pygithub.GithubObject.NotSet
+        self._files = pygithub.GithubObject.NotSet
+        self._html_url = pygithub.GithubObject.NotSet
+        self._merge_base_commit = pygithub.GithubObject.NotSet
+        self._patch_url = pygithub.GithubObject.NotSet
+        self._permalink_url = pygithub.GithubObject.NotSet
+        self._status = pygithub.GithubObject.NotSet
+        self._total_commits = pygithub.GithubObject.NotSet
+        self._url = pygithub.GithubObject.NotSet
 
     def _useAttributes(self, attributes):
         if "ahead_by" in attributes:  # pragma no branch
             self._ahead_by = self._makeIntAttribute(attributes["ahead_by"])
         if "base_commit" in attributes:  # pragma no branch
-            self._base_commit = self._makeClassAttribute(github.Commit.Commit, attributes["base_commit"])
+            self._base_commit = self._makeClassAttribute(pygithub.Commit.Commit, attributes["base_commit"])
         if "behind_by" in attributes:  # pragma no branch
             self._behind_by = self._makeIntAttribute(attributes["behind_by"])
         if "commits" in attributes:  # pragma no branch
-            self._commits = self._makeListOfClassesAttribute(github.Commit.Commit, attributes["commits"])
+            self._commits = self._makeListOfClassesAttribute(pygithub.Commit.Commit, attributes["commits"])
         if "diff_url" in attributes:  # pragma no branch
             self._diff_url = self._makeStringAttribute(attributes["diff_url"])
         if "files" in attributes:  # pragma no branch
-            self._files = self._makeListOfClassesAttribute(github.File.File, attributes["files"])
+            self._files = self._makeListOfClassesAttribute(pygithub.File.File, attributes["files"])
         if "html_url" in attributes:  # pragma no branch
             self._html_url = self._makeStringAttribute(attributes["html_url"])
         if "merge_base_commit" in attributes:  # pragma no branch
-            self._merge_base_commit = self._makeClassAttribute(github.Commit.Commit, attributes["merge_base_commit"])
+            self._merge_base_commit = self._makeClassAttribute(pygithub.Commit.Commit, attributes["merge_base_commit"])
         if "patch_url" in attributes:  # pragma no branch
             self._patch_url = self._makeStringAttribute(attributes["patch_url"])
         if "permalink_url" in attributes:  # pragma no branch

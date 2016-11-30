@@ -25,7 +25,7 @@
 import pygithub.GithubObject
 
 
-class NotificationSubject(github.GithubObject.NonCompletableGithubObject):
+class NotificationSubject(pygithub.GithubObject.NonCompletableGithubObject):
     """
     This class represents Subjects of Notifications as returned for example by http://developer.github.com/v3/activity/notifications/#list-your-notifications
     """
@@ -59,10 +59,10 @@ class NotificationSubject(github.GithubObject.NonCompletableGithubObject):
         return self._type.value
 
     def _initAttributes(self):
-        self._title = github.GithubObject.NotSet
-        self._url = github.GithubObject.NotSet
-        self._latest_comment_url = github.GithubObject.NotSet
-        self._type = github.GithubObject.NotSet
+        self._title = pygithub.GithubObject.NotSet
+        self._url = pygithub.GithubObject.NotSet
+        self._latest_comment_url = pygithub.GithubObject.NotSet
+        self._type = pygithub.GithubObject.NotSet
 
     def _useAttributes(self, attributes):
         if "title" in attributes:  # pragma no branch

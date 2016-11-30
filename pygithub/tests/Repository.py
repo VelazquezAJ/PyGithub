@@ -189,7 +189,7 @@ class Repository(Framework.TestCase):
 
     def testCreateGitCommitWithAllArguments(self):
         tree = self.repo.get_git_tree("107139a922f33bab6fbeb9f9eb8787e7f19e0528")
-        commit = self.repo.create_git_commit("Commit created by PyGithub", tree, [], github.InputGitAuthor("John Doe", "j.doe@vincent-jacques.net", "2008-07-09T16:13:30+12:00"), github.InputGitAuthor("John Doe", "j.doe@vincent-jacques.net", "2008-07-09T16:13:30+12:00"))
+        commit = self.repo.create_git_commit("Commit created by PyGithub", tree, [], pygithub.InputGitAuthor("John Doe", "j.doe@vincent-jacques.net", "2008-07-09T16:13:30+12:00"), pygithub.InputGitAuthor("John Doe", "j.doe@vincent-jacques.net", "2008-07-09T16:13:30+12:00"))
         self.assertEqual(commit.sha, "526946197ae9da59c6507cacd13ad6f1cfb686ea")
 
     def testCreateGitTag(self):
@@ -197,7 +197,7 @@ class Repository(Framework.TestCase):
         self.assertEqual(tag.sha, "5ba561eaa2b7ca9015662510157b15d8f3b0232a")
 
     def testCreateGitTagWithAllArguments(self):
-        tag = self.repo.create_git_tag("TaggedByPyGithub2", "Tag also created by PyGithub", "526946197ae9da59c6507cacd13ad6f1cfb686ea", "commit", github.InputGitAuthor("John Doe", "j.doe@vincent-jacques.net", "2008-07-09T16:13:30+12:00"))
+        tag = self.repo.create_git_tag("TaggedByPyGithub2", "Tag also created by PyGithub", "526946197ae9da59c6507cacd13ad6f1cfb686ea", "commit", pygithub.InputGitAuthor("John Doe", "j.doe@vincent-jacques.net", "2008-07-09T16:13:30+12:00"))
         self.assertEqual(tag.sha, "f0e99a8335fbc84c53366c4a681118468f266625")
 
     def testCreateKey(self):
@@ -224,7 +224,7 @@ class Repository(Framework.TestCase):
         self.assertEqual(comparison.patch_url, "https://github.com/jacquev6/PyGithub/compare/v0.6...v0.7.patch")
         self.assertEqual(comparison.permalink_url, "https://github.com/jacquev6/PyGithub/compare/jacquev6:4303c5b...jacquev6:ecda065")
         self.assertEqual(comparison.total_commits, 4)
-        self.assertListKeyEqual(comparison.files, lambda f: f.filename, ["ReferenceOfClasses.md", "github/Github.py", "github/Requester.py", "setup.py"])
+        self.assertListKeyEqual(comparison.files, lambda f: f.filename, ["ReferenceOfClasses.md", "pygithub/Github.py", "pygithub/Requester.py", "setup.py"])
         self.assertEqual(comparison.base_commit.sha, "4303c5b90e2216d927155e9609436ccb8984c495")
         self.assertListKeyEqual(comparison.commits, lambda c: c.sha, ["5bb654d26dd014d36794acd1e6ecf3736f12aad7", "cb0313157bf904f2d364377d35d9397b269547a5", "0cec0d25e606c023a62a4fc7cdc815309ebf6d16", "ecda065e01876209d2bdf5fe4e91cee8ffaa9ff7"])
 
@@ -282,7 +282,7 @@ class Repository(Framework.TestCase):
     def testGetGitTreeWithRecursive(self):
         tree = self.repo.get_git_tree("f492784d8ca837779650d1fb406a1a3587a764ad", True)
         self.assertEqual(len(tree.tree), 90)
-        self.assertEqual(tree.tree[50].path, "github/GithubObjects/Gist.py")
+        self.assertEqual(tree.tree[50].path, "pygithub/GithubObjects/Gist.py")
 
     def testGetHooks(self):
         self.assertListKeyEqual(self.repo.get_hooks(), lambda h: h.id, [257993])
@@ -417,7 +417,7 @@ class Repository(Framework.TestCase):
         raised = False
         try:
             commit = self.repo.merge("branchForBase", "branchForHead")
-        except github.GithubException, exception:
+        except pygithub.GithubException, exception:
             raised = True
             self.assertEqual(exception.status, 409)
             self.assertEqual(exception.data, {"message": "Merge conflict"})
@@ -440,7 +440,7 @@ class Repository(Framework.TestCase):
         raised = False
         try:
             self.repo.subscribe_to_hub("non-existing-event", "http://requestb.in/1bc1sc61")
-        except github.GithubException, exception:
+        except pygithub.GithubException, exception:
             raised = True
             self.assertEqual(exception.status, 422)
             self.assertEqual(exception.data, {"message": "Invalid event: \"non-existing-event\""})

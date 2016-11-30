@@ -25,7 +25,7 @@ import pygithub.GithubObject
 import datetime
 
 
-class Rate(github.GithubObject.NonCompletableGithubObject):
+class Rate(pygithub.GithubObject.NonCompletableGithubObject):
     """
     This class represents rate limits as defined in http://developer.github.com/v3/rate_limit
     """
@@ -52,9 +52,9 @@ class Rate(github.GithubObject.NonCompletableGithubObject):
         return self._reset.value
 
     def _initAttributes(self):
-        self._limit = github.GithubObject.NotSet
-        self._remaining = github.GithubObject.NotSet
-        self._reset = github.GithubObject.NotSet
+        self._limit = pygithub.GithubObject.NotSet
+        self._remaining = pygithub.GithubObject.NotSet
+        self._reset = pygithub.GithubObject.NotSet
 
     def _useAttributes(self, attributes):
         if "limit" in attributes:  # pragma no branch

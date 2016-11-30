@@ -26,7 +26,7 @@ import pygithub.GithubObject
 import pygithub.NamedUser
 
 
-class StatsPunchCard(github.GithubObject.NonCompletableGithubObject):
+class StatsPunchCard(pygithub.GithubObject.NonCompletableGithubObject):
     """
     This class represents the punch card. The reference can be found here http://developer.github.com/v3/repos/statistics/#get-the-number-of-commits-per-hour-in-each-day
     """

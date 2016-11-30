@@ -29,38 +29,38 @@ import pygithub
 
 class Authentication(Framework.BasicTestCase):
     def testNoAuthentication(self):
-        g = github.Github()
+        g = pygithub.Github()
         self.assertEqual(g.get_user("jacquev6").name, "Vincent Jacques")
 
     def testBasicAuthentication(self):
-        g = github.Github(self.login, self.password)
+        g = pygithub.Github(self.login, self.password)
         self.assertEqual(g.get_user("jacquev6").name, "Vincent Jacques")
 
     def testOAuthAuthentication(self):
-        g = github.Github(self.oauth_token)
+        g = pygithub.Github(self.oauth_token)
         self.assertEqual(g.get_user("jacquev6").name, "Vincent Jacques")
 
     # Warning: I don't have a scret key, so the requests for this test are forged
     def testSecretKeyAuthentication(self):
-        g = github.Github(client_id=self.client_id, client_secret=self.client_secret)
+        g = pygithub.Github(client_id=self.client_id, client_secret=self.client_secret)
         self.assertListKeyEqual(g.get_organization("BeaverSoftware").get_repos("public"), lambda r: r.name, ["FatherBeaver", "PyGithub"])
 
     def testUserAgent(self):
-        g = github.Github(user_agent="PyGithubTester")
+        g = pygithub.Github(user_agent="PyGithubTester")
         self.assertEqual(g.get_user("jacquev6").name, "Vincent Jacques")
 
     def testAuthorizationHeaderWithLogin(self):
         # See special case in Framework.fixAuthorizationHeader
-        g = github.Github("fake_login", "fake_password")
+        g = pygithub.Github("fake_login", "fake_password")
         try:
             g.get_user().name
-        except github.GithubException:
+        except pygithub.GithubException:
             pass
 
     def testAuthorizationHeaderWithToken(self):
         # See special case in Framework.fixAuthorizationHeader
-        g = github.Github("ZmFrZV9sb2dpbjpmYWtlX3Bhc3N3b3Jk")
+        g = pygithub.Github("ZmFrZV9sb2dpbjpmYWtlX3Bhc3N3b3Jk")
         try:
             g.get_user().name
-        except github.GithubException:
+        except pygithub.GithubException:
             pass

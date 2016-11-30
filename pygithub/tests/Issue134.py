@@ -27,21 +27,21 @@ import pygithub
 
 class Issue134(Framework.BasicTestCase):  # https://github.com/jacquev6/PyGithub/pull/134
     def testGetAuthorizationsFailsWhenAutenticatedThroughOAuth(self):
-        g = github.Github(self.oauth_token)
+        g = pygithub.Github(self.oauth_token)
         raised = False
         try:
             list(g.get_user().get_authorizations())
-        except github.GithubException, exception:
+        except pygithub.GithubException, exception:
             raised = True
             self.assertEqual(exception.status, 404)
         self.assertTrue(raised)
 
     def testGetAuthorizationsSucceedsWhenAutenticatedThroughLoginPassword(self):
-        g = github.Github(self.login, self.password)
+        g = pygithub.Github(self.login, self.password)
         self.assertListKeyEqual(g.get_user().get_authorizations(), lambda a: a.note, [None, None, 'cligh', None, None, 'GitHub Android App'])
 
     def testGetOAuthScopesFromHeader(self):
-        g = github.Github(self.oauth_token)
+        g = pygithub.Github(self.oauth_token)
         self.assertEqual(g.oauth_scopes, None)
         g.get_user().name
         self.assertEqual(g.oauth_scopes, ['repo', 'user', 'gist'])

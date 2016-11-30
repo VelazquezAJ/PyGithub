@@ -29,7 +29,7 @@ import pygithub.GithubObject
 import pygithub.GitObject
 
 
-class GitRef(github.GithubObject.CompletableGithubObject):
+class GitRef(pygithub.GithubObject.CompletableGithubObject):
     """
     This class represents GitRefs as returned for example by http://developer.github.com/v3/todo
     """
@@ -37,7 +37,7 @@ class GitRef(github.GithubObject.CompletableGithubObject):
     @property
     def object(self):
         """
-        :type: :class:`github.GitObject.GitObject`
+        :type: :class:`pygithub.GitObject.GitObject`
         """
         self._completeIfNotSet(self._object)
         return self._object.value
@@ -68,7 +68,7 @@ class GitRef(github.GithubObject.CompletableGithubObject):
             self.url
         )
 
-    def edit(self, sha, force=github.GithubObject.NotSet):
+    def edit(self, sha, force=pygithub.GithubObject.NotSet):
         """
         :calls: `PATCH /repos/:owner/:repo/git/refs/:ref <http://developer.github.com/v3/git/refs>`_
         :param sha: string
@@ -76,11 +76,11 @@ class GitRef(github.GithubObject.CompletableGithubObject):
         :rtype: None
         """
         assert isinstance(sha, (str, unicode)), sha
-        assert force is github.GithubObject.NotSet or isinstance(force, bool), force
+        assert force is pygithub.GithubObject.NotSet or isinstance(force, bool), force
         post_parameters = {
             "sha": sha,
         }
-        if force is not github.GithubObject.NotSet:
+        if force is not pygithub.GithubObject.NotSet:
             post_parameters["force"] = force
         headers, data = self._requester.requestJsonAndCheck(
             "PATCH",
@@ -90,13 +90,13 @@ class GitRef(github.GithubObject.CompletableGithubObject):
         self._useAttributes(data)
 
     def _initAttributes(self):
-        self._object = github.GithubObject.NotSet
-        self._ref = github.GithubObject.NotSet
-        self._url = github.GithubObject.NotSet
+        self._object = pygithub.GithubObject.NotSet
+        self._ref = pygithub.GithubObject.NotSet
+        self._url = pygithub.GithubObject.NotSet
 
     def _useAttributes(self, attributes):
         if "object" in attributes:  # pragma no branch
-            self._object = self._makeClassAttribute(github.GitObject.GitObject, attributes["object"])
+            self._object = self._makeClassAttribute(pygithub.GitObject.GitObject, attributes["object"])
         if "ref" in attributes:  # pragma no branch
             self._ref = self._makeStringAttribute(attributes["ref"])
         if "url" in attributes:  # pragma no branch

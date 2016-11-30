@@ -27,7 +27,7 @@
 import pygithub.GithubObject
 
 
-class CommitStats(github.GithubObject.NonCompletableGithubObject):
+class CommitStats(pygithub.GithubObject.NonCompletableGithubObject):
     """
     This class represents CommitStatss as returned for example by http://developer.github.com/v3/todo
     """
@@ -54,9 +54,9 @@ class CommitStats(github.GithubObject.NonCompletableGithubObject):
         return self._total.value
 
     def _initAttributes(self):
-        self._additions = github.GithubObject.NotSet
-        self._deletions = github.GithubObject.NotSet
-        self._total = github.GithubObject.NotSet
+        self._additions = pygithub.GithubObject.NotSet
+        self._deletions = pygithub.GithubObject.NotSet
+        self._total = pygithub.GithubObject.NotSet
 
     def _useAttributes(self, attributes):
         if "additions" in attributes:  # pragma no branch

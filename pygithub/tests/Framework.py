@@ -191,7 +191,7 @@ class BasicTestCase(unittest.TestCase):
         self.__fileName = ""
         self.__file = None
         if self.recordMode:  # pragma no cover (Branch useful only when recording new tests, not used during automated tests)
-            github.Requester.Requester.injectConnectionClasses(
+            pygithub.Requester.Requester.injectConnectionClasses(
                 lambda ignored, *args, **kwds: RecordingHttpConnection(self.__openFile("wb"), *args, **kwds),
                 lambda ignored, *args, **kwds: RecordingHttpsConnection(self.__openFile("wb"), *args, **kwds)
             )
@@ -203,7 +203,7 @@ class BasicTestCase(unittest.TestCase):
             # self.client_id = GithubCredentials.client_id
             # self.client_secret = GithubCredentials.client_secret
         else:
-            github.Requester.Requester.injectConnectionClasses(
+            pygithub.Requester.Requester.injectConnectionClasses(
                 lambda ignored, *args, **kwds: ReplayingHttpConnection(self, self.__openFile("rb"), *args, **kwds),
                 lambda ignored, *args, **kwds: ReplayingHttpsConnection(self, self.__openFile("rb"), *args, **kwds)
             )
@@ -216,7 +216,7 @@ class BasicTestCase(unittest.TestCase):
     def tearDown(self):
         unittest.TestCase.tearDown(self)
         self.__closeReplayFileIfNeeded()
-        github.Requester.Requester.resetConnectionClasses()
+        pygithub.Requester.Requester.resetConnectionClasses()
 
     def __openFile(self, mode):
         for (_, _, functionName, _) in traceback.extract_stack():
@@ -259,11 +259,11 @@ class TestCase(BasicTestCase):
         BasicTestCase.setUp(self)
 
         # Set up frame debugging
-        github.GithubObject.GithubObject.setCheckAfterInitFlag(True)
-        github.Requester.Requester.setDebugFlag(True)
-        github.Requester.Requester.setOnCheckMe(self.getFrameChecker())
+        pygithub.GithubObject.GithubObject.setCheckAfterInitFlag(True)
+        pygithub.Requester.Requester.setDebugFlag(True)
+        pygithub.Requester.Requester.setOnCheckMe(self.getFrameChecker())
 
-        self.g = github.Github(self.login, self.password)
+        self.g = pygithub.Github(self.login, self.password)
 
 
 def activateRecordMode():  # pragma no cover (Function useful only when recording new tests, not used during automated tests)

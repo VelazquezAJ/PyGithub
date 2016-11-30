@@ -27,7 +27,7 @@
 import pygithub.GithubObject
 
 
-class GistFile(github.GithubObject.NonCompletableGithubObject):
+class GistFile(pygithub.GithubObject.NonCompletableGithubObject):
     """
     This class represents GistFiles as returned for example by http://developer.github.com/v3/todo
     """
@@ -75,12 +75,12 @@ class GistFile(github.GithubObject.NonCompletableGithubObject):
         return self._type.value
 
     def _initAttributes(self):
-        self._content = github.GithubObject.NotSet
-        self._filename = github.GithubObject.NotSet
-        self._language = github.GithubObject.NotSet
-        self._raw_url = github.GithubObject.NotSet
-        self._size = github.GithubObject.NotSet
-        self._type = github.GithubObject.NotSet
+        self._content = pygithub.GithubObject.NotSet
+        self._filename = pygithub.GithubObject.NotSet
+        self._language = pygithub.GithubObject.NotSet
+        self._raw_url = pygithub.GithubObject.NotSet
+        self._size = pygithub.GithubObject.NotSet
+        self._type = pygithub.GithubObject.NotSet
 
     def _useAttributes(self, attributes):
         if "content" in attributes:  # pragma no branch

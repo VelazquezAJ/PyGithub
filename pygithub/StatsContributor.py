@@ -26,12 +26,12 @@ import pygithub.GithubObject
 import pygithub.NamedUser
 
 
-class StatsContributor(github.GithubObject.NonCompletableGithubObject):
+class StatsContributor(pygithub.GithubObject.NonCompletableGithubObject):
     """
     This class represents statistics of a contibutor. The reference can be found here http://developer.github.com/v3/repos/statistics/#get-contributors-list-with-additions-deletions-and-commit-counts
     """
 
-    class Week(github.GithubObject.NonCompletableGithubObject):
+    class Week(pygithub.GithubObject.NonCompletableGithubObject):
         """
         This class represents weekly statistics of a contibutor.
         """
@@ -65,10 +65,10 @@ class StatsContributor(github.GithubObject.NonCompletableGithubObject):
             return self._c.value
 
         def _initAttributes(self):
-            self._w = github.GithubObject.NotSet
-            self._a = github.GithubObject.NotSet
-            self._d = github.GithubObject.NotSet
-            self._c = github.GithubObject.NotSet
+            self._w = pygithub.GithubObject.NotSet
+            self._a = pygithub.GithubObject.NotSet
+            self._d = pygithub.GithubObject.NotSet
+            self._c = pygithub.GithubObject.NotSet
 
         def _useAttributes(self, attributes):
             if "w" in attributes:  # pragma no branch
@@ -83,7 +83,7 @@ class StatsContributor(github.GithubObject.NonCompletableGithubObject):
     @property
     def author(self):
         """
-        :type: :class:`github.NamedUser.NamedUser`
+        :type: :class:`pygithub.NamedUser.NamedUser`
         """
         return self._author.value
 
@@ -102,13 +102,13 @@ class StatsContributor(github.GithubObject.NonCompletableGithubObject):
         return self._weeks.value
 
     def _initAttributes(self):
-        self._author = github.GithubObject.NotSet
-        self._total = github.GithubObject.NotSet
-        self._weeks = github.GithubObject.NotSet
+        self._author = pygithub.GithubObject.NotSet
+        self._total = pygithub.GithubObject.NotSet
+        self._weeks = pygithub.GithubObject.NotSet
 
     def _useAttributes(self, attributes):
         if "author" in attributes:  # pragma no branch
-            self._author = self._makeClassAttribute(github.NamedUser.NamedUser, attributes["author"])
+            self._author = self._makeClassAttribute(pygithub.NamedUser.NamedUser, attributes["author"])
         if "total" in attributes:  # pragma no branch
             self._total = self._makeIntAttribute(attributes["total"])
         if "weeks" in attributes:  # pragma no branch

@@ -39,7 +39,7 @@ import pygithub.IssueComment
 import pygithub.IssuePullRequest
 
 
-class Issue(github.GithubObject.CompletableGithubObject):
+class Issue(pygithub.GithubObject.CompletableGithubObject):
     """
     This class represents Issues as returned for example by http://developer.github.com/v3/todo
     """
@@ -47,7 +47,7 @@ class Issue(github.GithubObject.CompletableGithubObject):
     @property
     def assignee(self):
         """
-        :type: :class:`github.NamedUser.NamedUser`
+        :type: :class:`pygithub.NamedUser.NamedUser`
         """
         self._completeIfNotSet(self._assignee)
         return self._assignee.value
@@ -71,7 +71,7 @@ class Issue(github.GithubObject.CompletableGithubObject):
     @property
     def closed_by(self):
         """
-        :type: :class:`github.NamedUser.NamedUser`
+        :type: :class:`pygithub.NamedUser.NamedUser`
         """
         self._completeIfNotSet(self._closed_by)
         return self._closed_by.value
@@ -127,7 +127,7 @@ class Issue(github.GithubObject.CompletableGithubObject):
     @property
     def labels(self):
         """
-        :type: list of :class:`github.Label.Label`
+        :type: list of :class:`pygithub.Label.Label`
         """
         self._completeIfNotSet(self._labels)
         return self._labels.value
@@ -143,7 +143,7 @@ class Issue(github.GithubObject.CompletableGithubObject):
     @property
     def milestone(self):
         """
-        :type: :class:`github.Milestone.Milestone`
+        :type: :class:`pygithub.Milestone.Milestone`
         """
         self._completeIfNotSet(self._milestone)
         return self._milestone.value
@@ -159,7 +159,7 @@ class Issue(github.GithubObject.CompletableGithubObject):
     @property
     def pull_request(self):
         """
-        :type: :class:`github.IssuePullRequest.IssuePullRequest`
+        :type: :class:`pygithub.IssuePullRequest.IssuePullRequest`
         """
         self._completeIfNotSet(self._pull_request)
         return self._pull_request.value
@@ -167,13 +167,13 @@ class Issue(github.GithubObject.CompletableGithubObject):
     @property
     def repository(self):
         """
-        :type: :class:`github.Repository.Repository`
+        :type: :class:`pygithub.Repository.Repository`
         """
         self._completeIfNotSet(self._repository)
-        if self._repository is github.GithubObject.NotSet:
+        if self._repository is pygithub.GithubObject.NotSet:
             # The repository was not set automatically, so it must be looked up by url.
             repo_url = "/".join(self.url.split("/")[:-2])
-            self._repository = github.GithubObject._ValuedAttribute(github.Repository.Repository(self._requester, self._headers, {'url': repo_url}, completed=False))
+            self._repository = pygithub.GithubObject._ValuedAttribute(pygithub.Repository.Repository(self._requester, self._headers, {'url': repo_url}, completed=False))
         return self._repository.value
 
     @property
@@ -211,7 +211,7 @@ class Issue(github.GithubObject.CompletableGithubObject):
     @property
     def user(self):
         """
-        :type: :class:`github.NamedUser.NamedUser`
+        :type: :class:`pygithub.NamedUser.NamedUser`
         """
         self._completeIfNotSet(self._user)
         return self._user.value
@@ -219,11 +219,11 @@ class Issue(github.GithubObject.CompletableGithubObject):
     def add_to_labels(self, *labels):
         """
         :calls: `POST /repos/:owner/:repo/issues/:number/labels <http://developer.github.com/v3/issues/labels>`_
-        :param label: :class:`github.Label.Label` or string
+        :param label: :class:`pygithub.Label.Label` or string
         :rtype: None
         """
-        assert all(isinstance(element, (github.Label.Label, str, unicode)) for element in labels), labels
-        post_parameters = [label.name if isinstance(label, github.Label.Label) else label for label in labels]
+        assert all(isinstance(element, (pygithub.Label.Label, str, unicode)) for element in labels), labels
+        post_parameters = [label.name if isinstance(label, pygithub.Label.Label) else label for label in labels]
         headers, data = self._requester.requestJsonAndCheck(
             "POST",
             self.url + "/labels",
@@ -234,7 +234,7 @@ class Issue(github.GithubObject.CompletableGithubObject):
         """
         :calls: `POST /repos/:owner/:repo/issues/:number/comments <http://developer.github.com/v3/issues/comments>`_
         :param body: string
-        :rtype: :class:`github.IssueComment.IssueComment`
+        :rtype: :class:`pygithub.IssueComment.IssueComment`
         """
         assert isinstance(body, (str, unicode)), body
         post_parameters = {
@@ -245,7 +245,7 @@ class Issue(github.GithubObject.CompletableGithubObject):
             self.url + "/comments",
             input=post_parameters
         )
-        return github.IssueComment.IssueComment(self._requester, headers, data, completed=True)
+        return pygithub.IssueComment.IssueComment(self._requester, headers, data, completed=True)
 
     def delete_labels(self):
         """
@@ -257,38 +257,38 @@ class Issue(github.GithubObject.CompletableGithubObject):
             self.url + "/labels"
         )
 
-    def edit(self, title=github.GithubObject.NotSet, body=github.GithubObject.NotSet, assignee=github.GithubObject.NotSet, state=github.GithubObject.NotSet, milestone=github.GithubObject.NotSet, labels=github.GithubObject.NotSet):
+    def edit(self, title=pygithub.GithubObject.NotSet, body=pygithub.GithubObject.NotSet, assignee=pygithub.GithubObject.NotSet, state=pygithub.GithubObject.NotSet, milestone=pygithub.GithubObject.NotSet, labels=pygithub.GithubObject.NotSet):
         """
         :calls: `PATCH /repos/:owner/:repo/issues/:number <http://developer.github.com/v3/issues>`_
         :param title: string
         :param body: string
-        :param assignee: string or :class:`github.NamedUser.NamedUser` or None
+        :param assignee: string or :class:`pygithub.NamedUser.NamedUser` or None
         :param state: string
-        :param milestone: :class:`github.Milestone.Milestone` or None
+        :param milestone: :class:`pygithub.Milestone.Milestone` or None
         :param labels: list of string
         :rtype: None
         """
-        assert title is github.GithubObject.NotSet or isinstance(title, (str, unicode)), title
-        assert body is github.GithubObject.NotSet or isinstance(body, (str, unicode)), body
-        assert assignee is github.GithubObject.NotSet or assignee is None or isinstance(assignee, github.NamedUser.NamedUser) or isinstance(assignee, (str, unicode)), assignee
-        assert state is github.GithubObject.NotSet or isinstance(state, (str, unicode)), state
-        assert milestone is github.GithubObject.NotSet or milestone is None or isinstance(milestone, github.Milestone.Milestone), milestone
-        assert labels is github.GithubObject.NotSet or all(isinstance(element, (str, unicode)) for element in labels), labels
+        assert title is pygithub.GithubObject.NotSet or isinstance(title, (str, unicode)), title
+        assert body is pygithub.GithubObject.NotSet or isinstance(body, (str, unicode)), body
+        assert assignee is pygithub.GithubObject.NotSet or assignee is None or isinstance(assignee, pygithub.NamedUser.NamedUser) or isinstance(assignee, (str, unicode)), assignee
+        assert state is pygithub.GithubObject.NotSet or isinstance(state, (str, unicode)), state
+        assert milestone is pygithub.GithubObject.NotSet or milestone is None or isinstance(milestone, pygithub.Milestone.Milestone), milestone
+        assert labels is pygithub.GithubObject.NotSet or all(isinstance(element, (str, unicode)) for element in labels), labels
         post_parameters = dict()
-        if title is not github.GithubObject.NotSet:
+        if title is not pygithub.GithubObject.NotSet:
             post_parameters["title"] = title
-        if body is not github.GithubObject.NotSet:
+        if body is not pygithub.GithubObject.NotSet:
             post_parameters["body"] = body
-        if assignee is not github.GithubObject.NotSet:
+        if assignee is not pygithub.GithubObject.NotSet:
             if isinstance(assignee, (str, unicode)):
                 post_parameters["assignee"] = assignee
             else:
                 post_parameters["assignee"] = assignee._identity if assignee else ''
-        if state is not github.GithubObject.NotSet:
+        if state is not pygithub.GithubObject.NotSet:
             post_parameters["state"] = state
-        if milestone is not github.GithubObject.NotSet:
+        if milestone is not pygithub.GithubObject.NotSet:
             post_parameters["milestone"] = milestone._identity if milestone else ''
-        if labels is not github.GithubObject.NotSet:
+        if labels is not pygithub.GithubObject.NotSet:
             post_parameters["labels"] = labels
         headers, data = self._requester.requestJsonAndCheck(
             "PATCH",
@@ -301,22 +301,22 @@ class Issue(github.GithubObject.CompletableGithubObject):
         """
         :calls: `GET /repos/:owner/:repo/issues/comments/:id <http://developer.github.com/v3/issues/comments>`_
         :param id: integer
-        :rtype: :class:`github.IssueComment.IssueComment`
+        :rtype: :class:`pygithub.IssueComment.IssueComment`
         """
         assert isinstance(id, (int, long)), id
         headers, data = self._requester.requestJsonAndCheck(
             "GET",
             self._parentUrl(self.url) + "/comments/" + str(id)
         )
-        return github.IssueComment.IssueComment(self._requester, headers, data, completed=True)
+        return pygithub.IssueComment.IssueComment(self._requester, headers, data, completed=True)
 
     def get_comments(self):
         """
         :calls: `GET /repos/:owner/:repo/issues/:number/comments <http://developer.github.com/v3/issues/comments>`_
-        :rtype: :class:`github.PaginatedList.PaginatedList` of :class:`github.IssueComment.IssueComment`
+        :rtype: :class:`pygithub.PaginatedList.PaginatedList` of :class:`pygithub.IssueComment.IssueComment`
         """
-        return github.PaginatedList.PaginatedList(
-            github.IssueComment.IssueComment,
+        return pygithub.PaginatedList.PaginatedList(
+            pygithub.IssueComment.IssueComment,
             self._requester,
             self.url + "/comments",
             None
@@ -325,10 +325,10 @@ class Issue(github.GithubObject.CompletableGithubObject):
     def get_events(self):
         """
         :calls: `GET /repos/:owner/:repo/issues/:issue_number/events <http://developer.github.com/v3/issues/events>`_
-        :rtype: :class:`github.PaginatedList.PaginatedList` of :class:`github.IssueEvent.IssueEvent`
+        :rtype: :class:`pygithub.PaginatedList.PaginatedList` of :class:`pygithub.IssueEvent.IssueEvent`
         """
-        return github.PaginatedList.PaginatedList(
-            github.IssueEvent.IssueEvent,
+        return pygithub.PaginatedList.PaginatedList(
+            pygithub.IssueEvent.IssueEvent,
             self._requester,
             self.url + "/events",
             None
@@ -337,10 +337,10 @@ class Issue(github.GithubObject.CompletableGithubObject):
     def get_labels(self):
         """
         :calls: `GET /repos/:owner/:repo/issues/:number/labels <http://developer.github.com/v3/issues/labels>`_
-        :rtype: :class:`github.PaginatedList.PaginatedList` of :class:`github.Label.Label`
+        :rtype: :class:`pygithub.PaginatedList.PaginatedList` of :class:`pygithub.Label.Label`
         """
-        return github.PaginatedList.PaginatedList(
-            github.Label.Label,
+        return pygithub.PaginatedList.PaginatedList(
+            pygithub.Label.Label,
             self._requester,
             self.url + "/labels",
             None
@@ -349,11 +349,11 @@ class Issue(github.GithubObject.CompletableGithubObject):
     def remove_from_labels(self, label):
         """
         :calls: `DELETE /repos/:owner/:repo/issues/:number/labels/:name <http://developer.github.com/v3/issues/labels>`_
-        :param label: :class:`github.Label.Label` or string
+        :param label: :class:`pygithub.Label.Label` or string
         :rtype: None
         """
-        assert isinstance(label, (github.Label.Label, str, unicode)), label
-        if isinstance(label, github.Label.Label):
+        assert isinstance(label, (pygithub.Label.Label, str, unicode)), label
+        if isinstance(label, pygithub.Label.Label):
             label = label._identity
         headers, data = self._requester.requestJsonAndCheck(
             "DELETE",
@@ -363,11 +363,11 @@ class Issue(github.GithubObject.CompletableGithubObject):
     def set_labels(self, *labels):
         """
         :calls: `PUT /repos/:owner/:repo/issues/:number/labels <http://developer.github.com/v3/issues/labels>`_
-        :param label: :class:`github.Label.Label`
+        :param label: :class:`pygithub.Label.Label`
         :rtype: None
         """
-        assert all(isinstance(element, (github.Label.Label, str, unicode)) for element in labels), labels
-        post_parameters = [label.name if isinstance(label, github.Label.Label) else label for label in labels]
+        assert all(isinstance(element, (pygithub.Label.Label, str, unicode)) for element in labels), labels
+        post_parameters = [label.name if isinstance(label, pygithub.Label.Label) else label for label in labels]
         headers, data = self._requester.requestJsonAndCheck(
             "PUT",
             self.url + "/labels",
@@ -379,37 +379,37 @@ class Issue(github.GithubObject.CompletableGithubObject):
         return self.number
 
     def _initAttributes(self):
-        self._assignee = github.GithubObject.NotSet
-        self._body = github.GithubObject.NotSet
-        self._closed_at = github.GithubObject.NotSet
-        self._closed_by = github.GithubObject.NotSet
-        self._comments = github.GithubObject.NotSet
-        self._comments_url = github.GithubObject.NotSet
-        self._created_at = github.GithubObject.NotSet
-        self._events_url = github.GithubObject.NotSet
-        self._html_url = github.GithubObject.NotSet
-        self._id = github.GithubObject.NotSet
-        self._labels = github.GithubObject.NotSet
-        self._labels_url = github.GithubObject.NotSet
-        self._milestone = github.GithubObject.NotSet
-        self._number = github.GithubObject.NotSet
-        self._pull_request = github.GithubObject.NotSet
-        self._repository = github.GithubObject.NotSet
-        self._state = github.GithubObject.NotSet
-        self._title = github.GithubObject.NotSet
-        self._updated_at = github.GithubObject.NotSet
-        self._url = github.GithubObject.NotSet
-        self._user = github.GithubObject.NotSet
+        self._assignee = pygithub.GithubObject.NotSet
+        self._body = pygithub.GithubObject.NotSet
+        self._closed_at = pygithub.GithubObject.NotSet
+        self._closed_by = pygithub.GithubObject.NotSet
+        self._comments = pygithub.GithubObject.NotSet
+        self._comments_url = pygithub.GithubObject.NotSet
+        self._created_at = pygithub.GithubObject.NotSet
+        self._events_url = pygithub.GithubObject.NotSet
+        self._html_url = pygithub.GithubObject.NotSet
+        self._id = pygithub.GithubObject.NotSet
+        self._labels = pygithub.GithubObject.NotSet
+        self._labels_url = pygithub.GithubObject.NotSet
+        self._milestone = pygithub.GithubObject.NotSet
+        self._number = pygithub.GithubObject.NotSet
+        self._pull_request = pygithub.GithubObject.NotSet
+        self._repository = pygithub.GithubObject.NotSet
+        self._state = pygithub.GithubObject.NotSet
+        self._title = pygithub.GithubObject.NotSet
+        self._updated_at = pygithub.GithubObject.NotSet
+        self._url = pygithub.GithubObject.NotSet
+        self._user = pygithub.GithubObject.NotSet
 
     def _useAttributes(self, attributes):
         if "assignee" in attributes:  # pragma no branch
-            self._assignee = self._makeClassAttribute(github.NamedUser.NamedUser, attributes["assignee"])
+            self._assignee = self._makeClassAttribute(pygithub.NamedUser.NamedUser, attributes["assignee"])
         if "body" in attributes:  # pragma no branch
             self._body = self._makeStringAttribute(attributes["body"])
         if "closed_at" in attributes:  # pragma no branch
             self._closed_at = self._makeDatetimeAttribute(attributes["closed_at"])
         if "closed_by" in attributes:  # pragma no branch
-            self._closed_by = self._makeClassAttribute(github.NamedUser.NamedUser, attributes["closed_by"])
+            self._closed_by = self._makeClassAttribute(pygithub.NamedUser.NamedUser, attributes["closed_by"])
         if "comments" in attributes:  # pragma no branch
             self._comments = self._makeIntAttribute(attributes["comments"])
         if "comments_url" in attributes:  # pragma no branch
@@ -423,17 +423,17 @@ class Issue(github.GithubObject.CompletableGithubObject):
         if "id" in attributes:  # pragma no branch
             self._id = self._makeIntAttribute(attributes["id"])
         if "labels" in attributes:  # pragma no branch
-            self._labels = self._makeListOfClassesAttribute(github.Label.Label, attributes["labels"])
+            self._labels = self._makeListOfClassesAttribute(pygithub.Label.Label, attributes["labels"])
         if "labels_url" in attributes:  # pragma no branch
             self._labels_url = self._makeStringAttribute(attributes["labels_url"])
         if "milestone" in attributes:  # pragma no branch
-            self._milestone = self._makeClassAttribute(github.Milestone.Milestone, attributes["milestone"])
+            self._milestone = self._makeClassAttribute(pygithub.Milestone.Milestone, attributes["milestone"])
         if "number" in attributes:  # pragma no branch
             self._number = self._makeIntAttribute(attributes["number"])
         if "pull_request" in attributes:  # pragma no branch
-            self._pull_request = self._makeClassAttribute(github.IssuePullRequest.IssuePullRequest, attributes["pull_request"])
+            self._pull_request = self._makeClassAttribute(pygithub.IssuePullRequest.IssuePullRequest, attributes["pull_request"])
         if "repository" in attributes:  # pragma no branch
-            self._repository = self._makeClassAttribute(github.Repository.Repository, attributes["repository"])
+            self._repository = self._makeClassAttribute(pygithub.Repository.Repository, attributes["repository"])
         if "state" in attributes:  # pragma no branch
             self._state = self._makeStringAttribute(attributes["state"])
         if "title" in attributes:  # pragma no branch
@@ -443,4 +443,4 @@ class Issue(github.GithubObject.CompletableGithubObject):
         if "url" in attributes:  # pragma no branch
             self._url = self._makeStringAttribute(attributes["url"])
         if "user" in attributes:  # pragma no branch
-            self._user = self._makeClassAttribute(github.NamedUser.NamedUser, attributes["user"])
+            self._user = self._makeClassAttribute(pygithub.NamedUser.NamedUser, attributes["user"])

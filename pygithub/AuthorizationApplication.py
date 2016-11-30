@@ -27,7 +27,7 @@
 import pygithub.GithubObject
 
 
-class AuthorizationApplication(github.GithubObject.CompletableGithubObject):
+class AuthorizationApplication(pygithub.GithubObject.CompletableGithubObject):
     """
     This class represents AuthorizationApplications as returned for example by http://developer.github.com/v3/todo
     """
@@ -49,8 +49,8 @@ class AuthorizationApplication(github.GithubObject.CompletableGithubObject):
         return self._url.value
 
     def _initAttributes(self):
-        self._name = github.GithubObject.NotSet
-        self._url = github.GithubObject.NotSet
+        self._name = pygithub.GithubObject.NotSet
+        self._url = pygithub.GithubObject.NotSet
 
     def _useAttributes(self, attributes):
         if "name" in attributes:  # pragma no branch

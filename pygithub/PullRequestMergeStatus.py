@@ -28,7 +28,7 @@
 import pygithub.GithubObject
 
 
-class PullRequestMergeStatus(github.GithubObject.NonCompletableGithubObject):
+class PullRequestMergeStatus(pygithub.GithubObject.NonCompletableGithubObject):
     """
     This class represents PullRequestMergeStatuss. The reference can be found here http://developer.github.com/v3/pulls/#get-if-a-pull-request-has-been-merged
     """
@@ -55,9 +55,9 @@ class PullRequestMergeStatus(github.GithubObject.NonCompletableGithubObject):
         return self._sha.value
 
     def _initAttributes(self):
-        self._merged = github.GithubObject.NotSet
-        self._message = github.GithubObject.NotSet
-        self._sha = github.GithubObject.NotSet
+        self._merged = pygithub.GithubObject.NotSet
+        self._message = pygithub.GithubObject.NotSet
+        self._sha = pygithub.GithubObject.NotSet
 
     def _useAttributes(self, attributes):
         if "merged" in attributes:  # pragma no branch

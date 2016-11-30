@@ -30,7 +30,7 @@ class InputGitTreeElement(object):
     """
     """
 
-    def __init__(self, path, mode, type, content=github.GithubObject.NotSet, sha=github.GithubObject.NotSet):
+    def __init__(self, path, mode, type, content=pygithub.GithubObject.NotSet, sha=pygithub.GithubObject.NotSet):
         """
         :param path: string
         :param mode: string
@@ -42,8 +42,8 @@ class InputGitTreeElement(object):
         assert isinstance(path, (str, unicode)), path
         assert isinstance(mode, (str, unicode)), mode
         assert isinstance(type, (str, unicode)), type
-        assert content is github.GithubObject.NotSet or isinstance(content, (str, unicode)), content
-        assert sha is github.GithubObject.NotSet or isinstance(sha, (str, unicode)), sha
+        assert content is pygithub.GithubObject.NotSet or isinstance(content, (str, unicode)), content
+        assert sha is pygithub.GithubObject.NotSet or isinstance(sha, (str, unicode)), sha
         self.__path = path
         self.__mode = mode
         self.__type = type
@@ -57,8 +57,8 @@ class InputGitTreeElement(object):
             "mode": self.__mode,
             "type": self.__type,
         }
-        if self.__sha is not github.GithubObject.NotSet:
+        if self.__sha is not pygithub.GithubObject.NotSet:
             identity["sha"] = self.__sha
-        if self.__content is not github.GithubObject.NotSet:
+        if self.__content is not pygithub.GithubObject.NotSet:
             identity["content"] = self.__content
         return identity

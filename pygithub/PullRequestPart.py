@@ -30,7 +30,7 @@ import pygithub.Repository
 import pygithub.NamedUser
 
 
-class PullRequestPart(github.GithubObject.NonCompletableGithubObject):
+class PullRequestPart(pygithub.GithubObject.NonCompletableGithubObject):
     """
     This class represents PullRequestParts as returned for example by http://developer.github.com/v3/todo
     """
@@ -52,7 +52,7 @@ class PullRequestPart(github.GithubObject.NonCompletableGithubObject):
     @property
     def repo(self):
         """
-        :type: :class:`github.Repository.Repository`
+        :type: :class:`pygithub.Repository.Repository`
         """
         return self._repo.value
 
@@ -66,16 +66,16 @@ class PullRequestPart(github.GithubObject.NonCompletableGithubObject):
     @property
     def user(self):
         """
-        :type: :class:`github.NamedUser.NamedUser`
+        :type: :class:`pygithub.NamedUser.NamedUser`
         """
         return self._user.value
 
     def _initAttributes(self):
-        self._label = github.GithubObject.NotSet
-        self._ref = github.GithubObject.NotSet
-        self._repo = github.GithubObject.NotSet
-        self._sha = github.GithubObject.NotSet
-        self._user = github.GithubObject.NotSet
+        self._label = pygithub.GithubObject.NotSet
+        self._ref = pygithub.GithubObject.NotSet
+        self._repo = pygithub.GithubObject.NotSet
+        self._sha = pygithub.GithubObject.NotSet
+        self._user = pygithub.GithubObject.NotSet
 
     def _useAttributes(self, attributes):
         if "label" in attributes:  # pragma no branch
@@ -83,8 +83,8 @@ class PullRequestPart(github.GithubObject.NonCompletableGithubObject):
         if "ref" in attributes:  # pragma no branch
             self._ref = self._makeStringAttribute(attributes["ref"])
         if "repo" in attributes:  # pragma no branch
-            self._repo = self._makeClassAttribute(github.Repository.Repository, attributes["repo"])
+            self._repo = self._makeClassAttribute(pygithub.Repository.Repository, attributes["repo"])
         if "sha" in attributes:  # pragma no branch
             self._sha = self._makeStringAttribute(attributes["sha"])
         if "user" in attributes:  # pragma no branch
-            self._user = self._makeClassAttribute(github.NamedUser.NamedUser, attributes["user"])
+            self._user = self._makeClassAttribute(pygithub.NamedUser.NamedUser, attributes["user"])

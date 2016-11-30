@@ -32,10 +32,10 @@ import pygithub.tests.AllTests
 
 def main(argv):
     if "--record" in argv:
-        github.tests.Framework.activateRecordMode()
+        pygithub.tests.Framework.activateRecordMode()
         argv = [arg for arg in argv if arg != "--record"]
 
-    unittest.main(module=github.tests.AllTests, argv=argv)
+    unittest.main(module=pygithub.tests.AllTests, argv=argv)
 
 
 if __name__ == "__main__":

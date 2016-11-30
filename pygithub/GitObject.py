@@ -27,7 +27,7 @@
 import pygithub.GithubObject
 
 
-class GitObject(github.GithubObject.NonCompletableGithubObject):
+class GitObject(pygithub.GithubObject.NonCompletableGithubObject):
     """
     This class represents GitObjects as returned for example by http://developer.github.com/v3/todo
     """
@@ -54,9 +54,9 @@ class GitObject(github.GithubObject.NonCompletableGithubObject):
         return self._url.value
 
     def _initAttributes(self):
-        self._sha = github.GithubObject.NotSet
-        self._type = github.GithubObject.NotSet
-        self._url = github.GithubObject.NotSet
+        self._sha = pygithub.GithubObject.NotSet
+        self._type = pygithub.GithubObject.NotSet
+        self._url = pygithub.GithubObject.NotSet
 
     def _useAttributes(self, attributes):
         if "sha" in attributes:  # pragma no branch

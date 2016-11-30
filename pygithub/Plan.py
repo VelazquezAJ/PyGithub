@@ -27,7 +27,7 @@
 import pygithub.GithubObject
 
 
-class Plan(github.GithubObject.NonCompletableGithubObject):
+class Plan(pygithub.GithubObject.NonCompletableGithubObject):
     """
     This class represents Plans as returned for example by http://developer.github.com/v3/todo
     """
@@ -61,10 +61,10 @@ class Plan(github.GithubObject.NonCompletableGithubObject):
         return self._space.value
 
     def _initAttributes(self):
-        self._collaborators = github.GithubObject.NotSet
-        self._name = github.GithubObject.NotSet
-        self._private_repos = github.GithubObject.NotSet
-        self._space = github.GithubObject.NotSet
+        self._collaborators = pygithub.GithubObject.NotSet
+        self._name = pygithub.GithubObject.NotSet
+        self._private_repos = pygithub.GithubObject.NotSet
+        self._space = pygithub.GithubObject.NotSet
 
     def _useAttributes(self, attributes):
         if "collaborators" in attributes:  # pragma no branch

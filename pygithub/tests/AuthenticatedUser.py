@@ -78,11 +78,11 @@ class AuthenticatedUser(Framework.TestCase):
         self.assertEqual(self.user.bio, "Bio edited by PyGithub")
 
     def testEmails(self):
-        self.assertEqual(self.user.get_emails(), ["vincent@vincent-jacques.net", "github.com@vincent-jacques.net"])
+        self.assertEqual(self.user.get_emails(), ["vincent@vincent-jacques.net", "pygithub.com@vincent-jacques.net"])
         self.user.add_to_emails("1@foobar.com", "2@foobar.com")
-        self.assertEqual(self.user.get_emails(), ["vincent@vincent-jacques.net", "1@foobar.com", "2@foobar.com", "github.com@vincent-jacques.net"])
+        self.assertEqual(self.user.get_emails(), ["vincent@vincent-jacques.net", "1@foobar.com", "2@foobar.com", "pygithub.com@vincent-jacques.net"])
         self.user.remove_from_emails("1@foobar.com", "2@foobar.com")
-        self.assertEqual(self.user.get_emails(), ["vincent@vincent-jacques.net", "github.com@vincent-jacques.net"])
+        self.assertEqual(self.user.get_emails(), ["vincent@vincent-jacques.net", "pygithub.com@vincent-jacques.net"])
 
     def testFollowing(self):
         nvie = self.g.get_user("nvie")
@@ -150,13 +150,13 @@ class AuthenticatedUser(Framework.TestCase):
         self.assertEqual(authorization.id, 372294)
 
     def testCreateGist(self):
-        gist = self.user.create_gist(True, {"foobar.txt": github.InputFileContent("File created by PyGithub")}, "Gist created by PyGithub")
+        gist = self.user.create_gist(True, {"foobar.txt": pygithub.InputFileContent("File created by PyGithub")}, "Gist created by PyGithub")
         self.assertEqual(gist.description, "Gist created by PyGithub")
         self.assertEqual(gist.files.keys(), ["foobar.txt"])
         self.assertEqual(gist.files["foobar.txt"].content, "File created by PyGithub")
 
     def testCreateGistWithoutDescription(self):
-        gist = self.user.create_gist(True, {"foobar.txt": github.InputFileContent("File created by PyGithub")})
+        gist = self.user.create_gist(True, {"foobar.txt": pygithub.InputFileContent("File created by PyGithub")})
         self.assertEqual(gist.description, None)
         self.assertEqual(gist.files.keys(), ["foobar.txt"])
         self.assertEqual(gist.files["foobar.txt"].content, "File created by PyGithub")

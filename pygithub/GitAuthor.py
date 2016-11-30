@@ -27,7 +27,7 @@
 import pygithub.GithubObject
 
 
-class GitAuthor(github.GithubObject.NonCompletableGithubObject):
+class GitAuthor(pygithub.GithubObject.NonCompletableGithubObject):
     """
     This class represents GitAuthors as returned for example by http://developer.github.com/v3/todo
     """
@@ -54,9 +54,9 @@ class GitAuthor(github.GithubObject.NonCompletableGithubObject):
         return self._name.value
 
     def _initAttributes(self):
-        self._date = github.GithubObject.NotSet
-        self._email = github.GithubObject.NotSet
-        self._name = github.GithubObject.NotSet
+        self._date = pygithub.GithubObject.NotSet
+        self._email = pygithub.GithubObject.NotSet
+        self._name = pygithub.GithubObject.NotSet
 
     def _useAttributes(self, attributes):
         if "date" in attributes:  # pragma no branch

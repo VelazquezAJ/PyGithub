@@ -36,7 +36,7 @@ import pygithub.Organization
 import pygithub.Event
 
 
-class NamedUser(github.GithubObject.CompletableGithubObject):
+class NamedUser(pygithub.GithubObject.CompletableGithubObject):
     """
     This class represents NamedUsers as returned for example by http://developer.github.com/v3/todo
     """
@@ -236,7 +236,7 @@ class NamedUser(github.GithubObject.CompletableGithubObject):
     @property
     def plan(self):
         """
-        :type: :class:`github.Plan.Plan`
+        :type: :class:`pygithub.Plan.Plan`
         """
         self._completeIfNotSet(self._plan)
         return self._plan.value
@@ -332,10 +332,10 @@ class NamedUser(github.GithubObject.CompletableGithubObject):
     def get_events(self):
         """
         :calls: `GET /users/:user/events <http://developer.github.com/v3/activity/events>`_
-        :rtype: :class:`github.PaginatedList.PaginatedList` of :class:`github.Event.Event`
+        :rtype: :class:`pygithub.PaginatedList.PaginatedList` of :class:`pygithub.Event.Event`
         """
-        return github.PaginatedList.PaginatedList(
-            github.Event.Event,
+        return pygithub.PaginatedList.PaginatedList(
+            pygithub.Event.Event,
             self._requester,
             self.url + "/events",
             None
@@ -344,9 +344,9 @@ class NamedUser(github.GithubObject.CompletableGithubObject):
     def get_followers(self):
         """
         :calls: `GET /users/:user/followers <http://developer.github.com/v3/users/followers>`_
-        :rtype: :class:`github.PaginatedList.PaginatedList` of :class:`github.NamedUser.NamedUser`
+        :rtype: :class:`pygithub.PaginatedList.PaginatedList` of :class:`pygithub.NamedUser.NamedUser`
         """
-        return github.PaginatedList.PaginatedList(
+        return pygithub.PaginatedList.PaginatedList(
             NamedUser,
             self._requester,
             self.url + "/followers",
@@ -356,9 +356,9 @@ class NamedUser(github.GithubObject.CompletableGithubObject):
     def get_following(self):
         """
         :calls: `GET /users/:user/following <http://developer.github.com/v3/users/followers>`_
-        :rtype: :class:`github.PaginatedList.PaginatedList` of :class:`github.NamedUser.NamedUser`
+        :rtype: :class:`pygithub.PaginatedList.PaginatedList` of :class:`pygithub.NamedUser.NamedUser`
         """
-        return github.PaginatedList.PaginatedList(
+        return pygithub.PaginatedList.PaginatedList(
             NamedUser,
             self._requester,
             self.url + "/following",
@@ -368,10 +368,10 @@ class NamedUser(github.GithubObject.CompletableGithubObject):
     def get_gists(self):
         """
         :calls: `GET /users/:user/gists <http://developer.github.com/v3/gists>`_
-        :rtype: :class:`github.PaginatedList.PaginatedList` of :class:`github.Gist.Gist`
+        :rtype: :class:`pygithub.PaginatedList.PaginatedList` of :class:`pygithub.Gist.Gist`
         """
-        return github.PaginatedList.PaginatedList(
-            github.Gist.Gist,
+        return pygithub.PaginatedList.PaginatedList(
+            pygithub.Gist.Gist,
             self._requester,
             self.url + "/gists",
             None
@@ -380,10 +380,10 @@ class NamedUser(github.GithubObject.CompletableGithubObject):
     def get_keys(self):
         """
         :calls: `GET /users/:user/keys <http://developer.github.com/v3/users/keys>`_
-        :rtype: :class:`github.PaginatedList.PaginatedList` of :class:`github.UserKey.UserKey`
+        :rtype: :class:`pygithub.PaginatedList.PaginatedList` of :class:`pygithub.UserKey.UserKey`
         """
-        return github.PaginatedList.PaginatedList(
-            github.UserKey.UserKey,
+        return pygithub.PaginatedList.PaginatedList(
+            pygithub.UserKey.UserKey,
             self._requester,
             self.url + "/keys",
             None
@@ -392,10 +392,10 @@ class NamedUser(github.GithubObject.CompletableGithubObject):
     def get_orgs(self):
         """
         :calls: `GET /users/:user/orgs <http://developer.github.com/v3/orgs>`_
-        :rtype: :class:`github.PaginatedList.PaginatedList` of :class:`github.Organization.Organization`
+        :rtype: :class:`pygithub.PaginatedList.PaginatedList` of :class:`pygithub.Organization.Organization`
         """
-        return github.PaginatedList.PaginatedList(
-            github.Organization.Organization,
+        return pygithub.PaginatedList.PaginatedList(
+            pygithub.Organization.Organization,
             self._requester,
             self.url + "/orgs",
             None
@@ -404,10 +404,10 @@ class NamedUser(github.GithubObject.CompletableGithubObject):
     def get_public_events(self):
         """
         :calls: `GET /users/:user/events/public <http://developer.github.com/v3/activity/events>`_
-        :rtype: :class:`github.PaginatedList.PaginatedList` of :class:`github.Event.Event`
+        :rtype: :class:`pygithub.PaginatedList.PaginatedList` of :class:`pygithub.Event.Event`
         """
-        return github.PaginatedList.PaginatedList(
-            github.Event.Event,
+        return pygithub.PaginatedList.PaginatedList(
+            pygithub.Event.Event,
             self._requester,
             self.url + "/events/public",
             None
@@ -416,10 +416,10 @@ class NamedUser(github.GithubObject.CompletableGithubObject):
     def get_public_received_events(self):
         """
         :calls: `GET /users/:user/received_events/public <http://developer.github.com/v3/activity/events>`_
-        :rtype: :class:`github.PaginatedList.PaginatedList` of :class:`github.Event.Event`
+        :rtype: :class:`pygithub.PaginatedList.PaginatedList` of :class:`pygithub.Event.Event`
         """
-        return github.PaginatedList.PaginatedList(
-            github.Event.Event,
+        return pygithub.PaginatedList.PaginatedList(
+            pygithub.Event.Event,
             self._requester,
             self.url + "/received_events/public",
             None
@@ -428,10 +428,10 @@ class NamedUser(github.GithubObject.CompletableGithubObject):
     def get_received_events(self):
         """
         :calls: `GET /users/:user/received_events <http://developer.github.com/v3/activity/events>`_
-        :rtype: :class:`github.PaginatedList.PaginatedList` of :class:`github.Event.Event`
+        :rtype: :class:`pygithub.PaginatedList.PaginatedList` of :class:`pygithub.Event.Event`
         """
-        return github.PaginatedList.PaginatedList(
-            github.Event.Event,
+        return pygithub.PaginatedList.PaginatedList(
+            pygithub.Event.Event,
             self._requester,
             self.url + "/received_events",
             None
@@ -441,27 +441,27 @@ class NamedUser(github.GithubObject.CompletableGithubObject):
         """
         :calls: `GET /repos/:owner/:repo <http://developer.github.com/v3/repos>`_
         :param name: string
-        :rtype: :class:`github.Repository.Repository`
+        :rtype: :class:`pygithub.Repository.Repository`
         """
         assert isinstance(name, (str, unicode)), name
         headers, data = self._requester.requestJsonAndCheck(
             "GET",
             "/repos/" + self.login + "/" + name
         )
-        return github.Repository.Repository(self._requester, headers, data, completed=True)
+        return pygithub.Repository.Repository(self._requester, headers, data, completed=True)
 
-    def get_repos(self, type=github.GithubObject.NotSet):
+    def get_repos(self, type=pygithub.GithubObject.NotSet):
         """
         :calls: `GET /users/:user/repos <http://developer.github.com/v3/repos>`_
         :param type: string
-        :rtype: :class:`github.PaginatedList.PaginatedList` of :class:`github.Repository.Repository`
+        :rtype: :class:`pygithub.PaginatedList.PaginatedList` of :class:`pygithub.Repository.Repository`
         """
-        assert type is github.GithubObject.NotSet or isinstance(type, (str, unicode)), type
+        assert type is pygithub.GithubObject.NotSet or isinstance(type, (str, unicode)), type
         url_parameters = dict()
-        if type is not github.GithubObject.NotSet:
+        if type is not pygithub.GithubObject.NotSet:
             url_parameters["type"] = type
-        return github.PaginatedList.PaginatedList(
-            github.Repository.Repository,
+        return pygithub.PaginatedList.PaginatedList(
+            pygithub.Repository.Repository,
             self._requester,
             self.url + "/repos",
             url_parameters
@@ -470,10 +470,10 @@ class NamedUser(github.GithubObject.CompletableGithubObject):
     def get_starred(self):
         """
         :calls: `GET /users/:user/starred <http://developer.github.com/v3/activity/starring>`_
-        :rtype: :class:`github.PaginatedList.PaginatedList` of :class:`github.Repository.Repository`
+        :rtype: :class:`pygithub.PaginatedList.PaginatedList` of :class:`pygithub.Repository.Repository`
         """
-        return github.PaginatedList.PaginatedList(
-            github.Repository.Repository,
+        return pygithub.PaginatedList.PaginatedList(
+            pygithub.Repository.Repository,
             self._requester,
             self.url + "/starred",
             None
@@ -482,10 +482,10 @@ class NamedUser(github.GithubObject.CompletableGithubObject):
     def get_subscriptions(self):
         """
         :calls: `GET /users/:user/subscriptions <http://developer.github.com/v3/activity/watching>`_
-        :rtype: :class:`github.PaginatedList.PaginatedList` of :class:`github.Repository.Repository`
+        :rtype: :class:`pygithub.PaginatedList.PaginatedList` of :class:`pygithub.Repository.Repository`
         """
-        return github.PaginatedList.PaginatedList(
-            github.Repository.Repository,
+        return pygithub.PaginatedList.PaginatedList(
+            pygithub.Repository.Repository,
             self._requester,
             self.url + "/subscriptions",
             None
@@ -494,10 +494,10 @@ class NamedUser(github.GithubObject.CompletableGithubObject):
     def get_watched(self):
         """
         :calls: `GET /users/:user/watched <http://developer.github.com/v3/activity/starring>`_
-        :rtype: :class:`github.PaginatedList.PaginatedList` of :class:`github.Repository.Repository`
+        :rtype: :class:`pygithub.PaginatedList.PaginatedList` of :class:`pygithub.Repository.Repository`
         """
-        return github.PaginatedList.PaginatedList(
-            github.Repository.Repository,
+        return pygithub.PaginatedList.PaginatedList(
+            pygithub.Repository.Repository,
             self._requester,
             self.url + "/watched",
             None
@@ -506,10 +506,10 @@ class NamedUser(github.GithubObject.CompletableGithubObject):
     def has_in_following(self, following):
         """
         :calls: `GET /users/:user/following/:target_user <http://developer.github.com/v3/users/followers/#check-if-one-user-follows-another>`_
-        :param following: :class:`github.NamedUser.NamedUser`
+        :param following: :class:`pygithub.NamedUser.NamedUser`
         :rtype: bool
         """
-        assert isinstance(following, github.NamedUser.NamedUser), following
+        assert isinstance(following, pygithub.NamedUser.NamedUser), following
         status, headers, data = self._requester.requestJson(
             "GET",
             self.url + "/following/" + following._identity
@@ -521,42 +521,42 @@ class NamedUser(github.GithubObject.CompletableGithubObject):
         return self.login
 
     def _initAttributes(self):
-        self._avatar_url = github.GithubObject.NotSet
-        self._bio = github.GithubObject.NotSet
-        self._blog = github.GithubObject.NotSet
-        self._collaborators = github.GithubObject.NotSet
-        self._company = github.GithubObject.NotSet
-        self._contributions = github.GithubObject.NotSet
-        self._created_at = github.GithubObject.NotSet
-        self._disk_usage = github.GithubObject.NotSet
-        self._email = github.GithubObject.NotSet
-        self._events_url = github.GithubObject.NotSet
-        self._followers = github.GithubObject.NotSet
-        self._followers_url = github.GithubObject.NotSet
-        self._following = github.GithubObject.NotSet
-        self._following_url = github.GithubObject.NotSet
-        self._gists_url = github.GithubObject.NotSet
-        self._gravatar_id = github.GithubObject.NotSet
-        self._hireable = github.GithubObject.NotSet
-        self._html_url = github.GithubObject.NotSet
-        self._id = github.GithubObject.NotSet
-        self._location = github.GithubObject.NotSet
-        self._login = github.GithubObject.NotSet
-        self._name = github.GithubObject.NotSet
-        self._organizations_url = github.GithubObject.NotSet
-        self._owned_private_repos = github.GithubObject.NotSet
-        self._plan = github.GithubObject.NotSet
-        self._private_gists = github.GithubObject.NotSet
-        self._public_gists = github.GithubObject.NotSet
-        self._public_repos = github.GithubObject.NotSet
-        self._received_events_url = github.GithubObject.NotSet
-        self._repos_url = github.GithubObject.NotSet
-        self._starred_url = github.GithubObject.NotSet
-        self._subscriptions_url = github.GithubObject.NotSet
-        self._total_private_repos = github.GithubObject.NotSet
-        self._type = github.GithubObject.NotSet
-        self._updated_at = github.GithubObject.NotSet
-        self._url = github.GithubObject.NotSet
+        self._avatar_url = pygithub.GithubObject.NotSet
+        self._bio = pygithub.GithubObject.NotSet
+        self._blog = pygithub.GithubObject.NotSet
+        self._collaborators = pygithub.GithubObject.NotSet
+        self._company = pygithub.GithubObject.NotSet
+        self._contributions = pygithub.GithubObject.NotSet
+        self._created_at = pygithub.GithubObject.NotSet
+        self._disk_usage = pygithub.GithubObject.NotSet
+        self._email = pygithub.GithubObject.NotSet
+        self._events_url = pygithub.GithubObject.NotSet
+        self._followers = pygithub.GithubObject.NotSet
+        self._followers_url = pygithub.GithubObject.NotSet
+        self._following = pygithub.GithubObject.NotSet
+        self._following_url = pygithub.GithubObject.NotSet
+        self._gists_url = pygithub.GithubObject.NotSet
+        self._gravatar_id = pygithub.GithubObject.NotSet
+        self._hireable = pygithub.GithubObject.NotSet
+        self._html_url = pygithub.GithubObject.NotSet
+        self._id = pygithub.GithubObject.NotSet
+        self._location = pygithub.GithubObject.NotSet
+        self._login = pygithub.GithubObject.NotSet
+        self._name = pygithub.GithubObject.NotSet
+        self._organizations_url = pygithub.GithubObject.NotSet
+        self._owned_private_repos = pygithub.GithubObject.NotSet
+        self._plan = pygithub.GithubObject.NotSet
+        self._private_gists = pygithub.GithubObject.NotSet
+        self._public_gists = pygithub.GithubObject.NotSet
+        self._public_repos = pygithub.GithubObject.NotSet
+        self._received_events_url = pygithub.GithubObject.NotSet
+        self._repos_url = pygithub.GithubObject.NotSet
+        self._starred_url = pygithub.GithubObject.NotSet
+        self._subscriptions_url = pygithub.GithubObject.NotSet
+        self._total_private_repos = pygithub.GithubObject.NotSet
+        self._type = pygithub.GithubObject.NotSet
+        self._updated_at = pygithub.GithubObject.NotSet
+        self._url = pygithub.GithubObject.NotSet
 
     def _useAttributes(self, attributes):
         if "avatar_url" in attributes:  # pragma no branch
@@ -608,7 +608,7 @@ class NamedUser(github.GithubObject.CompletableGithubObject):
         if "owned_private_repos" in attributes:  # pragma no branch
             self._owned_private_repos = self._makeIntAttribute(attributes["owned_private_repos"])
         if "plan" in attributes:  # pragma no branch
-            self._plan = self._makeClassAttribute(github.Plan.Plan, attributes["plan"])
+            self._plan = self._makeClassAttribute(pygithub.Plan.Plan, attributes["plan"])
         if "private_gists" in attributes:  # pragma no branch
             self._private_gists = self._makeIntAttribute(attributes["private_gists"])
         if "public_gists" in attributes:  # pragma no branch

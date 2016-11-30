@@ -31,7 +31,7 @@ import pygithub.GithubObject
 import pygithub.NamedUser
 
 
-class PullRequestComment(github.GithubObject.CompletableGithubObject):
+class PullRequestComment(pygithub.GithubObject.CompletableGithubObject):
     """
     This class represents PullRequestComments. The reference can be found here http://developer.github.com/v3/pulls/comments/
     """
@@ -143,7 +143,7 @@ class PullRequestComment(github.GithubObject.CompletableGithubObject):
     @property
     def user(self):
         """
-        :type: :class:`github.NamedUser.NamedUser`
+        :type: :class:`pygithub.NamedUser.NamedUser`
         """
         self._completeIfNotSet(self._user)
         return self._user.value
@@ -176,20 +176,20 @@ class PullRequestComment(github.GithubObject.CompletableGithubObject):
         self._useAttributes(data)
 
     def _initAttributes(self):
-        self._body = github.GithubObject.NotSet
-        self._commit_id = github.GithubObject.NotSet
-        self._created_at = github.GithubObject.NotSet
-        self._diff_hunk = github.GithubObject.NotSet
-        self._id = github.GithubObject.NotSet
-        self._original_commit_id = github.GithubObject.NotSet
-        self._original_position = github.GithubObject.NotSet
-        self._path = github.GithubObject.NotSet
-        self._position = github.GithubObject.NotSet
-        self._pull_request_url = github.GithubObject.NotSet
-        self._updated_at = github.GithubObject.NotSet
-        self._url = github.GithubObject.NotSet
-        self._html_url = github.GithubObject.NotSet
-        self._user = github.GithubObject.NotSet
+        self._body = pygithub.GithubObject.NotSet
+        self._commit_id = pygithub.GithubObject.NotSet
+        self._created_at = pygithub.GithubObject.NotSet
+        self._diff_hunk = pygithub.GithubObject.NotSet
+        self._id = pygithub.GithubObject.NotSet
+        self._original_commit_id = pygithub.GithubObject.NotSet
+        self._original_position = pygithub.GithubObject.NotSet
+        self._path = pygithub.GithubObject.NotSet
+        self._position = pygithub.GithubObject.NotSet
+        self._pull_request_url = pygithub.GithubObject.NotSet
+        self._updated_at = pygithub.GithubObject.NotSet
+        self._url = pygithub.GithubObject.NotSet
+        self._html_url = pygithub.GithubObject.NotSet
+        self._user = pygithub.GithubObject.NotSet
 
     def _useAttributes(self, attributes):
         if "body" in attributes:  # pragma no branch
@@ -219,4 +219,4 @@ class PullRequestComment(github.GithubObject.CompletableGithubObject):
         if "html_url" in attributes:  # pragma no branch
             self._html_url = self._makeStringAttribute(attributes["html_url"])
         if "user" in attributes:  # pragma no branch
-            self._user = self._makeClassAttribute(github.NamedUser.NamedUser, attributes["user"])
+            self._user = self._makeClassAttribute(pygithub.NamedUser.NamedUser, attributes["user"])

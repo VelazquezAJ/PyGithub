@@ -27,7 +27,7 @@
 import pygithub.GithubObject
 
 
-class IssuePullRequest(github.GithubObject.NonCompletableGithubObject):
+class IssuePullRequest(pygithub.GithubObject.NonCompletableGithubObject):
     """
     This class represents IssuePullRequests as returned for example by http://developer.github.com/v3/todo
     """
@@ -54,9 +54,9 @@ class IssuePullRequest(github.GithubObject.NonCompletableGithubObject):
         return self._patch_url.value
 
     def _initAttributes(self):
-        self._diff_url = github.GithubObject.NotSet
-        self._html_url = github.GithubObject.NotSet
-        self._patch_url = github.GithubObject.NotSet
+        self._diff_url = pygithub.GithubObject.NotSet
+        self._html_url = pygithub.GithubObject.NotSet
+        self._patch_url = pygithub.GithubObject.NotSet
 
     def _useAttributes(self, attributes):
         if "diff_url" in attributes:  # pragma no branch

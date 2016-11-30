@@ -32,7 +32,7 @@ import pygithub.Repository
 import pygithub.NamedUser
 
 
-class Team(github.GithubObject.CompletableGithubObject):
+class Team(pygithub.GithubObject.CompletableGithubObject):
     """
     This class represents Teams. The reference can be found here http://developer.github.com/v3/orgs/teams/
     """
@@ -112,10 +112,10 @@ class Team(github.GithubObject.CompletableGithubObject):
     def add_to_members(self, member):
         """
         :calls: `PUT /teams/:id/members/:user <http://developer.github.com/v3/orgs/teams>`_
-        :param member: :class:`github.NamedUser.NamedUser`
+        :param member: :class:`pygithub.NamedUser.NamedUser`
         :rtype: None
         """
-        assert isinstance(member, github.NamedUser.NamedUser), member
+        assert isinstance(member, pygithub.NamedUser.NamedUser), member
         headers, data = self._requester.requestJsonAndCheck(
             "PUT",
             self.url + "/members/" + member._identity
@@ -124,10 +124,10 @@ class Team(github.GithubObject.CompletableGithubObject):
     def add_to_repos(self, repo):
         """
         :calls: `PUT /teams/:id/repos/:org/:repo <http://developer.github.com/v3/orgs/teams>`_
-        :param repo: :class:`github.Repository.Repository`
+        :param repo: :class:`pygithub.Repository.Repository`
         :rtype: None
         """
-        assert isinstance(repo, github.Repository.Repository), repo
+        assert isinstance(repo, pygithub.Repository.Repository), repo
         headers, data = self._requester.requestJsonAndCheck(
             "PUT",
             self.url + "/repos/" + repo._identity
@@ -143,7 +143,7 @@ class Team(github.GithubObject.CompletableGithubObject):
             self.url
         )
 
-    def edit(self, name, permission=github.GithubObject.NotSet):
+    def edit(self, name, permission=pygithub.GithubObject.NotSet):
         """
         :calls: `PATCH /teams/:id <http://developer.github.com/v3/orgs/teams>`_
         :param name: string
@@ -151,11 +151,11 @@ class Team(github.GithubObject.CompletableGithubObject):
         :rtype: None
         """
         assert isinstance(name, (str, unicode)), name
-        assert permission is github.GithubObject.NotSet or isinstance(permission, (str, unicode)), permission
+        assert permission is pygithub.GithubObject.NotSet or isinstance(permission, (str, unicode)), permission
         post_parameters = {
             "name": name,
         }
-        if permission is not github.GithubObject.NotSet:
+        if permission is not pygithub.GithubObject.NotSet:
             post_parameters["permission"] = permission
         headers, data = self._requester.requestJsonAndCheck(
             "PATCH",
@@ -167,10 +167,10 @@ class Team(github.GithubObject.CompletableGithubObject):
     def get_members(self):
         """
         :calls: `GET /teams/:id/members <http://developer.github.com/v3/orgs/teams>`_
-        :rtype: :class:`github.PaginatedList.PaginatedList` of :class:`github.NamedUser.NamedUser`
+        :rtype: :class:`pygithub.PaginatedList.PaginatedList` of :class:`pygithub.NamedUser.NamedUser`
         """
-        return github.PaginatedList.PaginatedList(
-            github.NamedUser.NamedUser,
+        return pygithub.PaginatedList.PaginatedList(
+            pygithub.NamedUser.NamedUser,
             self._requester,
             self.url + "/members",
             None
@@ -179,10 +179,10 @@ class Team(github.GithubObject.CompletableGithubObject):
     def get_repos(self):
         """
         :calls: `GET /teams/:id/repos <http://developer.github.com/v3/orgs/teams>`_
-        :rtype: :class:`github.PaginatedList.PaginatedList` of :class:`github.Repository.Repository`
+        :rtype: :class:`pygithub.PaginatedList.PaginatedList` of :class:`pygithub.Repository.Repository`
         """
-        return github.PaginatedList.PaginatedList(
-            github.Repository.Repository,
+        return pygithub.PaginatedList.PaginatedList(
+            pygithub.Repository.Repository,
             self._requester,
             self.url + "/repos",
             None
@@ -191,10 +191,10 @@ class Team(github.GithubObject.CompletableGithubObject):
     def has_in_members(self, member):
         """
         :calls: `GET /teams/:id/members/:user <http://developer.github.com/v3/orgs/teams>`_
-        :param member: :class:`github.NamedUser.NamedUser`
+        :param member: :class:`pygithub.NamedUser.NamedUser`
         :rtype: bool
         """
-        assert isinstance(member, github.NamedUser.NamedUser), member
+        assert isinstance(member, pygithub.NamedUser.NamedUser), member
         status, headers, data = self._requester.requestJson(
             "GET",
             self.url + "/members/" + member._identity
@@ -204,10 +204,10 @@ class Team(github.GithubObject.CompletableGithubObject):
     def has_in_repos(self, repo):
         """
         :calls: `GET /teams/:id/repos/:owner/:repo <http://developer.github.com/v3/orgs/teams>`_
-        :param repo: :class:`github.Repository.Repository`
+        :param repo: :class:`pygithub.Repository.Repository`
         :rtype: bool
         """
-        assert isinstance(repo, github.Repository.Repository), repo
+        assert isinstance(repo, pygithub.Repository.Repository), repo
         status, headers, data = self._requester.requestJson(
             "GET",
             self.url + "/repos/" + repo._identity
@@ -217,10 +217,10 @@ class Team(github.GithubObject.CompletableGithubObject):
     def remove_from_members(self, member):
         """
         :calls: `DELETE /teams/:id/members/:user <http://developer.github.com/v3/orgs/teams>`_
-        :param member: :class:`github.NamedUser.NamedUser`
+        :param member: :class:`pygithub.NamedUser.NamedUser`
         :rtype: None
         """
-        assert isinstance(member, github.NamedUser.NamedUser), member
+        assert isinstance(member, pygithub.NamedUser.NamedUser), member
         headers, data = self._requester.requestJsonAndCheck(
             "DELETE",
             self.url + "/members/" + member._identity
@@ -229,10 +229,10 @@ class Team(github.GithubObject.CompletableGithubObject):
     def remove_from_repos(self, repo):
         """
         :calls: `DELETE /teams/:id/repos/:owner/:repo <http://developer.github.com/v3/orgs/teams>`_
-        :param repo: :class:`github.Repository.Repository`
+        :param repo: :class:`pygithub.Repository.Repository`
         :rtype: None
         """
-        assert isinstance(repo, github.Repository.Repository), repo
+        assert isinstance(repo, pygithub.Repository.Repository), repo
         headers, data = self._requester.requestJsonAndCheck(
             "DELETE",
             self.url + "/repos/" + repo._identity
@@ -243,15 +243,15 @@ class Team(github.GithubObject.CompletableGithubObject):
         return self.id
 
     def _initAttributes(self):
-        self._id = github.GithubObject.NotSet
-        self._members_count = github.GithubObject.NotSet
-        self._members_url = github.GithubObject.NotSet
-        self._name = github.GithubObject.NotSet
-        self._permission = github.GithubObject.NotSet
-        self._repos_count = github.GithubObject.NotSet
-        self._repositories_url = github.GithubObject.NotSet
-        self._slug = github.GithubObject.NotSet
-        self._url = github.GithubObject.NotSet
+        self._id = pygithub.GithubObject.NotSet
+        self._members_count = pygithub.GithubObject.NotSet
+        self._members_url = pygithub.GithubObject.NotSet
+        self._name = pygithub.GithubObject.NotSet
+        self._permission = pygithub.GithubObject.NotSet
+        self._repos_count = pygithub.GithubObject.NotSet
+        self._repositories_url = pygithub.GithubObject.NotSet
+        self._slug = pygithub.GithubObject.NotSet
+        self._url = pygithub.GithubObject.NotSet
 
     def _useAttributes(self, attributes):
         if "id" in attributes:  # pragma no branch

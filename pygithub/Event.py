@@ -32,7 +32,7 @@ import pygithub.Repository
 import pygithub.NamedUser
 
 
-class Event(github.GithubObject.NonCompletableGithubObject):
+class Event(pygithub.GithubObject.NonCompletableGithubObject):
     """
     This class represents Events. The reference can be found here http://developer.github.com/v3/activity/events/
     """
@@ -40,7 +40,7 @@ class Event(github.GithubObject.NonCompletableGithubObject):
     @property
     def actor(self):
         """
-        :type: :class:`github.NamedUser.NamedUser`
+        :type: :class:`pygithub.NamedUser.NamedUser`
         """
         return self._actor.value
 
@@ -61,7 +61,7 @@ class Event(github.GithubObject.NonCompletableGithubObject):
     @property
     def org(self):
         """
-        :type: :class:`github.Organization.Organization`
+        :type: :class:`pygithub.Organization.Organization`
         """
         return self._org.value
 
@@ -82,7 +82,7 @@ class Event(github.GithubObject.NonCompletableGithubObject):
     @property
     def repo(self):
         """
-        :type: :class:`github.Repository.Repository`
+        :type: :class:`pygithub.Repository.Repository`
         """
         return self._repo.value
 
@@ -94,29 +94,29 @@ class Event(github.GithubObject.NonCompletableGithubObject):
         return self._type.value
 
     def _initAttributes(self):
-        self._actor = github.GithubObject.NotSet
-        self._created_at = github.GithubObject.NotSet
-        self._id = github.GithubObject.NotSet
-        self._org = github.GithubObject.NotSet
-        self._payload = github.GithubObject.NotSet
-        self._public = github.GithubObject.NotSet
-        self._repo = github.GithubObject.NotSet
-        self._type = github.GithubObject.NotSet
+        self._actor = pygithub.GithubObject.NotSet
+        self._created_at = pygithub.GithubObject.NotSet
+        self._id = pygithub.GithubObject.NotSet
+        self._org = pygithub.GithubObject.NotSet
+        self._payload = pygithub.GithubObject.NotSet
+        self._public = pygithub.GithubObject.NotSet
+        self._repo = pygithub.GithubObject.NotSet
+        self._type = pygithub.GithubObject.NotSet
 
     def _useAttributes(self, attributes):
         if "actor" in attributes:  # pragma no branch
-            self._actor = self._makeClassAttribute(github.NamedUser.NamedUser, attributes["actor"])
+            self._actor = self._makeClassAttribute(pygithub.NamedUser.NamedUser, attributes["actor"])
         if "created_at" in attributes:  # pragma no branch
             self._created_at = self._makeDatetimeAttribute(attributes["created_at"])
         if "id" in attributes:  # pragma no branch
             self._id = self._makeStringAttribute(attributes["id"])
         if "org" in attributes:  # pragma no branch
-            self._org = self._makeClassAttribute(github.Organization.Organization, attributes["org"])
+            self._org = self._makeClassAttribute(pygithub.Organization.Organization, attributes["org"])
         if "payload" in attributes:  # pragma no branch
             self._payload = self._makeDictAttribute(attributes["payload"])
         if "public" in attributes:  # pragma no branch
             self._public = self._makeBoolAttribute(attributes["public"])
         if "repo" in attributes:  # pragma no branch
-            self._repo = self._makeClassAttribute(github.Repository.Repository, attributes["repo"])
+            self._repo = self._makeClassAttribute(pygithub.Repository.Repository, attributes["repo"])
         if "type" in attributes:  # pragma no branch
             self._type = self._makeStringAttribute(attributes["type"])

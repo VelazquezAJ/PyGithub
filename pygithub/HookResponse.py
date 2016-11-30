@@ -27,7 +27,7 @@
 import pygithub.GithubObject
 
 
-class HookResponse(github.GithubObject.NonCompletableGithubObject):
+class HookResponse(pygithub.GithubObject.NonCompletableGithubObject):
     """
     This class represents HookResponses as returned for example by http://developer.github.com/v3/todo
     """
@@ -54,9 +54,9 @@ class HookResponse(github.GithubObject.NonCompletableGithubObject):
         return self._status.value
 
     def _initAttributes(self):
-        self._code = github.GithubObject.NotSet
-        self._message = github.GithubObject.NotSet
-        self._status = github.GithubObject.NotSet
+        self._code = pygithub.GithubObject.NotSet
+        self._message = pygithub.GithubObject.NotSet
+        self._status = pygithub.GithubObject.NotSet
 
     def _useAttributes(self, attributes):
         if "code" in attributes:  # pragma no branch

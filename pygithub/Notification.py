@@ -30,7 +30,7 @@ import pygithub.Repository
 import pygithub.NotificationSubject
 
 
-class Notification(github.GithubObject.CompletableGithubObject):
+class Notification(pygithub.GithubObject.CompletableGithubObject):
     """
     This class represents Notifications. The reference can be found here http://developer.github.com/v3/activity/notifications/
     """
@@ -54,7 +54,7 @@ class Notification(github.GithubObject.CompletableGithubObject):
     @property
     def repository(self):
         """
-        :type: :class:`github.Repository.Repository`
+        :type: :class:`pygithub.Repository.Repository`
         """
         self._completeIfNotSet(self._repository)
         return self._repository.value
@@ -62,7 +62,7 @@ class Notification(github.GithubObject.CompletableGithubObject):
     @property
     def subject(self):
         """
-        :type: :class:`github.NotificationSubject.NotificationSubject`
+        :type: :class:`pygithub.NotificationSubject.NotificationSubject`
         """
         self._completeIfNotSet(self._subject)
         return self._subject.value
@@ -108,14 +108,14 @@ class Notification(github.GithubObject.CompletableGithubObject):
         return self._url.value
 
     def _initAttributes(self):
-        self._id = github.GithubObject.NotSet
-        self._last_read_at = github.GithubObject.NotSet
-        self._repository = github.GithubObject.NotSet
-        self._reason = github.GithubObject.NotSet
-        self._subscription_url = github.GithubObject.NotSet
-        self._unread = github.GithubObject.NotSet
-        self._updated_at = github.GithubObject.NotSet
-        self._url = github.GithubObject.NotSet
+        self._id = pygithub.GithubObject.NotSet
+        self._last_read_at = pygithub.GithubObject.NotSet
+        self._repository = pygithub.GithubObject.NotSet
+        self._reason = pygithub.GithubObject.NotSet
+        self._subscription_url = pygithub.GithubObject.NotSet
+        self._unread = pygithub.GithubObject.NotSet
+        self._updated_at = pygithub.GithubObject.NotSet
+        self._url = pygithub.GithubObject.NotSet
 
     def _useAttributes(self, attributes):
         if "id" in attributes:  # pragma no branch
@@ -123,9 +123,9 @@ class Notification(github.GithubObject.CompletableGithubObject):
         if "last_read_at" in attributes:  # pragma no branch
             self._last_read_at = self._makeDatetimeAttribute(attributes["last_read_at"])
         if "repository" in attributes:  # pragma no branch
-            self._repository = self._makeClassAttribute(github.Repository.Repository, attributes["repository"])
+            self._repository = self._makeClassAttribute(pygithub.Repository.Repository, attributes["repository"])
         if "subject" in attributes:  # pragma no branch
-            self._subject = self._makeClassAttribute(github.NotificationSubject.NotificationSubject, attributes["subject"])
+            self._subject = self._makeClassAttribute(pygithub.NotificationSubject.NotificationSubject, attributes["subject"])
         if "reason" in attributes:  # pragma no branch
             self._reason = self._makeStringAttribute(attributes["reason"])
         if "subscription_url" in attributes:  # pragma no branch

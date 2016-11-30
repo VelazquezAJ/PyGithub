@@ -27,7 +27,7 @@
 import pygithub.GithubObject
 
 
-class Download(github.GithubObject.CompletableGithubObject):
+class Download(pygithub.GithubObject.CompletableGithubObject):
     """
     This class represents Downloads as returned for example by http://developer.github.com/v3/todo
     """
@@ -203,26 +203,26 @@ class Download(github.GithubObject.CompletableGithubObject):
         )
 
     def _initAttributes(self):
-        self._accesskeyid = github.GithubObject.NotSet
-        self._acl = github.GithubObject.NotSet
-        self._bucket = github.GithubObject.NotSet
-        self._content_type = github.GithubObject.NotSet
-        self._created_at = github.GithubObject.NotSet
-        self._description = github.GithubObject.NotSet
-        self._download_count = github.GithubObject.NotSet
-        self._expirationdate = github.GithubObject.NotSet
-        self._html_url = github.GithubObject.NotSet
-        self._id = github.GithubObject.NotSet
-        self._mime_type = github.GithubObject.NotSet
-        self._name = github.GithubObject.NotSet
-        self._path = github.GithubObject.NotSet
-        self._policy = github.GithubObject.NotSet
-        self._prefix = github.GithubObject.NotSet
-        self._redirect = github.GithubObject.NotSet
-        self._s3_url = github.GithubObject.NotSet
-        self._signature = github.GithubObject.NotSet
-        self._size = github.GithubObject.NotSet
-        self._url = github.GithubObject.NotSet
+        self._accesskeyid = pygithub.GithubObject.NotSet
+        self._acl = pygithub.GithubObject.NotSet
+        self._bucket = pygithub.GithubObject.NotSet
+        self._content_type = pygithub.GithubObject.NotSet
+        self._created_at = pygithub.GithubObject.NotSet
+        self._description = pygithub.GithubObject.NotSet
+        self._download_count = pygithub.GithubObject.NotSet
+        self._expirationdate = pygithub.GithubObject.NotSet
+        self._html_url = pygithub.GithubObject.NotSet
+        self._id = pygithub.GithubObject.NotSet
+        self._mime_type = pygithub.GithubObject.NotSet
+        self._name = pygithub.GithubObject.NotSet
+        self._path = pygithub.GithubObject.NotSet
+        self._policy = pygithub.GithubObject.NotSet
+        self._prefix = pygithub.GithubObject.NotSet
+        self._redirect = pygithub.GithubObject.NotSet
+        self._s3_url = pygithub.GithubObject.NotSet
+        self._signature = pygithub.GithubObject.NotSet
+        self._size = pygithub.GithubObject.NotSet
+        self._url = pygithub.GithubObject.NotSet
 
     def _useAttributes(self, attributes):
         if "accesskeyid" in attributes:  # pragma no branch

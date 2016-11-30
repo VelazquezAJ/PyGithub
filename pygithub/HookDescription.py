@@ -27,7 +27,7 @@
 import pygithub.GithubObject
 
 
-class HookDescription(github.GithubObject.NonCompletableGithubObject):
+class HookDescription(pygithub.GithubObject.NonCompletableGithubObject):
     """
     This class represents HookDescriptions as returned for example by http://developer.github.com/v3/todo
     """
@@ -61,10 +61,10 @@ class HookDescription(github.GithubObject.NonCompletableGithubObject):
         return self._supported_events.value
 
     def _initAttributes(self):
-        self._events = github.GithubObject.NotSet
-        self._name = github.GithubObject.NotSet
-        self._schema = github.GithubObject.NotSet
-        self._supported_events = github.GithubObject.NotSet
+        self._events = pygithub.GithubObject.NotSet
+        self._name = pygithub.GithubObject.NotSet
+        self._schema = pygithub.GithubObject.NotSet
+        self._supported_events = pygithub.GithubObject.NotSet
 
     def _useAttributes(self, attributes):
         if "events" in attributes:  # pragma no branch

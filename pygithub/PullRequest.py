@@ -38,7 +38,7 @@ import pygithub.IssueComment
 import pygithub.Commit
 
 
-class PullRequest(github.GithubObject.CompletableGithubObject):
+class PullRequest(pygithub.GithubObject.CompletableGithubObject):
     """
     This class represents PullRequests. The reference can be found here http://developer.github.com/v3/pulls/
     """
@@ -54,7 +54,7 @@ class PullRequest(github.GithubObject.CompletableGithubObject):
     @property
     def assignee(self):
         """
-        :type: :class:`github.NamedUser.NamedUser`
+        :type: :class:`pygithub.NamedUser.NamedUser`
         """
         self._completeIfNotSet(self._assignee)
         return self._assignee.value
@@ -62,7 +62,7 @@ class PullRequest(github.GithubObject.CompletableGithubObject):
     @property
     def base(self):
         """
-        :type: :class:`github.PullRequestPart.PullRequestPart`
+        :type: :class:`pygithub.PullRequestPart.PullRequestPart`
         """
         self._completeIfNotSet(self._base)
         return self._base.value
@@ -150,7 +150,7 @@ class PullRequest(github.GithubObject.CompletableGithubObject):
     @property
     def head(self):
         """
-        :type: :class:`github.PullRequestPart.PullRequestPart`
+        :type: :class:`pygithub.PullRequestPart.PullRequestPart`
         """
         self._completeIfNotSet(self._head)
         return self._head.value
@@ -222,7 +222,7 @@ class PullRequest(github.GithubObject.CompletableGithubObject):
     @property
     def merged_by(self):
         """
-        :type: :class:`github.NamedUser.NamedUser`
+        :type: :class:`pygithub.NamedUser.NamedUser`
         """
         self._completeIfNotSet(self._merged_by)
         return self._merged_by.value
@@ -230,7 +230,7 @@ class PullRequest(github.GithubObject.CompletableGithubObject):
     @property
     def milestone(self):
         """
-        :type: :class:`github.Milestone.Milestone`
+        :type: :class:`pygithub.Milestone.Milestone`
         """
         self._completeIfNotSet(self._milestone)
         return self._milestone.value
@@ -310,7 +310,7 @@ class PullRequest(github.GithubObject.CompletableGithubObject):
     @property
     def user(self):
         """
-        :type: :class:`github.NamedUser.NamedUser`
+        :type: :class:`pygithub.NamedUser.NamedUser`
         """
         self._completeIfNotSet(self._user)
         return self._user.value
@@ -319,10 +319,10 @@ class PullRequest(github.GithubObject.CompletableGithubObject):
         """
         :calls: `POST /repos/:owner/:repo/pulls/:number/comments <http://developer.github.com/v3/pulls/comments>`_
         :param body: string
-        :param commit_id: :class:`github.Commit.Commit`
+        :param commit_id: :class:`pygithub.Commit.Commit`
         :param path: string
         :param position: integer
-        :rtype: :class:`github.PullRequestComment.PullRequestComment`
+        :rtype: :class:`pygithub.PullRequestComment.PullRequestComment`
         """
         return self.create_review_comment(body, commit_id, path, position)
 
@@ -330,13 +330,13 @@ class PullRequest(github.GithubObject.CompletableGithubObject):
         """
         :calls: `POST /repos/:owner/:repo/pulls/:number/comments <http://developer.github.com/v3/pulls/comments>`_
         :param body: string
-        :param commit_id: :class:`github.Commit.Commit`
+        :param commit_id: :class:`pygithub.Commit.Commit`
         :param path: string
         :param position: integer
-        :rtype: :class:`github.PullRequestComment.PullRequestComment`
+        :rtype: :class:`pygithub.PullRequestComment.PullRequestComment`
         """
         assert isinstance(body, (str, unicode)), body
-        assert isinstance(commit_id, github.Commit.Commit), commit_id
+        assert isinstance(commit_id, pygithub.Commit.Commit), commit_id
         assert isinstance(path, (str, unicode)), path
         assert isinstance(position, (int, long)), position
         post_parameters = {
@@ -350,13 +350,13 @@ class PullRequest(github.GithubObject.CompletableGithubObject):
             self.url + "/comments",
             input=post_parameters
         )
-        return github.PullRequestComment.PullRequestComment(self._requester, headers, data, completed=True)
+        return pygithub.PullRequestComment.PullRequestComment(self._requester, headers, data, completed=True)
 
     def create_issue_comment(self, body):
         """
         :calls: `POST /repos/:owner/:repo/issues/:number/comments <http://developer.github.com/v3/issues/comments>`_
         :param body: string
-        :rtype: :class:`github.IssueComment.IssueComment`
+        :rtype: :class:`pygithub.IssueComment.IssueComment`
         """
         assert isinstance(body, (str, unicode)), body
         post_parameters = {
@@ -367,9 +367,9 @@ class PullRequest(github.GithubObject.CompletableGithubObject):
             self._parentUrl(self._parentUrl(self.url)) + "/issues/" + str(self.number) + "/comments",
             input=post_parameters
         )
-        return github.IssueComment.IssueComment(self._requester, headers, data, completed=True)
+        return pygithub.IssueComment.IssueComment(self._requester, headers, data, completed=True)
 
-    def edit(self, title=github.GithubObject.NotSet, body=github.GithubObject.NotSet, state=github.GithubObject.NotSet):
+    def edit(self, title=pygithub.GithubObject.NotSet, body=pygithub.GithubObject.NotSet, state=pygithub.GithubObject.NotSet):
         """
         :calls: `PATCH /repos/:owner/:repo/pulls/:number <http://developer.github.com/v3/pulls>`_
         :param title: string
@@ -377,15 +377,15 @@ class PullRequest(github.GithubObject.CompletableGithubObject):
         :param state: string
         :rtype: None
         """
-        assert title is github.GithubObject.NotSet or isinstance(title, (str, unicode)), title
-        assert body is github.GithubObject.NotSet or isinstance(body, (str, unicode)), body
-        assert state is github.GithubObject.NotSet or isinstance(state, (str, unicode)), state
+        assert title is pygithub.GithubObject.NotSet or isinstance(title, (str, unicode)), title
+        assert body is pygithub.GithubObject.NotSet or isinstance(body, (str, unicode)), body
+        assert state is pygithub.GithubObject.NotSet or isinstance(state, (str, unicode)), state
         post_parameters = dict()
-        if title is not github.GithubObject.NotSet:
+        if title is not pygithub.GithubObject.NotSet:
             post_parameters["title"] = title
-        if body is not github.GithubObject.NotSet:
+        if body is not pygithub.GithubObject.NotSet:
             post_parameters["body"] = body
-        if state is not github.GithubObject.NotSet:
+        if state is not pygithub.GithubObject.NotSet:
             post_parameters["state"] = state
         headers, data = self._requester.requestJsonAndCheck(
             "PATCH",
@@ -398,7 +398,7 @@ class PullRequest(github.GithubObject.CompletableGithubObject):
         """
         :calls: `GET /repos/:owner/:repo/pulls/comments/:number <http://developer.github.com/v3/pulls/comments>`_
         :param id: integer
-        :rtype: :class:`github.PullRequestComment.PullRequestComment`
+        :rtype: :class:`pygithub.PullRequestComment.PullRequestComment`
         """
         return self.get_review_comment(id)
 
@@ -406,29 +406,29 @@ class PullRequest(github.GithubObject.CompletableGithubObject):
         """
         :calls: `GET /repos/:owner/:repo/pulls/comments/:number <http://developer.github.com/v3/pulls/comments>`_
         :param id: integer
-        :rtype: :class:`github.PullRequestComment.PullRequestComment`
+        :rtype: :class:`pygithub.PullRequestComment.PullRequestComment`
         """
         assert isinstance(id, (int, long)), id
         headers, data = self._requester.requestJsonAndCheck(
             "GET",
             self._parentUrl(self.url) + "/comments/" + str(id)
         )
-        return github.PullRequestComment.PullRequestComment(self._requester, headers, data, completed=True)
+        return pygithub.PullRequestComment.PullRequestComment(self._requester, headers, data, completed=True)
 
     def get_comments(self):
         """
         :calls: `GET /repos/:owner/:repo/pulls/:number/comments <http://developer.github.com/v3/pulls/comments>`_
-        :rtype: :class:`github.PaginatedList.PaginatedList` of :class:`github.PullRequestComment.PullRequestComment`
+        :rtype: :class:`pygithub.PaginatedList.PaginatedList` of :class:`pygithub.PullRequestComment.PullRequestComment`
         """
         return self.get_review_comments()
 
     def get_review_comments(self):
         """
         :calls: `GET /repos/:owner/:repo/pulls/:number/comments <http://developer.github.com/v3/pulls/comments>`_
-        :rtype: :class:`github.PaginatedList.PaginatedList` of :class:`github.PullRequestComment.PullRequestComment`
+        :rtype: :class:`pygithub.PaginatedList.PaginatedList` of :class:`pygithub.PullRequestComment.PullRequestComment`
         """
-        return github.PaginatedList.PaginatedList(
-            github.PullRequestComment.PullRequestComment,
+        return pygithub.PaginatedList.PaginatedList(
+            pygithub.PullRequestComment.PullRequestComment,
             self._requester,
             self.url + "/comments",
             None
@@ -437,10 +437,10 @@ class PullRequest(github.GithubObject.CompletableGithubObject):
     def get_commits(self):
         """
         :calls: `GET /repos/:owner/:repo/pulls/:number/commits <http://developer.github.com/v3/pulls>`_
-        :rtype: :class:`github.PaginatedList.PaginatedList` of :class:`github.Commit.Commit`
+        :rtype: :class:`pygithub.PaginatedList.PaginatedList` of :class:`pygithub.Commit.Commit`
         """
-        return github.PaginatedList.PaginatedList(
-            github.Commit.Commit,
+        return pygithub.PaginatedList.PaginatedList(
+            pygithub.Commit.Commit,
             self._requester,
             self.url + "/commits",
             None
@@ -449,10 +449,10 @@ class PullRequest(github.GithubObject.CompletableGithubObject):
     def get_files(self):
         """
         :calls: `GET /repos/:owner/:repo/pulls/:number/files <http://developer.github.com/v3/pulls>`_
-        :rtype: :class:`github.PaginatedList.PaginatedList` of :class:`github.File.File`
+        :rtype: :class:`pygithub.PaginatedList.PaginatedList` of :class:`pygithub.File.File`
         """
-        return github.PaginatedList.PaginatedList(
-            github.File.File,
+        return pygithub.PaginatedList.PaginatedList(
+            pygithub.File.File,
             self._requester,
             self.url + "/files",
             None
@@ -462,22 +462,22 @@ class PullRequest(github.GithubObject.CompletableGithubObject):
         """
         :calls: `GET /repos/:owner/:repo/issues/comments/:id <http://developer.github.com/v3/issues/comments>`_
         :param id: integer
-        :rtype: :class:`github.IssueComment.IssueComment`
+        :rtype: :class:`pygithub.IssueComment.IssueComment`
         """
         assert isinstance(id, (int, long)), id
         headers, data = self._requester.requestJsonAndCheck(
             "GET",
             self._parentUrl(self._parentUrl(self.url)) + "/issues/comments/" + str(id)
         )
-        return github.IssueComment.IssueComment(self._requester, headers, data, completed=True)
+        return pygithub.IssueComment.IssueComment(self._requester, headers, data, completed=True)
 
     def get_issue_comments(self):
         """
         :calls: `GET /repos/:owner/:repo/issues/:number/comments <http://developer.github.com/v3/issues/comments>`_
-        :rtype: :class:`github.PaginatedList.PaginatedList` of :class:`github.IssueComment.IssueComment`
+        :rtype: :class:`pygithub.PaginatedList.PaginatedList` of :class:`pygithub.IssueComment.IssueComment`
         """
-        return github.PaginatedList.PaginatedList(
-            github.IssueComment.IssueComment,
+        return pygithub.PaginatedList.PaginatedList(
+            pygithub.IssueComment.IssueComment,
             self._requester,
             self._parentUrl(self._parentUrl(self.url)) + "/issues/" + str(self.number) + "/comments",
             None
@@ -494,66 +494,66 @@ class PullRequest(github.GithubObject.CompletableGithubObject):
         )
         return status == 204
 
-    def merge(self, commit_message=github.GithubObject.NotSet):
+    def merge(self, commit_message=pygithub.GithubObject.NotSet):
         """
         :calls: `PUT /repos/:owner/:repo/pulls/:number/merge <http://developer.github.com/v3/pulls>`_
         :param commit_message: string
-        :rtype: :class:`github.PullRequestMergeStatus.PullRequestMergeStatus`
+        :rtype: :class:`pygithub.PullRequestMergeStatus.PullRequestMergeStatus`
         """
-        assert commit_message is github.GithubObject.NotSet or isinstance(commit_message, (str, unicode)), commit_message
+        assert commit_message is pygithub.GithubObject.NotSet or isinstance(commit_message, (str, unicode)), commit_message
         post_parameters = dict()
-        if commit_message is not github.GithubObject.NotSet:
+        if commit_message is not pygithub.GithubObject.NotSet:
             post_parameters["commit_message"] = commit_message
         headers, data = self._requester.requestJsonAndCheck(
             "PUT",
             self.url + "/merge",
             input=post_parameters
         )
-        return github.PullRequestMergeStatus.PullRequestMergeStatus(self._requester, headers, data, completed=True)
+        return pygithub.PullRequestMergeStatus.PullRequestMergeStatus(self._requester, headers, data, completed=True)
 
     def _initAttributes(self):
-        self._additions = github.GithubObject.NotSet
-        self._assignee = github.GithubObject.NotSet
-        self._base = github.GithubObject.NotSet
-        self._body = github.GithubObject.NotSet
-        self._changed_files = github.GithubObject.NotSet
-        self._closed_at = github.GithubObject.NotSet
-        self._comments = github.GithubObject.NotSet
-        self._comments_url = github.GithubObject.NotSet
-        self._commits = github.GithubObject.NotSet
-        self._commits_url = github.GithubObject.NotSet
-        self._created_at = github.GithubObject.NotSet
-        self._deletions = github.GithubObject.NotSet
-        self._diff_url = github.GithubObject.NotSet
-        self._head = github.GithubObject.NotSet
-        self._html_url = github.GithubObject.NotSet
-        self._id = github.GithubObject.NotSet
-        self._issue_url = github.GithubObject.NotSet
-        self._merge_commit_sha = github.GithubObject.NotSet
-        self._mergeable = github.GithubObject.NotSet
-        self._mergeable_state = github.GithubObject.NotSet
-        self._merged = github.GithubObject.NotSet
-        self._merged_at = github.GithubObject.NotSet
-        self._merged_by = github.GithubObject.NotSet
-        self._milestone = github.GithubObject.NotSet
-        self._number = github.GithubObject.NotSet
-        self._patch_url = github.GithubObject.NotSet
-        self._review_comment_url = github.GithubObject.NotSet
-        self._review_comments = github.GithubObject.NotSet
-        self._review_comments_url = github.GithubObject.NotSet
-        self._state = github.GithubObject.NotSet
-        self._title = github.GithubObject.NotSet
-        self._updated_at = github.GithubObject.NotSet
-        self._url = github.GithubObject.NotSet
-        self._user = github.GithubObject.NotSet
+        self._additions = pygithub.GithubObject.NotSet
+        self._assignee = pygithub.GithubObject.NotSet
+        self._base = pygithub.GithubObject.NotSet
+        self._body = pygithub.GithubObject.NotSet
+        self._changed_files = pygithub.GithubObject.NotSet
+        self._closed_at = pygithub.GithubObject.NotSet
+        self._comments = pygithub.GithubObject.NotSet
+        self._comments_url = pygithub.GithubObject.NotSet
+        self._commits = pygithub.GithubObject.NotSet
+        self._commits_url = pygithub.GithubObject.NotSet
+        self._created_at = pygithub.GithubObject.NotSet
+        self._deletions = pygithub.GithubObject.NotSet
+        self._diff_url = pygithub.GithubObject.NotSet
+        self._head = pygithub.GithubObject.NotSet
+        self._html_url = pygithub.GithubObject.NotSet
+        self._id = pygithub.GithubObject.NotSet
+        self._issue_url = pygithub.GithubObject.NotSet
+        self._merge_commit_sha = pygithub.GithubObject.NotSet
+        self._mergeable = pygithub.GithubObject.NotSet
+        self._mergeable_state = pygithub.GithubObject.NotSet
+        self._merged = pygithub.GithubObject.NotSet
+        self._merged_at = pygithub.GithubObject.NotSet
+        self._merged_by = pygithub.GithubObject.NotSet
+        self._milestone = pygithub.GithubObject.NotSet
+        self._number = pygithub.GithubObject.NotSet
+        self._patch_url = pygithub.GithubObject.NotSet
+        self._review_comment_url = pygithub.GithubObject.NotSet
+        self._review_comments = pygithub.GithubObject.NotSet
+        self._review_comments_url = pygithub.GithubObject.NotSet
+        self._state = pygithub.GithubObject.NotSet
+        self._title = pygithub.GithubObject.NotSet
+        self._updated_at = pygithub.GithubObject.NotSet
+        self._url = pygithub.GithubObject.NotSet
+        self._user = pygithub.GithubObject.NotSet
 
     def _useAttributes(self, attributes):
         if "additions" in attributes:  # pragma no branch
             self._additions = self._makeIntAttribute(attributes["additions"])
         if "assignee" in attributes:  # pragma no branch
-            self._assignee = self._makeClassAttribute(github.NamedUser.NamedUser, attributes["assignee"])
+            self._assignee = self._makeClassAttribute(pygithub.NamedUser.NamedUser, attributes["assignee"])
         if "base" in attributes:  # pragma no branch
-            self._base = self._makeClassAttribute(github.PullRequestPart.PullRequestPart, attributes["base"])
+            self._base = self._makeClassAttribute(pygithub.PullRequestPart.PullRequestPart, attributes["base"])
         if "body" in attributes:  # pragma no branch
             self._body = self._makeStringAttribute(attributes["body"])
         if "changed_files" in attributes:  # pragma no branch
@@ -575,7 +575,7 @@ class PullRequest(github.GithubObject.CompletableGithubObject):
         if "diff_url" in attributes:  # pragma no branch
             self._diff_url = self._makeStringAttribute(attributes["diff_url"])
         if "head" in attributes:  # pragma no branch
-            self._head = self._makeClassAttribute(github.PullRequestPart.PullRequestPart, attributes["head"])
+            self._head = self._makeClassAttribute(pygithub.PullRequestPart.PullRequestPart, attributes["head"])
         if "html_url" in attributes:  # pragma no branch
             self._html_url = self._makeStringAttribute(attributes["html_url"])
         if "id" in attributes:  # pragma no branch
@@ -593,9 +593,9 @@ class PullRequest(github.GithubObject.CompletableGithubObject):
         if "merged_at" in attributes:  # pragma no branch
             self._merged_at = self._makeDatetimeAttribute(attributes["merged_at"])
         if "merged_by" in attributes:  # pragma no branch
-            self._merged_by = self._makeClassAttribute(github.NamedUser.NamedUser, attributes["merged_by"])
+            self._merged_by = self._makeClassAttribute(pygithub.NamedUser.NamedUser, attributes["merged_by"])
         if "milestone" in attributes:  # pragma no branch
-            self._milestone = self._makeClassAttribute(github.Milestone.Milestone, attributes["milestone"])
+            self._milestone = self._makeClassAttribute(pygithub.Milestone.Milestone, attributes["milestone"])
         if "number" in attributes:  # pragma no branch
             self._number = self._makeIntAttribute(attributes["number"])
         if "patch_url" in attributes:  # pragma no branch
@@ -615,4 +615,4 @@ class PullRequest(github.GithubObject.CompletableGithubObject):
         if "url" in attributes:  # pragma no branch
             self._url = self._makeStringAttribute(attributes["url"])
         if "user" in attributes:  # pragma no branch
-            self._user = self._makeClassAttribute(github.NamedUser.NamedUser, attributes["user"])
+            self._user = self._makeClassAttribute(pygithub.NamedUser.NamedUser, attributes["user"])

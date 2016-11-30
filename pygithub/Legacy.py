@@ -30,9 +30,9 @@ import urlparse
 import pygithub.PaginatedList
 
 
-class PaginatedList(github.PaginatedList.PaginatedListBase):
+class PaginatedList(pygithub.PaginatedList.PaginatedListBase):
     def __init__(self, url, args, requester, key, convert, contentClass):
-        github.PaginatedList.PaginatedListBase.__init__(self)
+        pygithub.PaginatedList.PaginatedListBase.__init__(self)
         self.__url = url
         self.__args = args
         self.__requester = requester

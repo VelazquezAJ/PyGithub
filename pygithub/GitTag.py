@@ -30,7 +30,7 @@ import pygithub.GitAuthor
 import pygithub.GitObject
 
 
-class GitTag(github.GithubObject.CompletableGithubObject):
+class GitTag(pygithub.GithubObject.CompletableGithubObject):
     """
     This class represents GitTags as returned for example by http://developer.github.com/v3/todo
     """
@@ -46,7 +46,7 @@ class GitTag(github.GithubObject.CompletableGithubObject):
     @property
     def object(self):
         """
-        :type: :class:`github.GitObject.GitObject`
+        :type: :class:`pygithub.GitObject.GitObject`
         """
         self._completeIfNotSet(self._object)
         return self._object.value
@@ -70,7 +70,7 @@ class GitTag(github.GithubObject.CompletableGithubObject):
     @property
     def tagger(self):
         """
-        :type: :class:`github.GitAuthor.GitAuthor`
+        :type: :class:`pygithub.GitAuthor.GitAuthor`
         """
         self._completeIfNotSet(self._tagger)
         return self._tagger.value
@@ -84,23 +84,23 @@ class GitTag(github.GithubObject.CompletableGithubObject):
         return self._url.value
 
     def _initAttributes(self):
-        self._message = github.GithubObject.NotSet
-        self._object = github.GithubObject.NotSet
-        self._sha = github.GithubObject.NotSet
-        self._tag = github.GithubObject.NotSet
-        self._tagger = github.GithubObject.NotSet
-        self._url = github.GithubObject.NotSet
+        self._message = pygithub.GithubObject.NotSet
+        self._object = pygithub.GithubObject.NotSet
+        self._sha = pygithub.GithubObject.NotSet
+        self._tag = pygithub.GithubObject.NotSet
+        self._tagger = pygithub.GithubObject.NotSet
+        self._url = pygithub.GithubObject.NotSet
 
     def _useAttributes(self, attributes):
         if "message" in attributes:  # pragma no branch
             self._message = self._makeStringAttribute(attributes["message"])
         if "object" in attributes:  # pragma no branch
-            self._object = self._makeClassAttribute(github.GitObject.GitObject, attributes["object"])
+            self._object = self._makeClassAttribute(pygithub.GitObject.GitObject, attributes["object"])
         if "sha" in attributes:  # pragma no branch
             self._sha = self._makeStringAttribute(attributes["sha"])
         if "tag" in attributes:  # pragma no branch
             self._tag = self._makeStringAttribute(attributes["tag"])
         if "tagger" in attributes:  # pragma no branch
-            self._tagger = self._makeClassAttribute(github.GitAuthor.GitAuthor, attributes["tagger"])
+            self._tagger = self._makeClassAttribute(pygithub.GitAuthor.GitAuthor, attributes["tagger"])
         if "url" in attributes:  # pragma no branch
             self._url = self._makeStringAttribute(attributes["url"])

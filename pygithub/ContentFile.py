@@ -34,7 +34,7 @@ import pygithub.Repository
 atLeastPython3 = sys.hexversion >= 0x03000000
 
 
-class ContentFile(github.GithubObject.CompletableGithubObject):
+class ContentFile(pygithub.GithubObject.CompletableGithubObject):
     """
     This class represents ContentFiles as returned for example by http://developer.github.com/v3/todo
     """
@@ -99,12 +99,12 @@ class ContentFile(github.GithubObject.CompletableGithubObject):
     @property
     def repository(self):
         """
-        :type: :class:`github.Repository.Repository`
+        :type: :class:`pygithub.Repository.Repository`
         """
-        if self._repository is github.GithubObject.NotSet:
+        if self._repository is pygithub.GithubObject.NotSet:
             # The repository was not set automatically, so it must be looked up by url.
             repo_url = "/".join(self.url.split("/")[:6])  # pragma no cover (Should be covered)
-            self._repository = github.GithubObject._ValuedAttribute(github.Repository.Repository(self._requester, self._headers, {'url': repo_url}, completed=False))  # pragma no cover (Should be covered)
+            self._repository = pygithub.GithubObject._ValuedAttribute(pygithub.Repository.Repository(self._requester, self._headers, {'url': repo_url}, completed=False))  # pragma no cover (Should be covered)
         return self._repository.value
 
     @property
@@ -140,16 +140,16 @@ class ContentFile(github.GithubObject.CompletableGithubObject):
         return self._url.value
 
     def _initAttributes(self):
-        self._content = github.GithubObject.NotSet
-        self._encoding = github.GithubObject.NotSet
-        self._git_url = github.GithubObject.NotSet
-        self._html_url = github.GithubObject.NotSet
-        self._name = github.GithubObject.NotSet
-        self._path = github.GithubObject.NotSet
-        self._repository = github.GithubObject.NotSet
-        self._sha = github.GithubObject.NotSet
-        self._size = github.GithubObject.NotSet
-        self._type = github.GithubObject.NotSet
+        self._content = pygithub.GithubObject.NotSet
+        self._encoding = pygithub.GithubObject.NotSet
+        self._git_url = pygithub.GithubObject.NotSet
+        self._html_url = pygithub.GithubObject.NotSet
+        self._name = pygithub.GithubObject.NotSet
+        self._path = pygithub.GithubObject.NotSet
+        self._repository = pygithub.GithubObject.NotSet
+        self._sha = pygithub.GithubObject.NotSet
+        self._size = pygithub.GithubObject.NotSet
+        self._type = pygithub.GithubObject.NotSet
 
     def _useAttributes(self, attributes):
         if "content" in attributes:  # pragma no branch
@@ -165,7 +165,7 @@ class ContentFile(github.GithubObject.CompletableGithubObject):
         if "path" in attributes:  # pragma no branch
             self._path = self._makeStringAttribute(attributes["path"])
         if "repository" in attributes:  # pragma no branch
-            self._repository = self._makeClassAttribute(github.Repository.Repository, attributes["repository"])
+            self._repository = self._makeClassAttribute(pygithub.Repository.Repository, attributes["repository"])
         if "sha" in attributes:  # pragma no branch
             self._sha = self._makeStringAttribute(attributes["sha"])
         if "size" in attributes:  # pragma no branch

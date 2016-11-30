@@ -24,7 +24,7 @@
 import pygithub.GithubObject
 
 
-class Status(github.GithubObject.NonCompletableGithubObject):
+class Status(pygithub.GithubObject.NonCompletableGithubObject):
     """
     This class represents status as defined in https://status.github.com/api
     """
@@ -44,8 +44,8 @@ class Status(github.GithubObject.NonCompletableGithubObject):
         return self._last_updated.value
 
     def _initAttributes(self):
-        self._status = github.GithubObject.NotSet
-        self._last_updated = github.GithubObject.NotSet
+        self._status = pygithub.GithubObject.NotSet
+        self._last_updated = pygithub.GithubObject.NotSet
 
     def _useAttributes(self, attributes):
         if "status" in attributes:  # pragma no branch
