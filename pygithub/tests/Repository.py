@@ -140,7 +140,7 @@ class Repository(Framework.TestCase):
 
     def testCreateGitTree(self):
         tree = self.repo.create_git_tree(
-            [github.InputGitTreeElement(
+            [pygithub.InputGitTreeElement(
                 "Foobar.txt",
                 "100644",
                 "blob",
@@ -152,7 +152,7 @@ class Repository(Framework.TestCase):
     def testCreateGitTreeWithBaseTree(self):
         base_tree = self.repo.get_git_tree("41cf8c178c636a018d537cb20daae09391efd70b")
         tree = self.repo.create_git_tree(
-            [github.InputGitTreeElement(
+            [pygithub.InputGitTreeElement(
                 "Barbaz.txt",
                 "100644",
                 "blob",
@@ -164,7 +164,7 @@ class Repository(Framework.TestCase):
 
     def testCreateGitTreeWithSha(self):
         tree = self.repo.create_git_tree(
-            [github.InputGitTreeElement(
+            [pygithub.InputGitTreeElement(
                 "Barbaz.txt",
                 "100644",
                 "blob",
@@ -224,7 +224,7 @@ class Repository(Framework.TestCase):
         self.assertEqual(comparison.patch_url, "https://github.com/jacquev6/PyGithub/compare/v0.6...v0.7.patch")
         self.assertEqual(comparison.permalink_url, "https://github.com/jacquev6/PyGithub/compare/jacquev6:4303c5b...jacquev6:ecda065")
         self.assertEqual(comparison.total_commits, 4)
-        self.assertListKeyEqual(comparison.files, lambda f: f.filename, ["ReferenceOfClasses.md", "pygithub/Github.py", "pygithub/Requester.py", "setup.py"])
+        self.assertListKeyEqual(comparison.files, lambda f: f.filename, ["ReferenceOfClasses.md", "github/Github.py", "github/Requester.py", "setup.py"])
         self.assertEqual(comparison.base_commit.sha, "4303c5b90e2216d927155e9609436ccb8984c495")
         self.assertListKeyEqual(comparison.commits, lambda c: c.sha, ["5bb654d26dd014d36794acd1e6ecf3736f12aad7", "cb0313157bf904f2d364377d35d9397b269547a5", "0cec0d25e606c023a62a4fc7cdc815309ebf6d16", "ecda065e01876209d2bdf5fe4e91cee8ffaa9ff7"])
 
@@ -282,7 +282,7 @@ class Repository(Framework.TestCase):
     def testGetGitTreeWithRecursive(self):
         tree = self.repo.get_git_tree("f492784d8ca837779650d1fb406a1a3587a764ad", True)
         self.assertEqual(len(tree.tree), 90)
-        self.assertEqual(tree.tree[50].path, "pygithub/GithubObjects/Gist.py")
+        self.assertEqual(tree.tree[50].path, "github/GithubObjects/Gist.py")
 
     def testGetHooks(self):
         self.assertListKeyEqual(self.repo.get_hooks(), lambda h: h.id, [257993])

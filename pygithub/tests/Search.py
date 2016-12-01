@@ -47,7 +47,7 @@ class Search(Framework.TestCase):
         self.assertEqual([u.login for u in users.get_page(7)], [u'ursachec', u'bitboxer', u'fs111', u'michenriksen', u'witsch', u'booo', u'mortice', u'r0man', u'MikeBild', u'mhagger', u'bkw', u'fwbrasil', u'mschneider', u'lydiapintscher', u'asksven', u'iamtimm', u'sneak', u'kr1sp1n', u'Feh', u'GordonLesti', u'annismckenzie', u'eskimoblood', u'tsujigiri', u'riethmayer', u'lauritzthamsen', u'scotchi', u'peritor', u'toto', u'hwaxxer', u'lukaszklis'])
 
     def testSearchRepos(self):
-        repos = self.g.search_repositories("pygithub", sort="stars", order="desc", language="Python")
+        repos = self.g.search_repositories("github", sort="stars", order="desc", language="Python")
         self.assertListKeyBegin(repos, lambda r: r.full_name, [u'kennethreitz/legit', u'RuudBurger/CouchPotatoV1', u'gelstudios/gitfiti', u'gpjt/webgl-lessons', u'jacquev6/PyGithub', u'aaasen/github_globe', u'hmason/gitmarks', u'dnerdy/factory_boy', u'binaryage/drydrop', u'bgreenlee/sublime-github', u'karan/HackerNewsAPI', u'mfenniak/pyPdf', u'skazhy/github-decorator', u'llvmpy/llvmpy', u'lexrupy/gmate', u'ask/python-github2', u'audreyr/cookiecutter-pypackage', u'tabo/django-treebeard', u'dbr/tvdb_api', u'jchris/couchapp', u'joeyespo/grip', u'nigelsmall/py2neo', u'ask/chishop', u'sigmavirus24/github3.py', u'jsmits/github-cli', u'lincolnloop/django-layout', u'amccloud/django-project-skel', u'Stiivi/brewery', u'webpy/webpy.github.com', u'dustin/py-github', u'logsol/Github-Auto-Deploy', u'cloudkick/libcloud', u'berkerpeksag/github-badge', u'bitprophet/ssh', u'azavea/OpenTreeMap'])
 
     def testSearchIssues(self):
